@@ -2,6 +2,7 @@ package MainFrame.Pages.ForumPage.Center.Post;
 
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.CustomComponents.PostComponent;
+import MainFrame.CustomComponents.PostComponent_2;
 import PojoClasses.Post;
 import Static.SizeConstants;
 
@@ -15,6 +16,7 @@ public class PostModel implements IPostModel
     /*******************************************************************************************/
 
     private PostComponent postComponent;
+    private PostComponent_2 postComponent_2 ;
 
     /*******************************************************************************************/
 
@@ -28,6 +30,7 @@ public class PostModel implements IPostModel
         this.sc = new SizeConstants();
 
         this.postComponent = new PostComponent(post);
+        this.postComponent_2 = new PostComponent_2(post);
     }
 
     /*******************************************************************************************/
@@ -63,5 +66,10 @@ public class PostModel implements IPostModel
     public PostComponent getPostComponent()
     {
         return this.postComponent;
+    }
+
+    public PostComponent_2 getPostComponent_2()
+    {
+        return this.postComponent_2;
     }
 }

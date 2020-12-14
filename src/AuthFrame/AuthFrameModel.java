@@ -3,9 +3,13 @@ package AuthFrame;
 import AuthFrame.AuthPages.RegisterPage.RegisterPageController;
 import AuthFrame.AuthPages.RegisterPage.RegisterPageModel;
 import AuthFrame.AuthPages.RegisterPage.RegisterPageView;
+import AuthFrame.LoginPage.LoginPageController;
+import AuthFrame.LoginPage.LoginPageModel;
+import AuthFrame.LoginPage.LoginPageView;
 import MainFrame.CustomComponents.CustomJButton;
 import MainFrame.CustomComponents.CustomJFrame;
 import MainFrame.CustomComponents.CustomJPanel;
+import MainLoop.Loop;
 import Static.AuthSizeConstants;
 
 import javax.swing.*;
@@ -15,6 +19,7 @@ import java.awt.event.ActionListener;
 public class AuthFrameModel implements IAuthFrameModel {
     private AuthSizeConstants sc;
     private IAuthFrameView authFrameView;
+    private Loop mainLoop ;
 
     /****************************************************************************/
 
@@ -34,19 +39,27 @@ public class AuthFrameModel implements IAuthFrameModel {
 
     /****************************************************************************/
 
+    private LoginPageView loginPageView;
+    private LoginPageModel loginPageModel;
+    private LoginPageController loginPageController;
+
+    /****************************************************************************/
+
     private JButton btn;
     private JButton btnRegister;
 
-    public AuthFrameModel()
+    public AuthFrameModel( Loop mainLoop )
     {
-        this.init();
+        this.init( mainLoop );
     }
 
-    private void init()
+    private void init( Loop mainLoop )
     {
         this.sc = new AuthSizeConstants();
 
         this.cardPanel = new CustomJPanel();
+
+        this.mainLoop = mainLoop ;
 
         this.panel1 = new CustomJPanel();
         this.panel1.setBackground(Color.YELLOW);
@@ -62,10 +75,21 @@ public class AuthFrameModel implements IAuthFrameModel {
         this.btn = new CustomJButton();
         this.btn.setText("Login");
 
+        this.createLoginPage();
         this.createRegisterPage();
+
 
         this.btnRegister = new CustomJButton();
         this.btnRegister.setText("Register");
+    }
+
+    private void createLoginPage()
+    {
+        this.loginPageView = new LoginPageView();
+        this.loginPageModel = new LoginPageModel( this );
+        this.loginPageController = new LoginPageController( loginPageModel , loginPageView);
+
+        this.loginPageModel.setView( this.loginPageView );
     }
 
     private void createRegisterPage()
@@ -141,4 +165,11 @@ public class AuthFrameModel implements IAuthFrameModel {
         return this.RPM;
     }
 
+    public LoginPageModel getLoginPageModel() {
+        return loginPageModel;
+    }
+
+    public Loop getMainLoop() {
+        return mainLoop;
+    }
 }

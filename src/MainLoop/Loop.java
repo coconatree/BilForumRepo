@@ -34,7 +34,7 @@ public class Loop
         this.MFM.setView(this.MFV);
 
         this.AFV = new AuthFrameView();
-        this.AFM = new AuthFrameModel();
+        this.AFM = new AuthFrameModel(this );
         this.AFC = new AuthFrameController(this.AFV, this.AFM, this);
 
         this.AFM.setView(this.AFV);

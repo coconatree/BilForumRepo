@@ -27,7 +27,7 @@ public class PostView_2 extends CustomJPanel implements IPostView
         this.setLayout( layout );
 
         // [grow] yazmıstın grow yerine
-
+        this.add( model.getPostComponent_2() , "grow");
         //add( model.getTitleLabel() , "grow");
         //add( model.getVoteLabel(), "grow");
     }

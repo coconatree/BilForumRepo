@@ -39,4 +39,7 @@ public class AuthFrameController
             });
         }
     }
+    public Loop getRef() {
+        return ref;
+    }
 }
