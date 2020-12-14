@@ -1,9 +1,15 @@
 package MainFrame.Pages.PostCreationPage.Center;
 
+import MainFrame.CustomComponents.CustomJButton;
 import MainFrame.CustomComponents.CustomJPanel;
+import MainFrame.CustomComponents.CustomJTextField;
+import Static.Colors;
+import Static.ConstantText;
+import Static.Fonts;
 import Static.SizeConstants;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class PCCenterModel implements IPCCenterModel
@@ -14,10 +20,10 @@ public class PCCenterModel implements IPCCenterModel
 
     /*******************************************************************************************/
 
-    private JTextField titleField;
+    private CustomJTextField titleField;
 
     private JTextPane syntaxInfo;
-    private JTextPane contentInput;
+    private JTextArea contentInput;
 
     private JPanel scrollPanel;
     private JScrollPane sp;
@@ -25,9 +31,12 @@ public class PCCenterModel implements IPCCenterModel
     private JPanel  lowerPanel;
     private JButton postBtn;
 
+    private JPanel panel1;
+    private CustomJTextField tagsTextField;
+
     /*******************************************************************************************/
 
-    private String syntaxInfoText = "AAAAAAAAAAAAAAAAAAAAAAAAA";
+    private String syntaxInfoText = ConstantText.getPostCreationPageSyntax();
 
     /*******************************************************************************************/
 
@@ -45,7 +54,8 @@ public class PCCenterModel implements IPCCenterModel
 
     private void initFields()
     {
-        this.titleField = new JTextField(5);
+        this.titleField = new CustomJTextField(5);
+        this.titleField.setFont(Fonts.TITLE_FONT);
 
         this.syntaxInfo = new JTextPane();
         this.syntaxInfo.setOpaque(false);
@@ -55,17 +65,26 @@ public class PCCenterModel implements IPCCenterModel
         this.scrollPanel = new CustomJPanel();
 
         this.sp = new JScrollPane();
-
         this.sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        this.sp.setBorder(BorderFactory.createEmptyBorder());
 
-        this.contentInput = new JTextPane();
+        this.contentInput = new JTextArea();
         this.contentInput.setOpaque(true);
+        this.contentInput.setBackground(Colors.MAIN_BACKGROUND_COLOR);
+        this.contentInput.setWrapStyleWord(true);
+        this.contentInput.setLineWrap(true);
+        this.contentInput.setFont(Fonts.NORMAL_FONT);
+        this.contentInput.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         this.lowerPanel = new CustomJPanel();
 
-        this.postBtn = new JButton();
+        this.postBtn = new CustomJButton();
         this.postBtn.setText("POST");
+
+        this.panel1 = new CustomJPanel();
+
+        this.tagsTextField = new CustomJTextField(5);
     }
 
     /*******************************************************************************************/
@@ -113,7 +132,7 @@ public class PCCenterModel implements IPCCenterModel
         return syntaxInfo;
     }
 
-    public JTextPane getContentInput()
+    public JTextArea getContentInput()
     {
         return contentInput;
     }
@@ -136,5 +155,15 @@ public class PCCenterModel implements IPCCenterModel
     public JButton getPostBtn()
     {
         return postBtn;
+    }
+
+    public JPanel getPanel1()
+    {
+        return panel1;
+    }
+
+    public CustomJTextField getTagsTextField()
+    {
+        return tagsTextField;
     }
 }

@@ -1,6 +1,7 @@
 package MainFrame.CustomComponents;
 
 import Static.Colors;
+import Static.Fonts;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
@@ -12,7 +13,7 @@ public class CustomJButton extends JButton
     {
         super();
 
-        this.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
+        this.setFont(Fonts.BUTTON_FONT);
         this.setBackground(Colors.BUTTON_COLOR);
         this.setForeground(Color.white);
 

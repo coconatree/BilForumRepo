@@ -2,6 +2,7 @@ package MainFrame.Navbar;
 
 import MainFrame.CustomComponents.CustomJButton;
 import MainFrame.CustomComponents.CustomJPanel;
+import MainFrame.CustomComponents.CustomJTextField;
 import MainFrame.MainFrameModel;
 import Static.Colors;
 import Static.SizeConstants;
@@ -24,7 +25,7 @@ public class NavbarModel implements INavbarModel
 
     /*******************************************************************************************/
 
-    private JTextField sTF; // Search text field
+    private CustomJTextField sTF; // Search text field
 
     /*******************************************************************************************/
 
@@ -136,7 +137,7 @@ public class NavbarModel implements INavbarModel
 
     private void initTextField()
     {
-        this.sTF = new JTextField();
+        this.sTF = new CustomJTextField(5);
     }
 
     /*******************************************************************************************/

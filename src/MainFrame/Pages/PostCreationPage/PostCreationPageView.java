@@ -15,12 +15,9 @@ public class PostCreationPageView extends CustomJPanel implements IPostCreationP
 
     private void init(PostCreationPageModel model)
     {
-        MigLayout layout = new MigLayout("inset 15 15 15 15", String.format("[%d]15[grow]15[%d]", model.getSc().getWIDTH_RATIO() * 15, model.getSc().getWIDTH_RATIO() * 15), "[grow]");
+        MigLayout layout = new MigLayout("inset 15 15 15 15", "[grow]", "[grow]");
 
         this.setLayout(layout);
-
-        this.add(model.getPanel1(), "grow");
         this.add(model.getPCCenterModel().getView(), "grow");
-        this.add(model.getPanel3(), "grow");
     }
 }
