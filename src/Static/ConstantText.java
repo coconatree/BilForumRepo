@@ -8,6 +8,8 @@ public class ConstantText
 
     private static final String POST_CREATION_PAGE_SYNTAX = "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır. Beşyüz yıl boyunca varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.";
 
+    private static final String POST_CREATION_PAGE_TAGS = "Here is where you enter the tags relevant to your post.";
+
     /*******************************************************************************/
 
     public static String getForumPageLeftText()
@@ -23,4 +25,6 @@ public class ConstantText
     {
         return POST_CREATION_PAGE_SYNTAX;
     }
+
+    public static String getPostCreationPageTags(){ return POST_CREATION_PAGE_TAGS; }
 }

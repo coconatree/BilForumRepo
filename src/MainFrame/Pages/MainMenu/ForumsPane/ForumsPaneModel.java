@@ -35,7 +35,7 @@ public class ForumsPaneModel implements IForumsPaneModel{
 
         for (int i = 0 ; i < 15 ; i++)
         {
-            loopPost = new Post("Hello ",12,12,"", "", "","");
+            loopPost = new Post("Hello ",12,12,"", "", "","", "");
             postList.add( loopPost );
         }
 

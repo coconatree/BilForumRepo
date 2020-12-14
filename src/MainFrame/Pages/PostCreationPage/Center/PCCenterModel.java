@@ -1,6 +1,7 @@
 package MainFrame.Pages.PostCreationPage.Center;
 
 import MainFrame.CustomComponents.CustomJButton;
+import MainFrame.CustomComponents.CustomJLabel;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.CustomComponents.CustomJTextField;
 import Static.Colors;
@@ -31,7 +32,10 @@ public class PCCenterModel implements IPCCenterModel
     private JPanel  lowerPanel;
     private JButton postBtn;
 
-    private JPanel panel1;
+    private CustomJPanel panel1;
+    private CustomJPanel panel2;
+
+    private CustomJLabel tagsLabel;
     private CustomJTextField tagsTextField;
 
     /*******************************************************************************************/
@@ -83,8 +87,11 @@ public class PCCenterModel implements IPCCenterModel
         this.postBtn.setText("POST");
 
         this.panel1 = new CustomJPanel();
+        this.panel2 = new CustomJPanel();
 
         this.tagsTextField = new CustomJTextField(5);
+        this.tagsLabel = new CustomJLabel();
+        this.tagsLabel.setText(ConstantText.getPostCreationPageTags());
     }
 
     /*******************************************************************************************/
@@ -166,4 +173,15 @@ public class PCCenterModel implements IPCCenterModel
     {
         return tagsTextField;
     }
+
+    public CustomJLabel getTagsLabel()
+    {
+        return this.tagsLabel;
+    }
+
+    public CustomJPanel getPanel2()
+    {
+        return this.panel2;
+    }
 }
+

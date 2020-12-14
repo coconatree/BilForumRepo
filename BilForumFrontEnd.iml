@@ -11,16 +11,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Jar Files/miglayout-core-5.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Jar Files/miglayout-swing-5.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../miglayout-3.5.5-swing-java14.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

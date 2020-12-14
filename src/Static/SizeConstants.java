@@ -10,10 +10,10 @@ public class SizeConstants
 
     public SizeConstants()
     {
-        this.WIDTH = 1500;
+        this.WIDTH = 1000;
         this.WIDTH_RATIO = WIDTH / 100;
 
-        this.HEIGHT = 900;
+        this.HEIGHT = 700;
         this.HEIGHT_RATIO = HEIGHT / 100;
     }
 

@@ -21,6 +21,11 @@ public class CenterController
 
         this.ref = ref;
 
+        this.updateMouseListener();
+    }
+
+    public void updateMouseListener()
+    {
         this.CM.addMouseListener(new PostMouseListener());
     }
 

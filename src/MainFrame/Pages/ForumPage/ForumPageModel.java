@@ -97,8 +97,10 @@ public class ForumPageModel implements IForumPageModel
 
     public CenterModel getCM()
     {
-        return CM;
+        return this.CM;
     }
+
+    public CenterController getCC(){ return this.CC; }
 
     /*******************************************************************************************/
 

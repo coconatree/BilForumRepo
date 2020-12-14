@@ -19,6 +19,7 @@ import MainFrame.Pages.PostCreationPage.PostCreationPageView;
 import MainFrame.Pages.ProfilePage.ProfilePageController;
 import MainFrame.Pages.ProfilePage.ProfilePageModel;
 import MainFrame.Pages.ProfilePage.ProfilePageView;
+import PojoClasses.User;
 import Static.SizeConstants;
 
 import javax.swing.*;
@@ -29,6 +30,10 @@ public class MainFrameModel implements IMainFrameModel
     private SizeConstants sc;
 
     private IMainFrameView MFV;
+
+    /*******************************************************************************************/
+
+    private User currentUser;
 
     /*******************************************************************************************/
 
@@ -74,6 +79,11 @@ public class MainFrameModel implements IMainFrameModel
     public MainFrameModel()
     {
         this.init();
+    }
+
+    public void setUser(User user)
+    {
+        this.currentUser = user;
     }
 
     private void init()
@@ -127,7 +137,7 @@ public class MainFrameModel implements IMainFrameModel
     private void createPostCreationPage()
     {
         this.PostCreationPageView   = new PostCreationPageView();
-        this.PostCreationPageModel  = new PostCreationPageModel();
+        this.PostCreationPageModel  = new PostCreationPageModel(this);
         this.PostCreationController = new PostCreationPageController(this.PostCreationPageView, this.PostCreationPageModel);
 
         this.PostCreationPageModel.setView(this.PostCreationPageView);
@@ -233,5 +243,10 @@ public class MainFrameModel implements IMainFrameModel
     public MainMenuModel getMMM()
     {
         return MMM;
+    }
+
+    public User getCurrentUser()
+    {
+        return this.currentUser;
     }
 }

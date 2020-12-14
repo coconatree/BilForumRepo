@@ -37,7 +37,7 @@ public class CenterModel implements ICenterModel
         for(int i = 0; i < 10; i++)
         {
             loopView =  new PostView();
-            loopModel = new PostModel(new Post("emre", (int)(Math.random() * 1000), 20, "emre", "emre", "emre", "12:12:2020"));
+            loopModel = new PostModel(new Post("emre", (int)(Math.random() * 1000), 20, "emre", "emre", "emre", "12:12:2020", ""));
 
             loopModel.setView(loopView);
 
@@ -51,7 +51,10 @@ public class CenterModel implements ICenterModel
     {
         for (PostModel mdl : this.getPostModels())
         {
-            mdl.getPostComponent().addMouseListener(ML);
+            if(mdl.getPostComponent().getMouseListeners().length == 0)
+            {
+                mdl.getPostComponent().addMouseListener(ML);
+            }
         }
     }
 

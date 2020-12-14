@@ -1,6 +1,7 @@
 package MainFrame.Pages.PostCreationPage;
 
 import MainFrame.CustomComponents.CustomJPanel;
+import MainFrame.MainFrameModel;
 import MainFrame.Pages.PostCreationPage.Center.PCCenterController;
 import MainFrame.Pages.PostCreationPage.Center.PCCenterModel;
 import MainFrame.Pages.PostCreationPage.Center.PCCenterView;
@@ -31,20 +32,20 @@ public class PostCreationPageModel implements IPostCreationPageModel
 
     /*******************************************************************************************/
 
-    public PostCreationPageModel()
+    public PostCreationPageModel(MainFrameModel ref)
     {
         this.sc = new SizeConstants();
 
-        this.initPCCenter();
+        this.initPCCenter(ref);
 
         this.initPanels();
     }
 
-    private void initPCCenter()
+    private void initPCCenter(MainFrameModel ref)
     {
         this.PCCenterView  = new PCCenterView();
         this.PCCenterModel = new PCCenterModel();
-        this.PCCenterController = new PCCenterController(this.PCCenterView, this.PCCenterModel);
+        this.PCCenterController = new PCCenterController(this.PCCenterView, this.PCCenterModel, ref);
 
         this.PCCenterModel.setView(this.PCCenterView);
     }
