@@ -11,34 +11,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/JavaJars/miglayout-3.5.5-swing-java14.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Jar Files/miglayout-core-5.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://E:/JavaJars/jackson-annotations-2.9.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://E:/JavaJars/jackson-core-2.9.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://E:/JavaJars/jackson-databind-2.9.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../Jar Files/miglayout-swing-5.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
