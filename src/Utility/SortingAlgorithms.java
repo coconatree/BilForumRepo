@@ -14,7 +14,7 @@ public class SortingAlgorithms
         {
             for (int j = 0; j < n-i-1; j++)
             {
-                if (list.get(j).getVotes() > list.get(j + 1).getVotes())
+                if (Integer.valueOf(list.get(j).getVotes()) > Integer.valueOf(list.get(j + 1).getVotes()))
                 {
                     Post temp = list.get(j);
                     list.set(j, list.get(j + 1));
@@ -32,7 +32,7 @@ public class SortingAlgorithms
         {
             for (int j = 0; j < n-i-1; j++)
             {
-                if (list.get(j).getViews() > list.get(j + 1).getViews())
+                if (Integer.valueOf(list.get(j).getViews()) > Integer.valueOf(list.get(j + 1).getViews()))
                 {
                     Post temp = list.get(j);
                     list.set(j, list.get(j + 1));

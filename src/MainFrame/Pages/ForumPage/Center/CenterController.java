@@ -41,7 +41,7 @@ public class CenterController
                 public void run()
                 {
                     PostComponent cmp = (PostComponent) e.getSource();
-                    ref.getLabelTemp().setText(Integer.toString(cmp.getView()));
+                    ref.getLabelTemp().setText(cmp.getView());
 
                     ref.getCardLayout().show(ref.getCardPanel(), "PANEL_TEMP");
                 }

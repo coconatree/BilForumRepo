@@ -1,8 +1,10 @@
 package MainFrame.Navbar;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class NavbarController
 {
@@ -16,6 +18,23 @@ public class NavbarController
 
         this.NBM.addActionListenerToNextBtn(new ArrayChangeListener());
         this.NBM.addActionListenerToBackBtn(new PageListener());
+        this.NBM.addActionListenerToRefreshBtn(new RefreshListener());
+    }
+
+    class RefreshListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    NBM.getRef().getFPM().getCM().update();
+                }
+            });
+        }
     }
 
     class ArrayChangeListener implements ActionListener

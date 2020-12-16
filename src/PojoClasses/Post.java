@@ -4,8 +4,8 @@ public class Post
 {
     private String id;
 
-    private int views;
-    private int votes;
+    private String views;
+    private String votes;
 
     /***********************************************************************************/
 
@@ -19,7 +19,14 @@ public class Post
 
     /***********************************************************************************/
 
-    public Post(String id, int views, int votes, String title, String content, String author, String date, String tags)
+    public Post()
+    {
+
+    };
+
+    /***********************************************************************************/
+
+    public Post(String id, String views, String votes, String title, String content, String author, String date, String tags)
     {
         this.id = id;
         this.views = views;
@@ -36,7 +43,7 @@ public class Post
     @Override
     public String toString()
     {
-        return String.format("Id: %s - Views: %d - Votes: %d - Title: %s - Content: %s - Author: %s - Date: %s Tags: %s",
+        return String.format("Id: %s - Views: %s - Votes: %s - Title: %s - Content: %s - Author: %s - Date: %s Tags: %s",
 
                 this.id,
                 this.views,
@@ -57,12 +64,12 @@ public class Post
         return id;
     }
 
-    public int getViews()
+    public String getViews()
     {
         return views;
     }
 
-    public int getVotes()
+    public String getVotes()
     {
         return votes;
     }
@@ -94,12 +101,12 @@ public class Post
         this.id = id;
     }
 
-    public void setViews(int views)
+    public void setViews(String views)
     {
         this.views = views;
     }
 
-    public void setVotes(int votes)
+    public void setVotes(String votes)
     {
         this.votes = votes;
     }

@@ -173,6 +173,11 @@ public class NavbarModel implements INavbarModel
         this.bBtn.addActionListener(AL);
     }
 
+    public void addActionListenerToRefreshBtn(ActionListener Al)
+    {
+        this.rBtn.addActionListener(Al);
+    }
+
     /*******************************************************************************************/
 
     public MainFrameModel getRef()

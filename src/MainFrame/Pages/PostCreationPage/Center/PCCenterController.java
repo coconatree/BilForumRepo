@@ -1,5 +1,6 @@
 package MainFrame.Pages.PostCreationPage.Center;
 
+import APIConnection.APIConnection;
 import MainFrame.MainFrameModel;
 import MainFrame.Pages.ForumPage.Center.Post.PostModel;
 import MainFrame.Pages.ForumPage.Center.Post.PostView;
@@ -47,28 +48,38 @@ public class PCCenterController
                     tagsText = postCreationCenterModel.getTagsTextField().getText();
 
                     Post post1 = new Post(
-                            "1012",
-                            0,
-                            0,
+                            "1016",
+                            "200000",
+                            "252525",
                             titleText,
                             contentText,
                             "emre",
                             "----", tagsText
                     );
-                    System.out.printf(post1.toString());
 
                     PostModel modelTemp = new PostModel(post1);
                     PostView viewTemp = new PostView();
 
                     modelTemp.setView(viewTemp);
 
-                    ref.getFPM().getCM().getPostModels().add(modelTemp);
+                    try
+                    {
+                        String code = APIConnection.httpPOST(post1);
+                        System.out.println(code);
+                    }
+                    catch (Exception exception)
+                    {
+                        exception.printStackTrace();
+                        exception.getMessage();
+                    }
 
-
+                    // ref.getFPM().getCM().getPostModels().add(modelTemp);
 
                     ref.getCardLayout().show(ref.getCardPanel(), "FORUM_PAGE");
 
                     ref.getFPM().getCM().update();
+                    ref.getFPM().getCM().initPostList();
+
                     ref.getFPM().getCC().updateMouseListener();
 
                 }

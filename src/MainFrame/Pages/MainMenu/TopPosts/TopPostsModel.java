@@ -48,7 +48,7 @@ public class TopPostsModel implements ITopPostsModel{
         {
             int random = (int)(Math.random() * 100);
 
-            loopModel = new PostModel( new Post("Hi my problem is :" + i , 12, 12, "", "", "", "", ""));
+            loopModel = new PostModel( new Post("Hi my problem is :" + i , "12", "12", "", "", "", "", ""));
             loopView = new PostView_2();
 
             loopModel.setView( loopView );

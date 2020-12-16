@@ -16,18 +16,19 @@ public class EmailConfirmation
 
     public void setCode(String email)
     {
-        try
-        {
-            this.code = APIConnection.sendGET(String.format("%s/%s", GET_EMAIl_CODE_URL, email)).body().toString();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
+        /**
+         * try
+         *         {
+         *             // this.code = APIConnection.sendGET(String.format("%s/%s", GET_EMAIl_CODE_URL, email)).body().toString();
+         *         }
+         *         catch (IOException e)
+         *         {
+         *             e.printStackTrace();
+         *         }
+         *         catch (InterruptedException e)
+         *         {
+         *             e.printStackTrace();
+         *         }*/
     }
 
     /*******************************************************************************************/

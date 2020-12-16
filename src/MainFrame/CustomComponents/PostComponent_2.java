@@ -16,7 +16,7 @@ public class PostComponent_2 extends JComponent {
     private SizeConstants sc ;
     private JPanel panel ;
 
-    int vote ;
+    String vote ;
     String title ;
 
     public PostComponent_2(Post post){

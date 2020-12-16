@@ -5,6 +5,7 @@ import Static.SizeConstants;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PostComponent extends JComponent
 {
@@ -30,8 +31,8 @@ public class PostComponent extends JComponent
 
     String id;
 
-    int vote;
-    int view;
+    String vote;
+    String view;
 
     private SizeConstants sc;
 
@@ -50,6 +51,8 @@ public class PostComponent extends JComponent
 
         MigLayout layout = new MigLayout("inset 5 5 5 5", String.format("[%d][grow]", this.sc.getWIDTH_RATIO() * 15), "[grow]");
         this.setLayout(layout);
+
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         this.panel1.add(this.viewLabel);
         this.panel1.add(this.voteLabel);
@@ -96,7 +99,7 @@ public class PostComponent extends JComponent
         this.panel3 = new CustomJPanel();
     }
 
-    public int getView()
+    public String getView()
     {
         return this.view;
     }
