@@ -1,8 +1,12 @@
 package AuthFrame.AuthPages.RegisterPage;
 
+import Utility.EmailCodeGenerator;
+import Utility.EmailSender;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 public class RegisterPageController {
 
@@ -16,9 +20,6 @@ public class RegisterPageController {
 
         this.registerPageModel.addActionListenerToBtn(new RegisterButtonListener());
     }
-
-
-
     class RegisterButtonListener implements ActionListener
     {
         String username;
@@ -30,34 +31,33 @@ public class RegisterPageController {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            SwingUtilities.invokeLater(() -> {
-                username = registerPageModel.getUsernameF().getText();
-                email = registerPageModel.getUsernameF().getText();
-                password = registerPageModel.getPasswordF().getText();
+            Scanner scan = new Scanner(System.in);
 
+            SwingUtilities.invokeLater(() -> {
+                String input;
+                username = registerPageModel.getUsernameF().getText();
+                email = registerPageModel.getEmailF().getText();
+                password = registerPageModel.getPasswordF().getText();
+                String code = new EmailCodeGenerator().createEmailCode();
+                String passCode = new EmailSender(code,email).getCode();
+                //also check for email
                 if(registerPageModel.getPasswordF().getText().equals(registerPageModel.getPasswordRF().getText()))
                 {
                     valid = true;
                 }
-                else
-                {
-                    new JOptionPane("Please enter same passwords");
-                }
                 if(valid)
                 {
-                    System.out.println("Sending to the database !!!");
-                    System.out.println("Redirecting you to the mail authentication page !!!");
-                    System.out.println("-------------------------");
-
-                }
-                else
-                {
-                    System.out.println("Else block");
-                    new JOptionPane("It is not valid.");
+                   input = scan.nextLine();
+                    if(input.equals(code))
+                    {
+                        System.out.println("new user added to the databese");
+                    }
+                    else
+                    {
+                        System.out.println("wrong code");
+                    }
                 }
             });
         }
     }
-
-
 }
