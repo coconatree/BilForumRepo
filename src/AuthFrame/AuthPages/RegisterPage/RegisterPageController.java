@@ -1,11 +1,14 @@
 package AuthFrame.AuthPages.RegisterPage;
 
+import APIConnection.APIConnection;
+import PojoClasses.User;
 import Utility.EmailCodeGenerator;
 import Utility.EmailSender;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.util.Scanner;
 
 public class RegisterPageController {
@@ -50,7 +53,24 @@ public class RegisterPageController {
                    input = scan.nextLine();
                     if(input.equals(code))
                     {
-                        System.out.println("new user added to the databese");
+                        User user1 = new User(
+                                "10",
+                                username,
+                                email,
+                                password,
+                                2
+                                );
+                        try {
+                            String rofl = APIConnection.httpUser(user1);
+
+                            System.out.println(rofl);
+                        }
+                        catch ( Exception exception)
+                        {
+                            exception.printStackTrace();
+                            exception.getMessage();
+                        }
+
                     }
                     else
                     {
