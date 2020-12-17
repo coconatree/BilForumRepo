@@ -95,7 +95,7 @@ public class APIConnection
 
         System.out.println(requestBody);
 
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/user/register/addUser")).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/user/addUser")).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
