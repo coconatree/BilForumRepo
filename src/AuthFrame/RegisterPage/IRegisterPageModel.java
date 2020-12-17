@@ -1,4 +1,4 @@
-package AuthFrame.AuthPages.RegisterPage;
+package AuthFrame.RegisterPage;
 
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.IModel;

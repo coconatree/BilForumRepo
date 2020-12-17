@@ -5,11 +5,10 @@ import Static.Fonts;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.RoundRectangle2D;
 
-public class CustomJTextField extends JTextField
+public class CustomPasswordField extends JPasswordField
 {
-    public CustomJTextField(int size)
+    public CustomPasswordField(int size)
     {
         super(size);
 

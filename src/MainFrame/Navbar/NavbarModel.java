@@ -98,7 +98,7 @@ public class NavbarModel implements INavbarModel
 
         this.logoLabelText = "Logo";
         this.voteLabelText = "56";
-        this.profLabelText = "Profile";
+        this.profLabelText = "Guest";
     }
 
     private void initPanels()

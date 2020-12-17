@@ -25,4 +25,6 @@ public class LoginPageView extends CustomJPanel implements ILoginPageView {
         this.add( model.getRegisterButton() , " grow");
         this.add( model.getForgotButton() , "grow");
     }
+
+
 }

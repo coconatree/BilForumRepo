@@ -1,8 +1,8 @@
 package AuthFrame;
 
-import AuthFrame.AuthPages.RegisterPage.RegisterPageController;
-import AuthFrame.AuthPages.RegisterPage.RegisterPageModel;
-import AuthFrame.AuthPages.RegisterPage.RegisterPageView;
+import AuthFrame.RegisterPage.RegisterPageController;
+import AuthFrame.RegisterPage.RegisterPageModel;
+import AuthFrame.RegisterPage.RegisterPageView;
 import AuthFrame.LoginPage.LoginPageController;
 import AuthFrame.LoginPage.LoginPageModel;
 import AuthFrame.LoginPage.LoginPageView;

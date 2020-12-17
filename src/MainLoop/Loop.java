@@ -70,4 +70,9 @@ public class Loop
     {
         return frameMain;
     }
+
+    public MainFrameModel getMainFrameModel()
+    {
+        return this.MFM;
+    }
 }

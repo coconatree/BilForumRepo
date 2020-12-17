@@ -1,4 +1,4 @@
-package AuthFrame.AuthPages.RegisterPage;
+package AuthFrame.RegisterPage;
 
 
 public interface IRegisterPageView
