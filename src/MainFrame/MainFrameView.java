@@ -32,6 +32,7 @@ public class MainFrameView extends CustomJFrame implements IMainFrameView
         model.getCardPanel().add(model.getFPM().getView(), "FORUM_PAGE");
         model.getCardPanel().add(model.getPostCreationPageModel().getView(), "POST_CREATION_PAGE");
         model.getCardPanel().add(model.getProfilePageModel().getView(), "PROFILE_PAGE");
+        model.getCardPanel().add(model.getPostPageModel().getView(), "POST_PAGE");
 
         /***** TEST *****/
 
