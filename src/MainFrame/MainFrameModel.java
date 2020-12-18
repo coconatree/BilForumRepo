@@ -225,6 +225,11 @@ public class MainFrameModel implements IMainFrameModel
     {
         return this.FPM;
     }
+    
+    public PostPageModel getPostPageModel()
+    {
+        return this.PPM;
+    }
 
     public NavbarModel getNVM()
     {
