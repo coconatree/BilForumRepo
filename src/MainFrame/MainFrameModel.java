@@ -19,6 +19,9 @@ import MainFrame.Pages.PostCreationPage.PostCreationPageView;
 import MainFrame.Pages.ProfilePage.ProfilePageController;
 import MainFrame.Pages.ProfilePage.ProfilePageModel;
 import MainFrame.Pages.ProfilePage.ProfilePageView;
+import MainFrame.Pages.PostPage.PostPageController;
+import MainFrame.Pages.PostPage.PostPageModel;
+import MainFrame.Pages.PostPage.PostPageView;
 import PojoClasses.User;
 import Static.SizeConstants;
 
@@ -65,6 +68,12 @@ public class MainFrameModel implements IMainFrameModel
     private MainMenuModel MMM;
     private MainMenuController MMC;
 
+    /*******************************************************************************************/
+    
+    private PostPageView PPV;
+    private PostPageModel PPM;
+    private PostPageController PPC;
+    
     /*******************************************************************************************/
 
     private CustomJPanel cardPanel;
@@ -152,6 +161,17 @@ public class MainFrameModel implements IMainFrameModel
         this.ProfilePageModel.setView(this.ProfilePageView);
     }
 
+    /*******************************************************************************************/
+    
+    private void createPostPage()
+    {
+        this.PPV = new PostPageView();
+        this.PPM = new PostPageModel(this);
+        this.PPC = new PostPageController(this.PPV, this.PPM);
+
+        this.PPM.setView(this.PPV);
+    }
+    
     /*******************************************************************************************/
 
     @Override
