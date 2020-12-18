@@ -41,9 +41,10 @@ public class CenterController
                 public void run()
                 {
                     PostComponent cmp = (PostComponent) e.getSource();
-                    ref.getLabelTemp().setText(cmp.getView());
+                    //ref.getLabelTemp().setText(cmp.getView());
 
-                    ref.getCardLayout().show(ref.getCardPanel(), "PANEL_TEMP");
+                    //ref.getCardLayout().show(ref.getCardPanel(), "PANEL_TEMP");
+                    ref.getCardLayout().show(ref.getCardPanel(), "POST_PAGE");
                 }
             });
         }
