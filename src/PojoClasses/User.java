@@ -1,5 +1,7 @@
 package PojoClasses;
 
+
+
 public class User
 {
     private String userID;
@@ -11,6 +13,10 @@ public class User
 
     /*************************************************************************************/
 
+    public User()
+    {
+
+    }
     public User(String userID, String username, String email, String passwordHashed, int userLevel)
     {
         this.userID = userID;

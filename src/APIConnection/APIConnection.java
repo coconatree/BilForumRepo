@@ -15,22 +15,22 @@ public class APIConnection
 {
     /**
 
-    private static final String GET_ALL_POSTS_URL = "http://localhost:8080/post/getAll";
+     private static final String GET_ALL_POSTS_URL = "http://localhost:8080/post/getAll";
 
-    public static HttpResponse<String> sendGET(String URL) throws IOException, InterruptedException
-    {
-        HttpClient client = HttpClient.newHttpClient();
+     public static HttpResponse<String> sendGET(String URL) throws IOException, InterruptedException
+     {
+     HttpClient client = HttpClient.newHttpClient();
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .header("accept", "application/json")
-                .uri(URI.create(URL))
-                .build();
+     HttpRequest request = HttpRequest.newBuilder()
+     .GET()
+     .header("accept", "application/json")
+     .uri(URI.create(URL))
+     .build();
 
-        return client.send(request, HttpResponse.BodyHandlers.ofString());
-    }
+     return client.send(request, HttpResponse.BodyHandlers.ofString());
+     }
 
-    */
+     */
 
     public static List<Post> httpGET() throws Exception
     {
@@ -71,7 +71,7 @@ public class APIConnection
     {
         HttpClient client = HttpClient.newHttpClient();
 
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/user/register/getAll")).build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/user/getAll")).build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -79,7 +79,7 @@ public class APIConnection
 
         ObjectMapper mapper = new ObjectMapper();
 
-        List<User> userList = mapper.readValue(bodyAsString, new TypeReference<List<Post>>(){});
+        List<User> userList = mapper.readValue(bodyAsString, new TypeReference<List<User>>(){});
 
         return userList;
     }

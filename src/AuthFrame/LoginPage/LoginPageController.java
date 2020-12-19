@@ -1,18 +1,23 @@
 package AuthFrame.LoginPage;
 
+import APIConnection.APIConnection;
 import MainLoop.Loop;
+import PojoClasses.Post;
 import PojoClasses.User;
 import Utility.PasswordHash;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginPageController {
 
     private ILoginPageView view;
     private LoginPageModel model;
     private Loop mainLoop ;
+
 
     public LoginPageController(LoginPageModel model, ILoginPageView view )
     {
@@ -28,7 +33,9 @@ public class LoginPageController {
 
         String username;
         String password;
-
+        String passwordCheck;
+        //api yoksa bunu true yapıp direk girebilirsiniz.
+        boolean valid = false;
         @Override
         public void actionPerformed(ActionEvent e) {
             SwingUtilities.invokeLater(new Runnable() {
@@ -37,12 +44,31 @@ public class LoginPageController {
                 {
                     if ( e.getSource() == model.getLoginButton() )
                     {
+                        passwordCheck = model.getPassWordTextField().getText();
                         username = model.getUserNameTextField().getText();
                         password = PasswordHash.hashString(model.getPassWordTextField().getText());
+                        List<User> userList;
+                        try {
+                            userList = APIConnection.getUsers();
+                            System.out.println(userList);
+                            for(int i = 0; i < userList.size(); i++)
+                            {
+                                if(userList.get(i).getUsername().equals(username))
+                                {
+                                    if(userList.get(i).getPasswordHashed().equals(passwordCheck))
+                                    {
+                                        valid = true;
+                                    }
+                                }
+                            }
+                        } catch (Exception exception) {
+                            exception.printStackTrace();
+                        }
 
-                        if(password.equals(PasswordHash.hashString("emre")))
+
+                        if(valid)
                         {
-                            mainLoop.getMainFrameModel().setUser(new User("12132", username, "", password, 1));
+                            mainLoop.getMainFrameModel().setUser(new User("", username, "", password, 1));
 
                             mainLoop.getMainFrameModel().getNVM().getProfLabel().setText(username);
 
