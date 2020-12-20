@@ -4,6 +4,7 @@ import APIConnection.APIConnection;
 import PojoClasses.User;
 import Utility.EmailCodeGenerator;
 import Utility.EmailSender;
+import Utility.PasswordHash;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +29,7 @@ public class RegisterPageController {
         String username;
         String email;
         String password;
+        String ID;
 
         boolean valid = false;
 
@@ -37,6 +39,7 @@ public class RegisterPageController {
             Scanner scan = new Scanner(System.in);
 
             SwingUtilities.invokeLater(() -> {
+
                 String input;
                 username = registerPageModel.getUsernameF().getText();
                 email = registerPageModel.getEmailF().getText();
@@ -50,16 +53,18 @@ public class RegisterPageController {
                 }
                 if(valid)
                 {
-                   input = scan.nextLine();
+                    input = scan.nextLine();
                     if(input.equals(code))
                     {
+                        ID = new EmailCodeGenerator().createUserID();
+
                         User user1 = new User(
-                                "10",
+                                ID,
                                 username,
                                 email,
-                                password,
-                                2
-                                );
+                                new PasswordHash().hashString(password),
+                                1
+                        );
                         try {
                             String rofl = APIConnection.httpUser(user1);
 
