@@ -9,6 +9,8 @@ public class CenterView extends CustomJPanel implements ICenterView
     @Override
     public void update(CenterModel model)
     {
+        //remove ekledim
+        removeAll();
         this.init(model);
     }
 
