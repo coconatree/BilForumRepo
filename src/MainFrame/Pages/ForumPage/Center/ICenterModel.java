@@ -2,6 +2,8 @@ package MainFrame.Pages.ForumPage.Center;
 
 import MainFrame.CustomComponents.CustomJPanel;
 
+import javax.swing.*;
+
 public interface ICenterModel
 {
     /**
@@ -9,7 +11,7 @@ public interface ICenterModel
      *
      */
 
-    CustomJPanel getView();
+    JPanel getView();
 
     /**
      *

@@ -11,6 +11,6 @@ public class CustomJPanel extends JPanel
     {
         super();
         this.setBorder(BorderFactory.createEmptyBorder());
-        this.setBackground(Colors.MAIN_BACKGROUND_COLOR);
+        this.setBackground(Colors.MAIN_COLOR);
     }
 }

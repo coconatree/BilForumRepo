@@ -12,9 +12,9 @@ public class CustomPasswordField extends JPasswordField
     {
         super(size);
 
-        this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        this.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(3, 10, 3, 10)));
 
         this.setFont(Fonts.NORMAL_FONT);
-        this.setBackground(Colors.MAIN_BACKGROUND_COLOR);
+        this.setBackground(Colors.MAIN_COLOR);
     }
 }

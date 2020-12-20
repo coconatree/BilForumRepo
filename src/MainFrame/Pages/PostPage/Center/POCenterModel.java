@@ -32,7 +32,7 @@ public class POCenterModel implements IPOCenterModel {
         for(int i = 0; i < 10; i++)
         {
             loopView =  new PostView();
-            loopModel = new PostModel(new Post("emre", (int)(Math.random() * 1000), 20, "emre", "emre", "emre", "12:12:2020", ""));
+            loopModel = new PostModel(new Post("emre", "20","12", "emre", "emre", "emre", "12:12:2020", ""));
 
             loopModel.setView(loopView);
 

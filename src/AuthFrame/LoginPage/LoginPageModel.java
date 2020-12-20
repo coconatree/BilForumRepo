@@ -1,9 +1,10 @@
 package AuthFrame.LoginPage;
 
 import AuthFrame.AuthFrameModel;
-import MainFrame.CustomComponents.CustomJButton;
-import MainFrame.CustomComponents.CustomJPanel;
+import MainFrame.CustomComponents.*;
 import Static.AuthSizeConstants;
+import Static.Fonts;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,11 +18,21 @@ public class LoginPageModel implements ILoginPageModel{
 
     private CustomJPanel panel ;
 
+    /*****************************************/
+
+    private CustomJPanel panel1;
+    private CustomJPanel panel2;
+    private CustomJPanel panel3;
+    private CustomJPanel panel4;
+    private CustomJPanel panel5;
+
+    /*****************************************/
+
     private JLabel usernameLabel ;
     private JLabel passWordLabel ;
 
     private JTextField userNameTextField ;
-    private JTextField passWordTextField ;
+    private JTextField passwordField ;
 
     private JButton loginButton ;
     private JButton registerButton ;
@@ -34,24 +45,38 @@ public class LoginPageModel implements ILoginPageModel{
 
     private void init( AuthFrameModel ref)
     {
-        sc = new AuthSizeConstants();
-        panel = new CustomJPanel();
+        this.sc = new AuthSizeConstants();
         this.ref = ref ;
 
-        usernameLabel = new JLabel("Username:");
-        usernameLabel.setFont( new Font( "Monaco", Font.BOLD, 20));
-        passWordLabel = new JLabel("Password:");
-        passWordLabel.setFont( new Font( "Monaco", Font.BOLD, 20));
+        this.panel1 = new CustomJPanel();
+        this.panel2 = new CustomJPanel();
+        this.panel3 = new CustomJPanel();
+        this.panel4 = new CustomJPanel();
+        this.panel5 = new CustomJPanel();
 
-        userNameTextField = new JTextField(40);
-        passWordTextField = new JTextField(40);
+        this.usernameLabel = new CustomJLabel();
+        this.usernameLabel.setText("Username:");
+        this.usernameLabel.setFont(Fonts.AUTH_FONT);
 
-        loginButton = new CustomJButton();
-        loginButton.setText("LOG IN");
-        registerButton = new CustomJButton();
-        registerButton.setText("REGISTER");
-        forgotButton = new CustomJButton();
-        forgotButton.setText("Forgot your password?");
+        this.userNameTextField = new CustomJTextField(5);
+
+        this.passWordLabel = new CustomJLabel();
+        this.passWordLabel.setText("Password:");
+        this.passWordLabel.setFont(Fonts.AUTH_FONT);
+
+        this.passwordField = new CustomPasswordField(5);
+
+        this.loginButton = new CustomJButton();
+        this.loginButton.setText("Login");
+        this.loginButton.setFont(Fonts.AUTH_FONT);
+
+        this.registerButton = new CustomJButton();
+        this.registerButton.setText("Register");
+        this.registerButton.setFont(Fonts.AUTH_FONT);
+
+        this.forgotButton = new CustomJButton();
+        this.forgotButton.setText("Forgot your password?");
+        this.forgotButton.setFont(Fonts.AUTH_FONT);
     }
 
     /*************************************************************************/
@@ -128,7 +153,19 @@ public class LoginPageModel implements ILoginPageModel{
         return userNameTextField;
     }
 
-    public JTextField getPassWordTextField() {
-        return passWordTextField;
+    public JTextField getPasswordField() {
+        return passwordField;
     }
+
+    public JPanel getPanel1(){ return this.panel1; }
+
+    public JPanel getPanel2(){ return this.panel2; }
+
+    public JPanel getPanel3(){ return this.panel3; }
+
+    public JPanel getPanel4(){ return this.panel4; }
+
+    public JPanel getPanel5(){ return this.panel5; }
+
+
 }

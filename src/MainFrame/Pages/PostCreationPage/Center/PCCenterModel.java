@@ -44,6 +44,13 @@ public class PCCenterModel implements IPCCenterModel
 
     /*******************************************************************************************/
 
+    private JPanel titlePanel;
+    private JPanel middlePanel;
+    private JPanel guidePanel;
+
+    private JLabel titleLabel;
+    private JLabel contentLabel;
+
     public PCCenterModel()
     {
         this.sc = new SizeConstants();
@@ -58,8 +65,23 @@ public class PCCenterModel implements IPCCenterModel
 
     private void initFields()
     {
+        this.titlePanel = new CustomJPanel();
+        this.titlePanel.setOpaque(false);
+
         this.titleField = new CustomJTextField(5);
         this.titleField.setFont(Fonts.TITLE_FONT);
+
+        this.titleLabel = new CustomJLabel();
+        this.titleLabel.setText("Title:");
+        this.titleLabel.setFont(Fonts.TITLE_FONT);
+
+        /**************************************************************/
+
+        this.middlePanel = new CustomJPanel();
+
+        this.contentLabel = new CustomJLabel();
+        this.contentLabel.setText("Content:");
+        this.contentLabel.setFont(Fonts.TITLE_FONT);
 
         this.syntaxInfo = new JTextPane();
         this.syntaxInfo.setOpaque(false);
@@ -75,23 +97,30 @@ public class PCCenterModel implements IPCCenterModel
 
         this.contentInput = new JTextArea();
         this.contentInput.setOpaque(true);
-        this.contentInput.setBackground(Colors.MAIN_BACKGROUND_COLOR);
+        this.contentInput.setBackground(Colors.MAIN_COLOR);
         this.contentInput.setWrapStyleWord(true);
         this.contentInput.setLineWrap(true);
         this.contentInput.setFont(Fonts.NORMAL_FONT);
         this.contentInput.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
+        /*************************************************************/
+
         this.lowerPanel = new CustomJPanel();
 
         this.postBtn = new CustomJButton();
-        this.postBtn.setText("POST");
+        this.postBtn.setText("Post");
 
         this.panel1 = new CustomJPanel();
         this.panel2 = new CustomJPanel();
 
         this.tagsTextField = new CustomJTextField(5);
         this.tagsLabel = new CustomJLabel();
-        this.tagsLabel.setText(ConstantText.getPostCreationPageTags());
+        this.tagsLabel.setText("Tags:");
+        this.tagsLabel.setFont(Fonts.TITLE_FONT);
+
+        /***************************************************************/
+
+        this.guidePanel = new CustomJPanel();
     }
 
     /*******************************************************************************************/
@@ -182,6 +211,34 @@ public class PCCenterModel implements IPCCenterModel
     public CustomJPanel getPanel2()
     {
         return this.panel2;
+    }
+
+    /****************************/
+
+    public String getSyntaxInfoText() {
+        return syntaxInfoText;
+    }
+
+    public JPanel getTitlePanel() {
+        return titlePanel;
+    }
+
+    public JLabel getTitleLabel() {
+        return titleLabel;
+    }
+
+    public JPanel getMiddlePanel() {
+        return middlePanel;
+    }
+
+    public JLabel getContentLabel()
+    {
+        return this.contentLabel;
+    }
+
+    public JPanel getGuidePanel()
+    {
+        return this.guidePanel;
     }
 }
 

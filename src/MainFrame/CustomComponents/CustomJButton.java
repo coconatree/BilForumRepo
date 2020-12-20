@@ -15,7 +15,8 @@ public class CustomJButton extends JButton
 
         this.setFont(Fonts.BUTTON_FONT);
         this.setBackground(Colors.BUTTON_COLOR);
-        this.setForeground(Color.white);
+        this.setForeground(Colors.MAIN_COLOR);
+        this.setFont(Fonts.BUTTON_FONT);
 
         this.setUI(new BasicButtonUI());
 

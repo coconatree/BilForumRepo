@@ -47,10 +47,14 @@ public class PCCenterController
                     contentText = postCreationCenterModel.getContentInput().getText();
                     tagsText = postCreationCenterModel.getTagsTextField().getText();
 
+                    postCreationCenterModel.getTitleField().setText("");
+                    postCreationCenterModel.getContentInput().setText("");
+                    postCreationCenterModel.getTagsTextField().setText("");
+
                     Post post1 = new Post(
                             "1016",
-                            "200000",
-                            "252525",
+                            "0",
+                            "0",
                             titleText,
                             contentText,
                             "emre",
@@ -81,7 +85,6 @@ public class PCCenterController
                     ref.getFPM().getCM().initPostList();
 
                     ref.getFPM().getCC().updateMouseListener();
-
                 }
             });
         }

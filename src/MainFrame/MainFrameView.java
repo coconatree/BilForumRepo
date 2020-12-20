@@ -1,6 +1,7 @@
 package MainFrame;
 
 import MainFrame.CustomComponents.CustomJFrame;
+import Static.Colors;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.*;
@@ -19,8 +20,12 @@ public class MainFrameView extends CustomJFrame implements IMainFrameView
 
     private void init(MainFrameModel model)
     {
-        MigLayout layout = new MigLayout("inset 0 0 0 0", "[grow]", String.format("[%d]15[grow]", model.getSc().getHEIGHT_RATIO() * 10));
+        MigLayout layout = new MigLayout("inset 0 15 0 15", "[grow]", String.format("[%d]15[grow]", model.getSc().getHEIGHT_RATIO() * 10));
         this.setLayout(layout);
+
+        // Setting the background color
+
+        this.getContentPane().setBackground(Colors.MAIN_COLOR);
 
         /******************************************************************/
 

@@ -109,7 +109,7 @@ public class ForumPageModel implements IForumPageModel
         return this.LBM.getView();
     }
 
-    public CustomJPanel getCenterView()
+    public JPanel getCenterView()
     {
         return this.CM.getView();
     }

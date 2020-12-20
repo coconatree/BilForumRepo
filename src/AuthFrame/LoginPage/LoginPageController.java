@@ -34,8 +34,11 @@ public class LoginPageController {
         String username;
         String password;
         String passwordCheck;
+
         //api yoksa bunu true yapıp direk girebilirsiniz.
-        boolean valid = false;
+
+        boolean valid = true;
+
         @Override
         public void actionPerformed(ActionEvent e) {
             SwingUtilities.invokeLater(new Runnable() {
@@ -44,9 +47,9 @@ public class LoginPageController {
                 {
                     if ( e.getSource() == model.getLoginButton() )
                     {
-                        passwordCheck = model.getPassWordTextField().getText();
+                        passwordCheck = model.getPasswordField().getText();
                         username = model.getUserNameTextField().getText();
-                        password = PasswordHash.hashString(model.getPassWordTextField().getText());
+                        password = PasswordHash.hashString(model.getPasswordField().getText());
                         List<User> userList;
                         try {
                             userList = APIConnection.getUsers();

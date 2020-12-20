@@ -105,6 +105,7 @@ public class MainFrameModel implements IMainFrameModel
         this.createPostCreationPage();
         this.createProfilePage();
         this.createMainMenu();
+        this.createPostPage();
 
         this.cardPanel = new CustomJPanel();
 

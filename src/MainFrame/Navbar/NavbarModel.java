@@ -1,15 +1,15 @@
 package MainFrame.Navbar;
 
-import MainFrame.CustomComponents.CustomJButton;
-import MainFrame.CustomComponents.CustomJPanel;
-import MainFrame.CustomComponents.CustomJTextField;
+import MainFrame.CustomComponents.*;
 import MainFrame.MainFrameModel;
 import Static.Colors;
+import Static.Fonts;
 import Static.SizeConstants;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class NavbarModel implements INavbarModel
 {
@@ -86,7 +86,7 @@ public class NavbarModel implements INavbarModel
 
     private void initColors()
     {
-        this.background_color = Colors.NAV_BAR_BACKGROUND;
+        this.background_color = Colors.NAVBAR_COLOR;
     }
 
     private void initText()
@@ -96,7 +96,7 @@ public class NavbarModel implements INavbarModel
         this.bBtnText = "Back";
         this.nBtnText = "Next";
 
-        this.logoLabelText = "Logo";
+        this.logoLabelText = "Bil-Forum";
         this.voteLabelText = "56";
         this.profLabelText = "Guest";
     }
@@ -104,8 +104,13 @@ public class NavbarModel implements INavbarModel
     private void initPanels()
     {
         this.lPanel = new JPanel();
+        this.lPanel.setOpaque(false);
+
         this.sPanel = new JPanel();
+        this.sPanel.setOpaque(false);
+
         this.pPanel = new JPanel();
+        this.pPanel.setOpaque(false);
     }
 
     private void initButtons()
@@ -117,6 +122,10 @@ public class NavbarModel implements INavbarModel
         this.rBtn.setText(this.rBtnText);
 
         this.bBtn = new CustomJButton();
+
+        //Icon icon = IconFontSwing.buildIcon(FontAwesome.SMILE_O, 40, new Color(0, 150, 0));
+        //this.bBtn.setIcon(icon);
+
         this.bBtn.setText(this.bBtnText);
 
         this.nBtn = new CustomJButton();
@@ -125,14 +134,20 @@ public class NavbarModel implements INavbarModel
 
     private void initLabels()
     {
-        this.logoLabel = new JLabel();
-        this.logoLabel.setText(this.logoLabelText);
+         this.logoLabel = new CustomJLabel();
+         this.logoLabel.setText(this.logoLabelText);
+         this.logoLabel.setFont(Fonts.LOGO_FONT);
+         this.logoLabel.setForeground(Colors.SECONDARY_COLOR);
 
-        this.voteLabel = new JLabel();
-        this.voteLabel.setText(this.voteLabelText);
+         this.voteLabel = new JLabel();
+         this.voteLabel.setText(this.voteLabelText);
+         this.voteLabel.setFont(Fonts.TITLE_FONT);
+         this.voteLabel.setForeground(Colors.SECONDARY_COLOR);
 
-        this.profLabel = new JLabel();
-        this.profLabel.setText(this.profLabelText);
+         this.profLabel = new JLabel();
+         this.profLabel.setText(this.profLabelText);
+         this.profLabel.setFont(Fonts.TITLE_FONT);
+         this.profLabel.setForeground(Colors.SECONDARY_COLOR);
     }
 
     private void initTextField()
@@ -176,6 +191,11 @@ public class NavbarModel implements INavbarModel
     public void addActionListenerToRefreshBtn(ActionListener Al)
     {
         this.rBtn.addActionListener(Al);
+    }
+
+    public void addMouseListenerToLogoLabel(MouseListener Ml)
+    {
+        this.logoLabel.addMouseListener(Ml);
     }
 
     /*******************************************************************************************/

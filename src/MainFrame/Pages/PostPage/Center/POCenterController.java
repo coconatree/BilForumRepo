@@ -42,7 +42,7 @@ public class POCenterController {
                 {
                     PostComponent cmp = (PostComponent) e.getSource();
                     // ref.getLabelTemp().setText(Integer.toString(cmp.getView()));
-                    ref.getLabelTemp().setText(cmp.getTitle());
+                    //ref.getLabelTemp().setText(cmp.getTitle());
 
                     ref.getCardLayout().show(ref.getCardPanel(), "PANEL_TEMP");
                 }

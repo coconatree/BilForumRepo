@@ -1,7 +1,9 @@
 package MainFrame.CustomComponents;
 
 import PojoClasses.Post;
+import Static.Fonts;
 import Static.SizeConstants;
+import net.miginfocom.layout.CC;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -10,18 +12,13 @@ import java.awt.*;
 public class PostComponent extends JComponent
 {
 
-    JLabel titleLabel;
-    JLabel dateLabel;
-
-    JLabel voteLabel;
-    JLabel viewLabel;
-
-    JLabel idLabel;
+    CustomJLabel titleLabel;
 
     /*******************************************************************************************/
 
-    JPanel panel1;
-    JPanel panel2;
+    CustomDoubleJLabel customDLabel1;
+    CustomDoubleJLabel customDLabel2;
+
     JPanel panel3;
 
     /*******************************************************************************************/
@@ -38,8 +35,8 @@ public class PostComponent extends JComponent
 
     public PostComponent(Post post)
     {
+        super();
         this.sc = new SizeConstants();
-
         this.init(post);
     }
 
@@ -49,18 +46,14 @@ public class PostComponent extends JComponent
         this.initLabels();
         this.initPanels();
 
-        MigLayout layout = new MigLayout("inset 5 5 5 5", String.format("[%d][grow]", this.sc.getWIDTH_RATIO() * 15), "[grow]");
+        MigLayout layout = new MigLayout("", String.format("[%d][%d][grow]", this.sc.getWIDTH_RATIO() * 7, this.sc.getWIDTH_RATIO() * 7), "[grow]");
         this.setLayout(layout);
 
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-        this.panel1.add(this.viewLabel);
-        this.panel1.add(this.voteLabel);
-
-        this.panel2.add(this.titleLabel);
-
-        this.add(this.panel1, "grow");
-        this.add(this.panel2, "grow");
+        this.add(this.customDLabel1, "grow");
+        this.add(this.customDLabel2, "grow");
+        this.add(this.panel3, "center, grow");
     }
 
     private void initText(Post post)
@@ -76,27 +69,21 @@ public class PostComponent extends JComponent
 
     private void initLabels()
     {
-        this.titleLabel = new JLabel();
+        this.titleLabel = new CustomJLabel();
         this.titleLabel.setText(this.titleText);
-
-        this.dateLabel = new JLabel();
-        this.dateLabel.setText(this.date);
-
-        this.voteLabel = new JLabel();
-        this.voteLabel.setText("Votes: " + String.valueOf(this.vote));
-
-        this.viewLabel = new JLabel();
-        this.viewLabel.setText("Views: " + String.valueOf(this.view));
-
-        this.idLabel = new JLabel();
-        this.idLabel.setText(String.valueOf(this.id));
+        this.titleLabel.setFont(Fonts.TITLE_FONT);
     }
 
     private void initPanels()
     {
-        this.panel1 = new CustomJPanel();
-        this.panel2 = new CustomJPanel();
-        this.panel3 = new CustomJPanel();
+        this.customDLabel1 = new CustomDoubleJLabel(this.view, "Views");
+        this.customDLabel2 = new CustomDoubleJLabel(this.vote, "Votes");
+
+        this.panel3 = new JPanel();
+
+        MigLayout layout3 = new MigLayout("", "[grow]", "[grow]");
+        this.panel3.setLayout(layout3);
+        this.panel3.add(this.titleLabel, "center");
     }
 
     public String getView()

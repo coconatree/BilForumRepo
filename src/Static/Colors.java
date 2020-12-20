@@ -4,9 +4,11 @@ import java.awt.*;
 
 public class Colors
 {
-    public static final Color NAV_BAR_BACKGROUND = Color.decode("#294A66");
+    public static final Color MAIN_COLOR = Color.decode("#F3F5F7");
 
-    public static final Color BUTTON_COLOR = Color.decode("#40A43D");
+    public static final Color NAVBAR_COLOR = Color.decode("#F3F5F7");
 
-    public static final Color MAIN_BACKGROUND_COLOR = Color.decode("#F5F9F9");
+    public static final Color BUTTON_COLOR = Color.decode("#19A463");
+
+    public static final Color SECONDARY_COLOR = Color.decode("#404145");
 }
