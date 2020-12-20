@@ -1,7 +1,10 @@
 package AuthFrame.LoginPage;
 
 import MainFrame.CustomComponents.CustomJPanel;
+import Static.Colors;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.border.MatteBorder;
 
 public class LoginPageView extends CustomJPanel implements ILoginPageView {
 
@@ -44,18 +47,30 @@ public class LoginPageView extends CustomJPanel implements ILoginPageView {
 
         /***********************************************************************/
 
-        MigLayout layout5 = new MigLayout("", "[grow]", String.format("[%d]15[%d]50[%d]15[%d]",  model.getSc().getHEIGHT_RATIO() * 10, model.getSc().getHEIGHT_RATIO() * 10,  model.getSc().getHEIGHT_RATIO() * 10,  model.getSc().getHEIGHT_RATIO() * 10));
-        model.getPanel5().setLayout(layout5);
+        MigLayout topLayout = new MigLayout("", "[grow]", "[grow][grow]");
+        model.getPanelTop().setLayout(topLayout);
+        model.getPanelTop().add(model.getPanel1(), "grow, wrap");
+        model.getPanelTop().add(model.getPanel2(), "grow, wrap");
 
-        model.getPanel5().add(model.getPanel1(), "grow, wrap");
-        model.getPanel5().add(model.getPanel2(), "grow, wrap");
-        model.getPanel5().add(model.getPanel3(), "grow, wrap");
-        model.getPanel5().add(model.getPanel4(), "grow, wrap");
+        MigLayout botLayout = new MigLayout("", "[grow]", "[grow][grow]");
+        model.getPanelBot().setLayout(botLayout);
+        model.getPanelBot().add(model.getPanel3(), "grow, wrap");
+        model.getPanelBot().add(model.getPanel4(), "grow, wrap");
 
         /************************************************************************/
 
-        MigLayout layout = new MigLayout("debug, inset 5 5 5 5", "[grow]","[grow]");
+        MigLayout layout5 = new MigLayout("", "[grow]", String.format("[%d]%d[%d]",  model.getSc().getHEIGHT_RATIO() * 20, model.getSc().getWIDTH_RATIO() * 32, model.getSc().getHEIGHT_RATIO() * 20));
+        model.getPanel5().setLayout(layout5);
+
+        model.getPanel5().add(model.getPanelTop(), "grow, wrap");
+        model.getPanel5().add(model.getPanelBot(), "grow");
+
+        /************************************************************************/
+
+        MigLayout layout = new MigLayout("inset 5 5 5 5", "[grow]","[grow]");
         this.setLayout(layout);
         this.add(model.getPanel5(), "grow");
+
+        this.setBorder( new MatteBorder(0, 2, 0, 0, Colors.SECONDARY_COLOR));
     }
 }

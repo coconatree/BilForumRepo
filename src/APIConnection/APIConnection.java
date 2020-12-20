@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -144,18 +145,23 @@ public class APIConnection
 
     public static void main(String[] args)
     {
-        try
-        {
-            for (Post post : getAllPostOfAForum("Forum1"))
-            {
-                System.out.println(post.toString());
-            }
+        /**
+         * try
+         *         {
+         *             for (Post post : getAllPostOfAForum("Forum1"))
+         *             {
+         *                 System.out.println(post.toString());
+         *             }
+         *
+         *         }
+         *         catch (Exception exception)
+         *         {
+         *             exception.printStackTrace();
+         *             System.out.println(exception.getMessage());
+         *         }
+         * */
 
-        }
-        catch (Exception exception)
-        {
-            exception.printStackTrace();
-            System.out.println(exception.getMessage());
-        }
+        URL path = APIConnection.class.getResource("/AUTH_LOGO.png");
+        System.out.println(path.toString());
     }
 }

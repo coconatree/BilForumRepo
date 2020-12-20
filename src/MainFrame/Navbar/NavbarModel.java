@@ -1,15 +1,21 @@
 package MainFrame.Navbar;
 
+import AuthFrame.AuthFrameModel;
 import MainFrame.CustomComponents.*;
 import MainFrame.MainFrameModel;
 import Static.Colors;
 import Static.Fonts;
 import Static.SizeConstants;
+import net.miginfocom.swing.MigLayout;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
 
 public class NavbarModel implements INavbarModel
 {
@@ -58,6 +64,7 @@ public class NavbarModel implements INavbarModel
 
     /*******************************************************************************************/
 
+    private JPanel logoPanel;
 
     /*******************************************************************************************/
 
@@ -122,32 +129,34 @@ public class NavbarModel implements INavbarModel
         this.rBtn.setText(this.rBtnText);
 
         this.bBtn = new CustomJButton();
-
-        //Icon icon = IconFontSwing.buildIcon(FontAwesome.SMILE_O, 40, new Color(0, 150, 0));
-        //this.bBtn.setIcon(icon);
-
         this.bBtn.setText(this.bBtnText);
-
-        this.nBtn = new CustomJButton();
-        this.nBtn.setText(this.nBtnText);
     }
 
     private void initLabels()
     {
-         this.logoLabel = new CustomJLabel();
-         this.logoLabel.setText(this.logoLabelText);
-         this.logoLabel.setFont(Fonts.LOGO_FONT);
-         this.logoLabel.setForeground(Colors.SECONDARY_COLOR);
+        this.logoPanel = new JPanel();
 
-         this.voteLabel = new JLabel();
-         this.voteLabel.setText(this.voteLabelText);
-         this.voteLabel.setFont(Fonts.TITLE_FONT);
-         this.voteLabel.setForeground(Colors.SECONDARY_COLOR);
+        MigLayout logoLayout = new MigLayout("", String.format("[%d]", this.sc.getWIDTH_RATIO() * 60), String.format("[%d]", this.sc.getHEIGHT()));
 
-         this.profLabel = new JLabel();
-         this.profLabel.setText(this.profLabelText);
-         this.profLabel.setFont(Fonts.TITLE_FONT);
-         this.profLabel.setForeground(Colors.SECONDARY_COLOR);
+        this.logoPanel.setLayout(logoLayout);
+        this.logoLabel = new CustomJLabel();
+
+        this.logoLabel = new JLabel("BİL-FORUM");
+        this.logoLabel.setText(this.logoLabelText);
+        this.logoLabel.setFont(Fonts.LOGO_FONT);
+        this.logoLabel.setForeground(Colors.SECONDARY_COLOR);
+
+        this.logoPanel.add(this.logoLabel, "grow");
+
+        this.voteLabel = new JLabel();
+        this.voteLabel.setText(this.voteLabelText);
+        this.voteLabel.setFont(Fonts.TITLE_FONT);
+        this.voteLabel.setForeground(Colors.SECONDARY_COLOR);
+
+        this.profLabel = new JLabel();
+        this.profLabel.setText(this.profLabelText);
+        this.profLabel.setFont(Fonts.TITLE_FONT);
+        this.profLabel.setForeground(Colors.SECONDARY_COLOR);
     }
 
     private void initTextField()
@@ -177,11 +186,6 @@ public class NavbarModel implements INavbarModel
     }
 
     /*******************************************************************************************/
-
-    public void addActionListenerToNextBtn(ActionListener AL)
-    {
-        this.nBtn.addActionListener(AL);
-    }
 
     public void addActionListenerToBackBtn(ActionListener AL)
     {
@@ -245,11 +249,6 @@ public class NavbarModel implements INavbarModel
         return bBtn;
     }
 
-    public CustomJButton getnBtn()
-    {
-        return nBtn;
-    }
-
     public JLabel getLogoLabel()
     {
         return logoLabel;
@@ -269,5 +268,10 @@ public class NavbarModel implements INavbarModel
     public Color getBackground_color()
     {
         return background_color;
+    }
+
+    public JPanel getLogoPanel()
+    {
+        return this.logoPanel;
     }
 }

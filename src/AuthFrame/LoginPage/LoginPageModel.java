@@ -16,8 +16,6 @@ public class LoginPageModel implements ILoginPageModel{
     private ILoginPageView loginPageView ;
     private AuthFrameModel ref ;
 
-    private CustomJPanel panel ;
-
     /*****************************************/
 
     private CustomJPanel panel1;
@@ -37,6 +35,9 @@ public class LoginPageModel implements ILoginPageModel{
     private JButton loginButton ;
     private JButton registerButton ;
     private JButton forgotButton ;
+
+    private JPanel panelTop;
+    private JPanel panelBot;
 
     public LoginPageModel( AuthFrameModel ref)
     {
@@ -75,8 +76,14 @@ public class LoginPageModel implements ILoginPageModel{
         this.registerButton.setFont(Fonts.AUTH_FONT);
 
         this.forgotButton = new CustomJButton();
-        this.forgotButton.setText("Forgot your password?");
+        this.forgotButton.setText("Forgot your password ?");
         this.forgotButton.setFont(Fonts.AUTH_FONT);
+
+        this.panelTop = new JPanel();
+        this.panelTop.setOpaque(false);
+
+        this.panelBot = new JPanel();
+        this.panelBot.setOpaque(false);
     }
 
     /*************************************************************************/
@@ -121,10 +128,6 @@ public class LoginPageModel implements ILoginPageModel{
         return ref;
     }
 
-    public CustomJPanel getPanel() {
-        return panel;
-    }
-
     public AuthSizeConstants getSc() {
         return sc;
     }
@@ -167,5 +170,11 @@ public class LoginPageModel implements ILoginPageModel{
 
     public JPanel getPanel5(){ return this.panel5; }
 
+    public JPanel getPanelTop() {
+        return panelTop;
+    }
 
+    public JPanel getPanelBot() {
+        return panelBot;
+    }
 }

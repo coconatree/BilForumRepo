@@ -41,19 +41,18 @@ public class NavbarView extends CustomJPanel implements INavbarView
 
     private void setupPanel1(NavbarModel model)
     {
-        MigLayout layout1 = new MigLayout("fillx, inset 5 5 5 5", "[grow]", "[grow]");
+        MigLayout layout1 = new MigLayout("", "[grow]", "[grow]");
         model.getlPanel().setLayout(layout1);
 
-        model.getlPanel().add(model.getLogoLabel(), "grow");
+        model.getlPanel().add(model.getLogoPanel(), "grow");
     }
 
     private void setupPanel2(NavbarModel model)
     {
-        MigLayout layout2 = new MigLayout("", String.format("[%d]5[%d]5[%d]5[grow]5[%d]", model.getSc().getWIDTH_RATIO()* 2, model.getSc().getWIDTH_RATIO()* 2, model.getSc().getWIDTH_RATIO() * 2,  model.getSc().getWIDTH_RATIO() * 2),"[grow]");
+        MigLayout layout2 = new MigLayout("", String.format("[%d]5[%d]5[grow]5[%d]", model.getSc().getWIDTH_RATIO()* 2, model.getSc().getWIDTH_RATIO()* 2, model.getSc().getWIDTH_RATIO() * 2,  model.getSc().getWIDTH_RATIO() * 2),"[grow]");
         model.getsPanel().setLayout(layout2);
 
         model.getsPanel().add(model.getbBtn(), "growx");
-        model.getsPanel().add(model.getnBtn(), "growx");
         model.getsPanel().add(model.getrBtn(), "growx");
         model.getsPanel().add(model.getsTF(),  "growx");
         model.getsPanel().add(model.getsBtn(), "growx");

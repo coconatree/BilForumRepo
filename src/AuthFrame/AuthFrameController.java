@@ -19,27 +19,5 @@ public class AuthFrameController
         this.AFM = model;
 
         this.ref = ref;
-
-        this.AFM.addActionListenerToBtn(new ClickListener());
-    }
-
-    class ClickListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    Loop.closeFrame(ref.getFrameAuth());
-                    Loop.setFrameVisible(ref.getFrameMain());
-                }
-            });
-        }
-    }
-    public Loop getRef() {
-        return ref;
     }
 }

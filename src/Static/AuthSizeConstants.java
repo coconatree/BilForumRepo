@@ -10,10 +10,10 @@ public class AuthSizeConstants
 
     public AuthSizeConstants()
     {
-        this.WIDTH = 500;
+        this.WIDTH = 900;
         this.WIDTH_RATIO = WIDTH / 100;
 
-        this.HEIGHT = 325;
+        this.HEIGHT = 600;
         this.HEIGHT_RATIO = HEIGHT / 100;
     }
 

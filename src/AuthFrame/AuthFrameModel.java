@@ -11,10 +11,16 @@ import MainFrame.CustomComponents.CustomJFrame;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainLoop.Loop;
 import Static.AuthSizeConstants;
+import net.miginfocom.swing.MigLayout;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 public class AuthFrameModel implements IAuthFrameModel {
     private AuthSizeConstants sc;
@@ -23,10 +29,12 @@ public class AuthFrameModel implements IAuthFrameModel {
 
     /****************************************************************************/
 
+    private JPanel panelLeft;
+
+    private JLabel imageLabel;
+
     private CustomJPanel cardPanel;
 
-    private CustomJPanel panel1;
-    private CustomJPanel panel2;
     private CustomJPanel panel3;
 
     private CardLayout cardLayout;
@@ -45,9 +53,6 @@ public class AuthFrameModel implements IAuthFrameModel {
 
     /****************************************************************************/
 
-    private JButton btn;
-    private JButton btnRegister;
-
     public AuthFrameModel( Loop mainLoop )
     {
         this.init( mainLoop );
@@ -57,30 +62,44 @@ public class AuthFrameModel implements IAuthFrameModel {
     {
         this.sc = new AuthSizeConstants();
 
+        this.panelLeft = new JPanel();
+
+        MigLayout lefLayout = new MigLayout("", String.format("[%d]", this.sc.getWIDTH_RATIO() * 60), String.format("[%d]", this.sc.getHEIGHT()));
+        this.panelLeft.setLayout(lefLayout);
+
+        BufferedImage imgBuffer = null;
+
+        try
+        {
+            URL url = AuthFrameModel.class.getResource("/AUTH_LOGO.png");
+
+            imgBuffer = ImageIO.read(url);
+
+            Image img = imgBuffer.getScaledInstance(this.sc.getWIDTH_RATIO() * 60, sc.getHEIGHT_RATIO() * 80, Image. SCALE_SMOOTH);
+
+            this.imageLabel =  new JLabel(new ImageIcon(img));
+        }
+        catch (IOException e)
+        {
+            this.imageLabel = new JLabel("ERROR");
+            e.printStackTrace();
+        }
+
+        this.panelLeft.setOpaque(false);
+
+        this.panelLeft.add(this.imageLabel, "dock north");
+
         this.cardPanel = new CustomJPanel();
 
         this.mainLoop = mainLoop ;
-
-        this.panel1 = new CustomJPanel();
-        this.panel1.setBackground(Color.YELLOW);
-
-        this.panel2 = new CustomJPanel();
-        this.panel2.setBackground(Color.MAGENTA);
 
         this.panel3 = new CustomJPanel();
         this.panel3.setBackground(Color.BLUE);
 
         this.cardLayout = new CardLayout();
 
-        this.btn = new CustomJButton();
-        this.btn.setText("Login");
-
         this.createLoginPage();
         this.createRegisterPage();
-
-
-        this.btnRegister = new CustomJButton();
-        this.btnRegister.setText("Register");
     }
 
     private void createLoginPage()
@@ -122,10 +141,6 @@ public class AuthFrameModel implements IAuthFrameModel {
 
     /****************************************************************************/
 
-    public void addActionListenerToBtn(ActionListener AL) {
-        this.btn.addActionListener(AL);
-    }
-
     /****************************************************************************/
 
     public CustomJPanel getCardPanel() {
@@ -136,28 +151,12 @@ public class AuthFrameModel implements IAuthFrameModel {
         return this.sc;
     }
 
-    public CustomJPanel getPanel1() {
-        return this.panel1;
-    }
-
-    public CustomJPanel getPanel2() {
-        return this.panel2;
-    }
-
     public CustomJPanel getPanel3() {
         return this.panel3;
     }
 
     public CardLayout getCardLayout() {
         return this.cardLayout;
-    }
-
-    public JButton getBtn() {
-        return this.btn;
-    }
-
-    public JButton getRegisterButton() {
-        return this.btnRegister;
     }
 
     public RegisterPageModel getRegisterPageModel()
@@ -172,4 +171,6 @@ public class AuthFrameModel implements IAuthFrameModel {
     public Loop getMainLoop() {
         return mainLoop;
     }
+
+    public JPanel getLeftPanel() { return this.panelLeft; }
 }
