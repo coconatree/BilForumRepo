@@ -27,7 +27,7 @@ public class LeftBarController
                 @Override
                 public void run()
                 {
-                    LBM.getRef().getCardLayout().show(LBM.getRef().getCardPanel(), "POST_CREATION_PAGE");
+                    LBM.getRef().changePage("POST_CREATION_PAGE");
                 }
             });
         }

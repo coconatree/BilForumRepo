@@ -60,7 +60,7 @@ public class MainMenuModel implements IMainMenuModel {
 
         this.forumsPaneModel = new ForumsPaneModel();
         this.forumsPaneView = new ForumsPaneView();
-        this.forumsPaneController = new ForumsPaneController();
+        this.forumsPaneController = new ForumsPaneController(this.forumsPaneView, this.forumsPaneModel, ref);
 
         this.forumsPaneModel.setView( forumsPaneView );
 

@@ -1,4 +1,6 @@
 package PojoClasses;
+import APIConnection.APIConnection;
+
 import java.util.ArrayList;
 
 /**
@@ -6,60 +8,53 @@ import java.util.ArrayList;
  * @author __Can Yılmaz___
  * @version __06.12.2020__
  */
+
 public class Forum
 {
+    private String id;
+    private String name;
 
-    private String title ;
-    private String creationDate ;
-    private ArrayList<Post> postList ;
-    private int postCount ;
+    private ArrayList<Post> postList;
 
+    public Forum()
+    {
 
-
-    /*******************************************************************************************/
-
-    public Forum(String title, ArrayList<Post> postList , String creationDate) {
-        this.title = title;
-        this.postList = postList;
-        this.creationDate = creationDate;
-        postCount = postList.size();
     }
 
-    /*******************************************************************************************/
-
-    public void addPost( Post post){
-        postList.add( post );
+    public Forum(String id, String name)
+    {
+        this.id = id;
+        this.name = name;
     }
 
-    public void removePost( Post post){
-        postList.remove( post );
+    /**************************************************************************/
+
+    public void setupPostList()
+    {
+        try
+        {
+            this.postList =  APIConnection.getAllPostOfAForum(this.id);
+        }
+        catch (Exception exception)
+        {
+            this.postList = new ArrayList<Post>();
+
+            this.postList.add(new Post("ERRORPOST", "12", "12", "ERRORPOST", "ERRORPOST", "ERRORPOST", "ERRORPOST", "ERRORPOST"));
+
+            exception.printStackTrace();
+        }
     }
 
-    public String getTitle() {
-        return title;
+    public String getId() { return this.id; }
+
+    public String getName()
+    {
+        return this.name;
     }
 
-    public ArrayList<Post> getPostList() {
-        return postList;
-    }
-
-    public int getPostCount() {
-        return postCount;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPostList(ArrayList<Post> postList) {
-        this.postList = postList;
-    }
-
-    public void setPostCount(int postCount) {
-        this.postCount = postCount;
-    }
-
-    public String getCreationDate() {
-        return creationDate;
+    public ArrayList<Post> getPostList()
+    {
+        this.setupPostList();
+        return this.postList;
     }
 }

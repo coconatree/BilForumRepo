@@ -1,5 +1,6 @@
 package MainFrame.Pages.MainMenu.ForumsPane;
 
+import APIConnection.APIConnection;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.Pages.MainMenu.ForumsPane.Forum.ForumModel;
 import MainFrame.Pages.MainMenu.ForumsPane.Forum.ForumView;
@@ -16,7 +17,9 @@ public class ForumsPaneModel implements IForumsPaneModel{
 
     /*******************************************************************************************/
 
-    private ArrayList<ForumModel> forumList;
+    private ArrayList<ForumModel> foumModelList;
+
+    private ArrayList<Forum> forumList; // For the use of getting forums from the database
 
     /*******************************************************************************************/
 
@@ -28,7 +31,8 @@ public class ForumsPaneModel implements IForumsPaneModel{
     private void init()
     {
         this.sc = new SizeConstants();
-        this.forumList = new ArrayList<ForumModel>();
+
+        this.foumModelList = new ArrayList<ForumModel>();
 
         ArrayList<Post> postList = new ArrayList<>(); // Sample ArrayList of Post object
         Post loopPost;
@@ -42,20 +46,41 @@ public class ForumsPaneModel implements IForumsPaneModel{
         ForumModel loopModel;
         ForumView loopView ;
 
-        for ( int i = 0 ; i < 10 ; i++)
-        {
-            loopView = new ForumView();
-            loopModel = new ForumModel( new Forum( "Forum Title" + i, postList,(i + 1) + ".11.2020" ));
+        /******************************************************************/
 
-            loopModel.setView( loopView );
-            forumList.add( loopModel );
+        this.forumList = new ArrayList<>();
+
+        try
+        {
+            this.forumList = APIConnection.getAllForums();
+
+            for ( Forum forum : this.forumList)
+            {
+                forum.setupPostList();
+            }
         }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        /******************************************************************/
+
+         for ( int i = 0 ; i < forumList.size() ; i++)
+         {
+             loopView = new ForumView();
+             loopModel = new ForumModel(forumList.get(i));
+
+             loopModel.setView( loopView );
+             foumModelList.add( loopModel );
+         }
     }
 
     /*******************************************************************************************/
 
     @Override
-    public void update() {
+    public void update()
+    {
         this.forumsPaneView.update( this );
     }
 
@@ -81,14 +106,14 @@ public class ForumsPaneModel implements IForumsPaneModel{
     }
 
     public ArrayList<ForumModel> getForumList() {
-        return forumList;
+        return foumModelList;
     }
 
     public void setForumsPaneView(IForumsPaneView forumsPaneView) {
         this.forumsPaneView = forumsPaneView;
     }
 
-    public void setForumList(ArrayList<ForumModel> forumList) {
-        this.forumList = forumList;
+    public void setForumList(ArrayList<ForumModel> foumModelList) {
+        this.foumModelList = foumModelList;
     }
 }

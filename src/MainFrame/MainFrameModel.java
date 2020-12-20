@@ -27,6 +27,7 @@ import Static.SizeConstants;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MainFrameModel implements IMainFrameModel
 {
@@ -37,6 +38,8 @@ public class MainFrameModel implements IMainFrameModel
     /*******************************************************************************************/
 
     private User currentUser;
+
+    private ArrayList<String> pagesList;
 
     /*******************************************************************************************/
 
@@ -98,6 +101,9 @@ public class MainFrameModel implements IMainFrameModel
     private void init()
     {
         this.sc = new SizeConstants();
+
+        this.pagesList = new ArrayList<>();
+        this.pagesList.add("MAIN_MENU");
 
         this.createNavbar();
 
@@ -172,7 +178,20 @@ public class MainFrameModel implements IMainFrameModel
 
         this.PPM.setView(this.PPV);
     }
-    
+
+    /*******************************************************************************************/
+
+    public void changePage(String pageName, Boolean back)
+    {
+        this.cardLayout.show(this.cardPanel, pageName);
+    }
+
+    public void changePage(String pageName)
+    {
+        this.cardLayout.show(this.cardPanel, pageName);
+        this.pagesList.add(pageName);
+    }
+
     /*******************************************************************************************/
 
     @Override
@@ -274,5 +293,10 @@ public class MainFrameModel implements IMainFrameModel
     public User getCurrentUser()
     {
         return this.currentUser;
+    }
+
+    public ArrayList<String> getPageList()
+    {
+        return this.pagesList;
     }
 }

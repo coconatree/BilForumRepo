@@ -13,16 +13,65 @@ public class NavbarController
     private INavbarView NBV;
     private NavbarModel NBM;
 
+    private int currentPosition;
+    private Boolean bool;
+
     public NavbarController(INavbarView NBV, NavbarModel NBM)
     {
         this.NBV = NBV;
         this.NBM = NBM;
 
-        this.NBM.addActionListenerToNextBtn(new ArrayChangeListener());
-        this.NBM.addActionListenerToBackBtn(new PageListener());
-        this.NBM.addActionListenerToRefreshBtn(new RefreshListener());
+        this.currentPosition = 0;
+        this.bool = true;
+
         this.NBM.addMouseListenerToLogoLabel(new LogoListener());
+        this.NBM.addActionListenerToBackBtn(new BackListener());
+        this.NBM.addActionListenerToRefreshBtn(new RefreshListener());
     }
+
+    class BackListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run()
+                {
+                    ArrayList<String> list = NBM.getRef().getPageList();
+
+                    if(2 <= list.size())
+                    {
+                        NBM.getRef().changePage(NBM.getRef().getPageList().get(NBM.getRef().getPageList().size() - 2), true);
+                        NBM.getRef().getPageList().remove(NBM.getRef().getPageList().size() - 1);
+                    }
+                    else
+                        {
+                            System.out.println("Size to small !!!");
+                        }
+                }
+            });
+        }
+    }
+
+    /********************************************************************************/
+
+    class RefreshListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    NBM.getRef().getFPM().getCM().update();
+                }
+            });
+        }
+    }
+
+    /********************************************************************************/
 
     class LogoListener implements MouseListener
     {
@@ -34,7 +83,7 @@ public class NavbarController
                 @Override
                 public void run()
                 {
-                    NBM.getRef().getCardLayout().show(NBM.getRef().getCardPanel(), "MAIN_MENU");
+                    NBM.getRef().changePage("MAIN_MENU");
                 }
             });
         }
@@ -57,50 +106,6 @@ public class NavbarController
         @Override
         public void mouseExited(MouseEvent e) {
 
-        }
-    }
-
-    class RefreshListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    NBM.getRef().getFPM().getCM().update();
-                }
-            });
-        }
-    }
-
-    class ArrayChangeListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run()
-                {
-                    NBM.getRef().getCardLayout().show(NBM.getRef().getCardPanel(), "POST_CREATION_PAGE");
-                }
-            });
-        }
-    }
-
-    class PageListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    NBM.getRef().getCardLayout().show(NBM.getRef().getCardPanel(), "FORUM_PAGE");
-                }
-            });
         }
     }
 }

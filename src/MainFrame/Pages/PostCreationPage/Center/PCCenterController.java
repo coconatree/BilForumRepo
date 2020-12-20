@@ -82,8 +82,6 @@ public class PCCenterController
                     ref.getCardLayout().show(ref.getCardPanel(), "FORUM_PAGE");
 
                     ref.getFPM().getCM().update();
-                    ref.getFPM().getCM().initPostList();
-
                     ref.getFPM().getCC().updateMouseListener();
                 }
             });

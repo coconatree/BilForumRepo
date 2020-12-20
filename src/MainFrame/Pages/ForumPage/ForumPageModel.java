@@ -8,6 +8,7 @@ import MainFrame.Pages.ForumPage.Center.CenterView;
 import MainFrame.Pages.ForumPage.LeftBar.LeftBarController;
 import MainFrame.Pages.ForumPage.LeftBar.LeftBarModel;
 import MainFrame.Pages.ForumPage.LeftBar.LeftBarView;
+import PojoClasses.Forum;
 import Static.SizeConstants;
 
 import javax.swing.*;

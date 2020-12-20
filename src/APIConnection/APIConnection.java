@@ -1,5 +1,6 @@
 package APIConnection;
 
+import PojoClasses.Forum;
 import PojoClasses.Post;
 import PojoClasses.User;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -103,11 +104,53 @@ public class APIConnection
         return response.toString();
     }
 
+    /****************************************************************************************************************/
+
+    public static ArrayList<Forum> getAllForums() throws Exception
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/forum/getAll")).build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String bodyAsString = response.body().toString();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        ArrayList<Forum> forumList = mapper.readValue(bodyAsString, new TypeReference<List<Forum>>(){});
+
+        return forumList;
+    }
+
+    public static ArrayList<Post> getAllPostOfAForum(String ID) throws Exception
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(String.format("http://localhost:8080/post/getAll/%s", ID))).build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String bodyAsString = response.body().toString();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        ArrayList<Post> postList = mapper.readValue(bodyAsString, new TypeReference<List<Post>>(){});
+
+        return postList;
+    }
+
+    /****************************************************************************************************************/
+
     public static void main(String[] args)
     {
         try
         {
-            httpGET();
+            for (Post post : getAllPostOfAForum("Forum1"))
+            {
+                System.out.println(post.toString());
+            }
+
         }
         catch (Exception exception)
         {

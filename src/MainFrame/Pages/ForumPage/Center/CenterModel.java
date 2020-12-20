@@ -4,6 +4,7 @@ import APIConnection.APIConnection;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.Pages.ForumPage.Center.Post.PostModel;
 import MainFrame.Pages.ForumPage.Center.Post.PostView;
+import PojoClasses.Forum;
 import Static.SizeConstants;
 import PojoClasses.Post;
 
@@ -27,6 +28,8 @@ public class CenterModel implements ICenterModel
     private PostView  loopView;
     private PostModel loopModel;
 
+    private Forum forum;
+
     public CenterModel()
     {
         this.init();
@@ -39,42 +42,6 @@ public class CenterModel implements ICenterModel
         this.postModels = new ArrayList<>();
 
         this.postList = null;
-
-        this.initPostList();
-    }
-
-    public void initPostList()
-    {
-        try
-        {
-            this.postList = APIConnection.httpGET();
-            System.out.println("CAME");
-        }
-        catch (Exception exception)
-        {
-            exception.printStackTrace();
-
-            // Error Page Caller will be here
-
-            return;
-        }
-
-        this.postModels.clear();
-
-        this.loopView = null;
-        this.loopModel = null;
-
-        System.out.println("INSIDE THE INIT ARRAY");
-
-        for(int i = 0; i < 10; i++)
-        {
-            this.loopView =  new PostView();
-            this.loopModel = new PostModel(postList.get(i));
-
-            this.loopModel.setView(this.loopView);
-
-            this.postModels.add(this.loopModel);
-        }
     }
 
     /*******************************************************************************************/
@@ -88,6 +55,28 @@ public class CenterModel implements ICenterModel
                 mdl.getPostComponent().addMouseListener(ML);
             }
         }
+    }
+
+    private void wake()
+    {
+        this.postList = forum.getPostList();
+
+        PostModel tempModel = null;
+        PostView tempView = null;
+
+        this.postModels.clear();
+
+        for(int i = 0; i < this.postList.size(); i++)
+        {
+            tempModel = new PostModel(this.postList.get(i));
+            tempView = new PostView();
+
+            tempModel.setView(tempView);
+
+            this.postModels.add(tempModel);
+        }
+
+        this.update();
     }
 
     /*******************************************************************************************/
@@ -109,7 +98,6 @@ public class CenterModel implements ICenterModel
     @Override
     public void update()
     {
-        this.initPostList();
         this.centerView.update(this);
 
         for (PostModel mdl : this.postModels)
@@ -136,5 +124,11 @@ public class CenterModel implements ICenterModel
     public void setPostModels(ArrayList<PostModel> postModels)
     {
         this.postModels = postModels;
+    }
+
+    public void setForum(Forum forum)
+    {
+        this.forum = forum;
+        this.wake();
     }
 }
