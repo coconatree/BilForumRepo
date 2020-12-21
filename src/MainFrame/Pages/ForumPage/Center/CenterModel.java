@@ -30,6 +30,7 @@ public class CenterModel implements ICenterModel
     private PostModel loopModel;
 
     private Forum forum;
+    private String currentForum;
 
     public CenterModel()
     {
@@ -60,8 +61,9 @@ public class CenterModel implements ICenterModel
 
     public void wake()
     {
+        this.currentForum = forum.getId();
         this.postList = forum.getPostList();
-
+        
         PostModel tempModel = null;
         PostView tempView = null;
 
@@ -180,5 +182,9 @@ public class CenterModel implements ICenterModel
     {
         this.forum = forum;
         this.wake();
+    }
+
+    public String getCurrentForum() {
+        return currentForum;
     }
 }

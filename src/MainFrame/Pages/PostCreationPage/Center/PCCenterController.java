@@ -5,6 +5,7 @@ import MainFrame.CustomComponents.CustomForumComponent;
 import MainFrame.MainFrameModel;
 import MainFrame.Pages.ForumPage.Center.Post.PostModel;
 import MainFrame.Pages.ForumPage.Center.Post.PostView;
+import PojoClasses.Forum;
 import PojoClasses.Post;
 
 import javax.swing.*;
@@ -34,6 +35,7 @@ public class PCCenterController
         String titleText;
         String contentText;
         String tagsText;
+        String currentForum;
 
         boolean valid = true;
 
@@ -48,6 +50,7 @@ public class PCCenterController
                     titleText = postCreationCenterModel.getTitleField().getText();
                     contentText = postCreationCenterModel.getContentInput().getText();
                     tagsText = postCreationCenterModel.getTagsTextField().getText();
+                    currentForum = PCCenterModel.getRef().getFPM().getCM().getCurrentForum();
 
                     postCreationCenterModel.getTitleField().setText("");
                     postCreationCenterModel.getContentInput().setText("");
@@ -70,7 +73,10 @@ public class PCCenterController
 
                     try
                     {
-                        String code = APIConnection.httpPOST(post1,"Forum2");
+                        PCCenterModel.getRef().getFPM().getCM().wake();
+
+                        String code = APIConnection.httpPOST(post1,currentForum);
+
                         PCCenterModel.getRef().getFPM().getCM().wake();
                         System.out.println(code);
                     }
