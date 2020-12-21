@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class SortingAlgorithms
 {
-    public static void sortPostListByVotes(ArrayList<Post> list)
+    public void sortPostListByVotes(ArrayList<Post> list)
     {
         int n = list.size();
 
@@ -24,7 +24,7 @@ public class SortingAlgorithms
         }
     }
 
-    public static void sortPostListByViews(ArrayList<Post> list)
+    public void sortPostListByViews(ArrayList<Post> list)
     {
         int n = list.size();
 

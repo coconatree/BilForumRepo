@@ -7,6 +7,7 @@ import MainFrame.Pages.ForumPage.Center.Post.PostView;
 import PojoClasses.Forum;
 import Static.SizeConstants;
 import PojoClasses.Post;
+import Utility.SortingAlgorithms;
 
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class CenterModel implements ICenterModel
     /*******************************************************************************************/
 
     private ArrayList<PostModel> postModels;
-
+    private SortingAlgorithms algorithms;
     /*******************************************************************************************/
 
     private List<Post> postList;
@@ -57,7 +58,7 @@ public class CenterModel implements ICenterModel
         }
     }
 
-    private void wake()
+    public void wake()
     {
         this.postList = forum.getPostList();
 
@@ -79,6 +80,55 @@ public class CenterModel implements ICenterModel
         this.update();
     }
 
+    public void wakeVote()
+    {
+        this.postList = forum.getPostList();
+
+        algorithms = new SortingAlgorithms();
+        PostModel tempModel = null;
+        PostView tempView = null;
+
+        this.postModels.clear();
+
+        algorithms.sortPostListByVotes((ArrayList<Post>) this.postList);
+
+        for(int i = this.postList.size() - 1; i >= 0 ; i--)
+        {
+            tempModel = new PostModel(this.postList.get(i));
+            tempView = new PostView();
+
+            tempModel.setView(tempView);
+
+            this.postModels.add(tempModel);
+        }
+
+        this.update();
+    }
+
+    public void wakeView()
+    {
+        this.postList = forum.getPostList();
+
+        algorithms = new SortingAlgorithms();
+        PostModel tempModel = null;
+        PostView tempView = null;
+
+        this.postModels.clear();
+
+        algorithms.sortPostListByViews((ArrayList<Post>) this.postList);
+
+        for(int i = this.postList.size() - 1; i >= 0 ; i--)
+        {
+            tempModel = new PostModel(this.postList.get(i));
+            tempView = new PostView();
+
+            tempModel.setView(tempView);
+
+            this.postModels.add(tempModel);
+        }
+
+        this.update();
+    }
     /*******************************************************************************************/
 
 
