@@ -44,7 +44,7 @@ public class CenterController
                     //ref.getLabelTemp().setText(cmp.getView());
 
                     //ref.getCardLayout().show(ref.getCardPanel(), "PANEL_TEMP");
-                    ref.getCardLayout().show(ref.getCardPanel(), "POST_PAGE");
+                    ref.changePage("POST_PAGE");
                 }
             });
         }

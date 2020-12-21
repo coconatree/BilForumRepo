@@ -65,6 +65,7 @@ public class NavbarController
                 @Override
                 public void run()
                 {
+                    NBM.getRef().getFPM().getCM().wake();
                     NBM.getRef().getFPM().getCM().update();
                 }
             });

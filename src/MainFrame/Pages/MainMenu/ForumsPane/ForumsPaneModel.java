@@ -48,7 +48,7 @@ public class ForumsPaneModel implements IForumsPaneModel{
 
         /******************************************************************/
 
-        this.forumList = new ArrayList<>();
+        this.forumList = null;
 
         try
         {
@@ -61,6 +61,8 @@ public class ForumsPaneModel implements IForumsPaneModel{
         }
         catch (Exception e)
         {
+            // Pop up menu no Internet connection
+
             e.printStackTrace();
         }
 

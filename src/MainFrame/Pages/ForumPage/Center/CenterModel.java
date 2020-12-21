@@ -57,7 +57,7 @@ public class CenterModel implements ICenterModel
         }
     }
 
-    private void wake()
+    public void wake()
     {
         this.postList = forum.getPostList();
 

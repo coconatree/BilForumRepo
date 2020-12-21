@@ -1,5 +1,7 @@
 package PojoClasses;
 
+import java.util.ArrayList;
+
 public class Post
 {
     private String id;
@@ -16,6 +18,9 @@ public class Post
     private String date;
 
     private String tags;
+
+    private ArrayList<String> comments;
+    private ArrayList<String> anwsers;
 
     /***********************************************************************************/
 

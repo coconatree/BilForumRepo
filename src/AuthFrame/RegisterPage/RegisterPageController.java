@@ -41,11 +41,16 @@ public class RegisterPageController {
             SwingUtilities.invokeLater(() -> {
 
                 String input;
+
                 username = registerPageModel.getUsernameF().getText();
                 email = registerPageModel.getEmailF().getText();
                 password = registerPageModel.getPasswordF().getText();
+
                 String code = new EmailCodeGenerator().createEmailCode();
-                String passCode = new EmailSender(code,email).getCode();
+                EmailSender sender = new EmailSender(code, email);
+
+                String passCode = sender.getCode();
+
                 //also check for email
                 if(registerPageModel.getPasswordF().getText().equals(registerPageModel.getPasswordRF().getText()))
                 {

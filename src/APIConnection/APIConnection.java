@@ -6,6 +6,7 @@ import PojoClasses.User;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
 import java.net.http.HttpClient;
@@ -35,7 +36,7 @@ public class APIConnection
 
      */
 
-    public static List<Post> httpGET() throws Exception
+    public static ArrayList<Post> httpGET() throws Exception
     {
         HttpClient client = HttpClient.newHttpClient();
 
@@ -47,7 +48,7 @@ public class APIConnection
 
         ObjectMapper mapper = new ObjectMapper();
 
-        List<Post> postList = mapper.readValue(bodyAsString, new TypeReference<List<Post>>(){});
+        ArrayList<Post> postList = mapper.readValue(bodyAsString, new TypeReference<ArrayList<Post>>(){});
 
         return postList;
     }

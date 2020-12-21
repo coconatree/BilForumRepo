@@ -37,7 +37,7 @@ public class CustomForumComponent extends JComponent
         System.out.println(forum.getId());
 
         this.panel1 = new CustomJPanel();
-        this.doubleLabel1 = new CustomDoubleJLabel("12", "Size");
+        this.doubleLabel1 = new CustomDoubleJLabel(String.valueOf(forum.getPostList().size()), "Size");
 
         MigLayout layout1 = new MigLayout("", "[grow]", "[grow]");
 

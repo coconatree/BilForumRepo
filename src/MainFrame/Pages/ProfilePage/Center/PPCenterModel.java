@@ -112,5 +112,3 @@ public class PPCenterModel implements IPPCenterModel{
         return profilePhoto;
     }
 }
-
-
