@@ -36,6 +36,8 @@ public class PCCenterController
         String contentText;
         String tagsText;
         String currentForum;
+        String date;
+        int index;
 
         boolean valid = true;
 
@@ -63,16 +65,22 @@ public class PCCenterController
                     {
                         PCCenterModel.getRef().getFPM().getCM().wake();
 
-
                         Post post1 = new Post(
-                                APIConnection.getID(currentForum),
+                                APIConnection.getID(currentForum + "Post"),
                                 "0",
                                 "0",
                                 titleText,
                                 contentText,
                                 "emre",
-                                "----", tagsText
+                                "",
+                                tagsText
                         );
+
+                        index = post1.getId().indexOf("-");
+                        date = post1.getId().substring(index + 1);
+
+                        post1.setDate(date);
+                        System.out.println(date);
 
                         PostModel modelTemp = new PostModel(post1);
                         PostView viewTemp = new PostView();
@@ -83,6 +91,7 @@ public class PCCenterController
 
                         PCCenterModel.getRef().getFPM().getCM().wake();
                         System.out.println(code);
+
                     }
                     catch (Exception exception)
                     {

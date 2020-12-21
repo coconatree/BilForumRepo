@@ -78,9 +78,35 @@ public class CenterModel implements ICenterModel
 
             this.postModels.add(tempModel);
         }
+        this.update();
+        wakeDate();
+    }
+
+    public void wakeDate()
+    {
+        this.postList = forum.getPostList();
+
+        algorithms = new SortingAlgorithms();
+        PostModel tempModel = null;
+        PostView tempView = null;
+
+        this.postModels.clear();
+
+        algorithms.sortPostListByDate((ArrayList<Post>) this.postList);
+
+        for(int i = this.postList.size() - 1; i >= 0 ; i--)
+        {
+            tempModel = new PostModel(this.postList.get(i));
+            tempView = new PostView();
+
+            tempModel.setView(tempView);
+
+            this.postModels.add(tempModel);
+        }
 
         this.update();
     }
+
 
     public void wakeVote()
     {

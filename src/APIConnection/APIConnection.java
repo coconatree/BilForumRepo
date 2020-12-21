@@ -156,7 +156,7 @@ public class APIConnection
 
         String id = mapper.writeValueAsString(bodyAsString);
 
-        return id;
+        return bodyAsString;
 
     }
 
