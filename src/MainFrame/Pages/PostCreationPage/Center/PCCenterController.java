@@ -1,9 +1,11 @@
 package MainFrame.Pages.PostCreationPage.Center;
 
 import APIConnection.APIConnection;
+import MainFrame.CustomComponents.CustomForumComponent;
 import MainFrame.MainFrameModel;
 import MainFrame.Pages.ForumPage.Center.Post.PostModel;
 import MainFrame.Pages.ForumPage.Center.Post.PostView;
+import PojoClasses.Forum;
 import PojoClasses.Post;
 
 import javax.swing.*;
@@ -16,6 +18,7 @@ public class PCCenterController
     PCCenterModel postCreationCenterModel;
 
     MainFrameModel ref;
+
 
     public PCCenterController(IPCCenterView postCreationCenterView, PCCenterModel postCreationCenterModel, MainFrameModel ref)
     {
@@ -32,6 +35,7 @@ public class PCCenterController
         String titleText;
         String contentText;
         String tagsText;
+        String currentForum;
 
         boolean valid = true;
 
@@ -46,6 +50,7 @@ public class PCCenterController
                     titleText = postCreationCenterModel.getTitleField().getText();
                     contentText = postCreationCenterModel.getContentInput().getText();
                     tagsText = postCreationCenterModel.getTagsTextField().getText();
+                    currentForum = PCCenterModel.getRef().getFPM().getCM().getCurrentForum();
 
                     postCreationCenterModel.getTitleField().setText("");
                     postCreationCenterModel.getContentInput().setText("");
@@ -68,7 +73,11 @@ public class PCCenterController
 
                     try
                     {
-                        String code = APIConnection.httpPOST(post1);
+                        PCCenterModel.getRef().getFPM().getCM().wake();
+
+                        String code = APIConnection.httpPOST(post1,currentForum);
+
+                        PCCenterModel.getRef().getFPM().getCM().wake();
                         System.out.println(code);
                     }
                     catch (Exception exception)
@@ -78,6 +87,7 @@ public class PCCenterController
                     }
 
                     // ref.getFPM().getCM().getPostModels().add(modelTemp);
+
 
                     ref.getCardLayout().show(ref.getCardPanel(), "FORUM_PAGE");
 

@@ -31,7 +31,7 @@ public class LeftBarView extends CustomJPanel implements ILeftBarView
         MigLayout bottomPanelLayout = new MigLayout("inset 5 5 5 5", "[grow]5[grow]", "[grow]5[grow]");
 
         model.getBottomPanel().setLayout(bottomPanelLayout);
-        model.getBottomPanel().add(model.getByDateButton(), "growx");
+        model.getBottomPanel().add(model.getByViewButton(), "growx");
         model.getBottomPanel().add(model.getByVoteButton(), "growx, wrap");
         model.getBottomPanel().add(model.getAddPostButton(), "growx, span 2");
 
