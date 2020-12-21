@@ -21,14 +21,14 @@ public class LeftBarModel implements ILeftBaModel
 
     /*******************************************************************************************/
 
-    private CustomJButton byDateButton;
+    private CustomJButton byViewButton;
     private CustomJButton byVoteButton;
     private CustomJButton addPostButton;
 
     /*******************************************************************************************/
 
     private String textPaneText;
-    private String byDateButtonText;
+    private String byViewButtonText;
     private String byVoteButtonText;
     private String addPostButtonText;
 
@@ -41,6 +41,7 @@ public class LeftBarModel implements ILeftBaModel
 
     private MainFrameModel mainFrameModelReference;
 
+
     public LeftBarModel(MainFrameModel ref)
     {
         this.mainFrameModelReference = ref;
@@ -52,7 +53,7 @@ public class LeftBarModel implements ILeftBaModel
         this.sc = new SizeConstants();
 
         this.textPaneText = ConstantText.getForumPageLeftText();
-        this.byDateButtonText = "By Date";
+        this.byViewButtonText = "By View";
         this.byVoteButtonText = "By Vote";
         this.addPostButtonText = "Create a post";
 
@@ -63,8 +64,8 @@ public class LeftBarModel implements ILeftBaModel
 
     private void initButtons()
     {
-        this.byDateButton = new CustomJButton();
-        this.byDateButton.setText(this.byDateButtonText);
+        this.byViewButton = new CustomJButton();
+        this.byViewButton.setText(this.byViewButtonText);
 
         this.byVoteButton = new CustomJButton();
         this.byVoteButton.setText(this.byVoteButtonText);
@@ -111,7 +112,7 @@ public class LeftBarModel implements ILeftBaModel
 
     public void addActionListenerToByDateBtn(ActionListener AL)
     {
-        this.byDateButton.addActionListener(AL);
+        this.byViewButton.addActionListener(AL);
     }
 
     public void addActionListenerToByVoteBtn(ActionListener AL)
@@ -136,9 +137,9 @@ public class LeftBarModel implements ILeftBaModel
         return this.textPane;
     }
 
-    public CustomJButton getByDateButton()
+    public CustomJButton getByViewButton()
     {
-        return this.byDateButton;
+        return this.byViewButton;
     }
 
     public CustomJButton getByVoteButton()

@@ -44,7 +44,7 @@ public class PostCreationPageModel implements IPostCreationPageModel
     private void initPCCenter(MainFrameModel ref)
     {
         this.PCCenterView  = new PCCenterView();
-        this.PCCenterModel = new PCCenterModel();
+        this.PCCenterModel = new PCCenterModel(ref);
         this.PCCenterController = new PCCenterController(this.PCCenterView, this.PCCenterModel, ref);
 
         this.PCCenterModel.setView(this.PCCenterView);

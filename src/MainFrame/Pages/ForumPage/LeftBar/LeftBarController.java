@@ -15,6 +15,8 @@ public class LeftBarController
         this.LBM = LBM;
 
         this.LBM.addActionListenerToAddPostBtn(new PostPageNavigationListener());
+        this.LBM.addActionListenerToByDateBtn(new PostPageSortByViewListener());
+        this.LBM.addActionListenerToByVoteBtn(new PostPageSortByVoteListener());
     }
 
     class PostPageNavigationListener implements ActionListener
@@ -32,4 +34,36 @@ public class LeftBarController
             });
         }
     }
+    class PostPageSortByVoteListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    LBM.getRef().getFPM().getCM().wakeVote();
+                }
+            });
+        }
+    }
+    class PostPageSortByViewListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    LBM.getRef().getFPM().getCM().wakeView();
+                }
+            });
+        }
+    }
+
+
 }
