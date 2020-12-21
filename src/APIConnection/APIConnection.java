@@ -52,7 +52,7 @@ public class APIConnection
         return postList;
     }
 
-    public static String httpPOST(Post post) throws Exception
+    public static String httpPOST(Post post, String ID) throws Exception
     {
         HttpClient client = HttpClient.newHttpClient();
 
@@ -64,11 +64,12 @@ public class APIConnection
 
         System.out.println(requestBody);
 
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/post/addPost")).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(String.format("http://localhost:8080/post/addPost/%s", ID))).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         return response.toString();
+
     }
     public static List<User> getUsers() throws Exception
     {

@@ -4,6 +4,7 @@ import MainFrame.CustomComponents.CustomJButton;
 import MainFrame.CustomComponents.CustomJLabel;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.CustomComponents.CustomJTextField;
+import MainFrame.MainFrameModel;
 import Static.Colors;
 import Static.ConstantText;
 import Static.Fonts;
@@ -51,8 +52,12 @@ public class PCCenterModel implements IPCCenterModel
     private JLabel titleLabel;
     private JLabel contentLabel;
 
-    public PCCenterModel()
+    private static MainFrameModel mainFrameModelReference;
+
+
+    public PCCenterModel(MainFrameModel ref)
     {
+        this.mainFrameModelReference = ref;
         this.sc = new SizeConstants();
 
         this.init();
@@ -239,6 +244,11 @@ public class PCCenterModel implements IPCCenterModel
     public JPanel getGuidePanel()
     {
         return this.guidePanel;
+    }
+
+    public static MainFrameModel getRef()
+    {
+        return mainFrameModelReference;
     }
 }
 

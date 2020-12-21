@@ -1,6 +1,7 @@
 package MainFrame.Pages.PostCreationPage.Center;
 
 import APIConnection.APIConnection;
+import MainFrame.CustomComponents.CustomForumComponent;
 import MainFrame.MainFrameModel;
 import MainFrame.Pages.ForumPage.Center.Post.PostModel;
 import MainFrame.Pages.ForumPage.Center.Post.PostView;
@@ -16,6 +17,7 @@ public class PCCenterController
     PCCenterModel postCreationCenterModel;
 
     MainFrameModel ref;
+
 
     public PCCenterController(IPCCenterView postCreationCenterView, PCCenterModel postCreationCenterModel, MainFrameModel ref)
     {
@@ -68,7 +70,8 @@ public class PCCenterController
 
                     try
                     {
-                        String code = APIConnection.httpPOST(post1);
+                        String code = APIConnection.httpPOST(post1,"Forum2");
+                        PCCenterModel.getRef().getFPM().getCM().wake();
                         System.out.println(code);
                     }
                     catch (Exception exception)
@@ -78,6 +81,7 @@ public class PCCenterController
                     }
 
                     // ref.getFPM().getCM().getPostModels().add(modelTemp);
+
 
                     ref.getCardLayout().show(ref.getCardPanel(), "FORUM_PAGE");
 
