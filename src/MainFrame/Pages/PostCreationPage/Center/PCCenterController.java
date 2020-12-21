@@ -42,6 +42,7 @@ public class PCCenterController
         @Override
         public void actionPerformed(ActionEvent e)
         {
+
             SwingUtilities.invokeLater(new Runnable()
             {
                 @Override
@@ -56,24 +57,27 @@ public class PCCenterController
                     postCreationCenterModel.getContentInput().setText("");
                     postCreationCenterModel.getTagsTextField().setText("");
 
-                    Post post1 = new Post(
-                            "1016",
-                            "0",
-                            "0",
-                            titleText,
-                            contentText,
-                            "emre",
-                            "----", tagsText
-                    );
 
-                    PostModel modelTemp = new PostModel(post1);
-                    PostView viewTemp = new PostView();
-
-                    modelTemp.setView(viewTemp);
 
                     try
                     {
                         PCCenterModel.getRef().getFPM().getCM().wake();
+
+
+                        Post post1 = new Post(
+                                APIConnection.getID(currentForum),
+                                "0",
+                                "0",
+                                titleText,
+                                contentText,
+                                "emre",
+                                "----", tagsText
+                        );
+
+                        PostModel modelTemp = new PostModel(post1);
+                        PostView viewTemp = new PostView();
+
+                        modelTemp.setView(viewTemp);
 
                         String code = APIConnection.httpPOST(post1,currentForum);
 
