@@ -102,11 +102,16 @@ public class AuthFrameModel implements IAuthFrameModel {
         this.createRegisterPage();
     }
 
+    public void changePage(String pageName)
+    {
+        this.cardLayout.show(this.cardPanel, pageName);
+    }
+
     private void createLoginPage()
     {
         this.loginPageView = new LoginPageView();
         this.loginPageModel = new LoginPageModel( this );
-        this.loginPageController = new LoginPageController( loginPageModel , loginPageView);
+        this.loginPageController = new LoginPageController( loginPageModel , loginPageView, this);
 
         this.loginPageModel.setView( this.loginPageView );
     }
@@ -115,7 +120,7 @@ public class AuthFrameModel implements IAuthFrameModel {
     {
         this.RPV = new RegisterPageView();
         this.RPM = new RegisterPageModel();
-        this.RPC = new RegisterPageController(this.RPV, this.RPM);
+        this.RPC = new RegisterPageController(this.RPV, this.RPM, this);
 
         this.RPM.setView(this.RPV);
     }

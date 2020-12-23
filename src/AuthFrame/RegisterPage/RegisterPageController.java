@@ -1,14 +1,15 @@
 package AuthFrame.RegisterPage;
 
 import APIConnection.APIConnection;
+import AuthFrame.AuthFrameModel;
 import PojoClasses.User;
-import Utility.EmailCodeGenerator;
-import Utility.EmailSender;
-import Utility.PasswordHash;
+import Utility.*;
 
+import javax.mail.MessagingException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,76 +18,122 @@ public class RegisterPageController {
     IRegisterPageView registerPageView;
     RegisterPageModel registerPageModel;
 
-    public RegisterPageController(IRegisterPageView registerPageView, RegisterPageModel registerPageModel)
+    AuthFrameModel ref;
+
+    public RegisterPageController(IRegisterPageView registerPageView, RegisterPageModel registerPageModel, AuthFrameModel ref)
     {
         this.registerPageModel = registerPageModel;
         this.registerPageView = registerPageView;
 
+        this.ref = ref;
+
         this.registerPageModel.addActionListenerToBtn(new RegisterButtonListener());
+        this.registerPageModel.addActionListenerToLBtn(new LoginButtonListener());
     }
-    class RegisterButtonListener implements ActionListener
+
+    class LoginButtonListener implements ActionListener
     {
-        String username;
-        String email;
-        String password;
-        String ID;
-
-        boolean valid = false;
-
         @Override
         public void actionPerformed(ActionEvent e)
         {
-            Scanner scan = new Scanner(System.in);
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    ref.changePage("LOGIN_PAGE");
 
+                    registerPageModel.getUsernameF().setText("");
+                    registerPageModel.getEmailF().setText("");
+                    registerPageModel.getPasswordF().setText("");
+                    registerPageModel.getPasswordRF().setText("");
+                }
+            });
+        }
+    }
+
+    class RegisterButtonListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
             SwingUtilities.invokeLater(() -> {
-
-                String input;
-
-                username = registerPageModel.getUsernameF().getText();
-                email = registerPageModel.getEmailF().getText();
-                password = registerPageModel.getPasswordF().getText();
-
-                String code = new EmailCodeGenerator().createEmailCode();
-                EmailSender sender = new EmailSender(code, email);
-
-                String passCode = sender.getCode();
-
-                //also check for email
-                if(registerPageModel.getPasswordF().getText().equals(registerPageModel.getPasswordRF().getText()))
+                try
                 {
-                    valid = true;
-                }
-                if(valid)
-                {
-                    input = scan.nextLine();
-                    if(input.equals(code))
+                    User newUser;
+
+                    ArrayList<User> userList = APIConnection.getUsers();
+
+                    if(Utility.checkEmail(registerPageModel.getEmailF().getText()))
                     {
-                        ID = new EmailCodeGenerator().createUserID();
+                        PopUp popUp = new PopUp("Please use your Bilkent email.");
+                        return;
+                    }
+                    else if(registerPageModel.getUsernameF().getText().length() <= 5)
+                    {
+                        PopUp popUp = new PopUp("Username must be at least 5 characters.");
+                        return;
+                    }
+                    else if(!(registerPageModel.getPasswordF().getText().equals(registerPageModel.getPasswordRF().getText())))
+                    {
+                        PopUp popUp = new PopUp("Passwords must match.");
+                        return;
+                    }
+                    else {}
 
-                        User user1 = new User(
-                                ID,
-                                username,
-                                email,
-                                new PasswordHash().hashString(password),
-                                1
-                        );
-                        try {
-                            String rofl = APIConnection.httpUser(user1);
-
-                            System.out.println(rofl);
-                        }
-                        catch ( Exception exception)
+                    for (User user : userList)
+                    {
+                        if(user.getUsername().equals(registerPageModel.getUsernameF().getText()))
                         {
-                            exception.printStackTrace();
-                            exception.getMessage();
+                            PopUp popUp = new PopUp("Username taken please select another one.");
+                            return;
                         }
+                        else { continue; }
+                    }
 
-                    }
-                    else
-                    {
-                        System.out.println("wrong code");
-                    }
+                    String ID = APIConnection.getID("User-");
+
+                    newUser = new User(
+                            ID,
+                            registerPageModel.getUsernameF().getText(),
+                            registerPageModel.getEmailF().getText(),
+                            PasswordHash.hashString(registerPageModel.getPasswordF().getText()),
+                            1
+                    );
+
+                    APIConnection.addUser(newUser);
+
+
                 }
+                catch (Exception exception)
+                {
+                    PopUp popUp = new PopUp("Please check you internet connection.");
+                    exception.printStackTrace();
+
+                    ref.changePage("EMAIL_PAGE");
+                }
+
+                /**
+                 *
+                 *
+                 *
+                 *                 String code = new EmailCodeGenerator().createEmailCode();
+                 *                 EmailSender sender = null;
+                 *                 try
+                 *                 {
+                 *                     sender = new EmailSender(code, email);
+                 *                 }
+                 *                 catch (MessagingException messagingException)
+                 *                 {
+                 *                     messagingException.printStackTrace();
+                 *                 }
+                 *
+                 *                 String passCode = sender.getCode();
+                 *
+                 *                 //also check for email
+                 *
+                 *
+                 * */
             });
         }
     }

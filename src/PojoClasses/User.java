@@ -1,6 +1,8 @@
 package PojoClasses;
 
 
+import APIConnection.APIConnection;
+import Utility.PasswordHash;
 
 public class User
 {
@@ -38,6 +40,40 @@ public class User
                 ", passwordHashed='" + passwordHashed + '\'' +
                 ", userLevel=" + userLevel +
                 '}';
+    }
+
+    /*************************************************************************************/
+
+    private void updateTheDB()
+    {
+        try
+        {
+            APIConnection.updateUser(this);
+        }
+        catch (Exception exception)
+        {
+            exception.printStackTrace();
+        }
+    }
+
+    public void switchByKey(String KEY, String data)
+    {
+        if(KEY.equals("USERNAME"))
+        {
+            this.username = data;
+            this.updateTheDB();
+        }
+        else if(KEY.equals("EMAIL"))
+        {
+            this.email = data;
+            this.updateTheDB();
+        }
+        else if(KEY.equals("PASSWORD"))
+        {
+            this.passwordHashed = PasswordHash.hashString(data);
+            this.updateTheDB();
+        }
+        else{ return; }
     }
 
     /*************************************************************************************/

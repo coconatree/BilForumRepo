@@ -1,10 +1,13 @@
 package AuthFrame.LoginPage;
 
 import APIConnection.APIConnection;
+import AuthFrame.AuthFrameModel;
+import MainFrame.Navbar.NavbarModel;
 import MainLoop.Loop;
 import PojoClasses.Post;
 import PojoClasses.User;
 import Utility.PasswordHash;
+import Utility.PopUp;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,82 +19,92 @@ public class LoginPageController {
 
     private ILoginPageView view;
     private LoginPageModel model;
+
     private Loop mainLoop ;
 
+    private AuthFrameModel ref;
 
-    public LoginPageController(LoginPageModel model, ILoginPageView view )
+    public LoginPageController(LoginPageModel model, ILoginPageView view, AuthFrameModel ref)
     {
         this.mainLoop = model.getRef().getMainLoop();
         this.view = view;
         this.model = model;
 
-        model.addActionListenerToLoginB( new PageListener() );
-        model.addActionListenerToRegisterB( new PageListener() );
+        this.ref = ref;
+
+        model.addActionListenerToLoginB( new LoginListener() );
+        model.addActionListenerToRegisterB( new RegisterListener() );
     }
 
-    class PageListener implements ActionListener{
-
-        String username;
-        String password;
-        String passwordCheck;
-
-        //api yoksa bunu true yapıp direk girebilirsiniz.
-
-        boolean valid = false;
-
+    class LoginListener implements ActionListener
+    {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            SwingUtilities.invokeLater(new Runnable() {
+        public void actionPerformed(ActionEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
                 @Override
                 public void run()
                 {
-                    if ( e.getSource() == model.getLoginButton() )
+                    ArrayList<User> userList;
+
+                    if(model.getUserNameTextField().getText().equals("") || model.getPasswordField().getText().equals(""))
                     {
-                        passwordCheck = model.getPasswordField().getText();
-                        username = model.getUserNameTextField().getText();
-                        password = PasswordHash.hashString(model.getPasswordField().getText());
-                        List<User> userList;
-                        try {
-                            userList = APIConnection.getUsers();
-                            System.out.println(userList);
-                            for(int i = 0; i < userList.size(); i++)
+                        PopUp popUp = new PopUp("Please fill the required spaces");
+                    }
+                    else
+                        {
+                            try
                             {
-                                if(userList.get(i).getUsername().equals(username))
+                                userList = APIConnection.getUsers();
+
+                                String uN = model.getUserNameTextField().getText();
+                                String pH = PasswordHash.hashString(model.getPasswordField().getText());
+
+                                for (User user : userList)
                                 {
-                                    if(userList.get(i).getPasswordHashed().equals(passwordCheck))
+                                    if(user != null && user.getUsername().equals(uN) && user.getPasswordHashed().equals(pH))
                                     {
-                                        valid = true;
+                                        mainLoop.getMainFrameModel().setUser(user);
+                                        mainLoop.getMainFrameModel().getProfilePageModel().getPPCenterModel().setUser(user);
+
+                                        mainLoop.getMainFrameModel().getNVM().getProfLabel().setText(user.getUsername());
+
+                                        Loop.closeFrame(mainLoop.getFrameAuth());
+                                        Loop.setFrameVisible(mainLoop.getFrameMain());
+
+                                        return;
                                     }
                                 }
+
+                                PopUp popUp = new PopUp("Username or Password is wrong please try again.");
                             }
-                        } catch (Exception exception) {
-                            exception.printStackTrace();
-                        }
-
-
-                        if(valid)
-                        {
-                            User user = new User("", username, "", password, 1);
-
-                            mainLoop.getMainFrameModel().setUser(user);
-                            mainLoop.getMainFrameModel().getProfilePageModel().getPPCenterModel().setUser(user);
-
-                            System.out.println(user.toString());
-
-                            mainLoop.getMainFrameModel().getNVM().getProfLabel().setText(username);
-
-                            Loop.closeFrame( mainLoop.getFrameAuth() );
-                            Loop.setFrameVisible( mainLoop.getFrameMain());
-                        }
-                        else
+                            catch (Exception e)
                             {
-                                System.out.println("Wrong password !!!");
+                                System.out.println(e.getMessage());
+                                e.printStackTrace();
+                                PopUp popUp = new PopUp("Please check your internet connection.");
                             }
-                    }
-                    else if ( e.getSource() == model.getRegisterButton() )
-                    {
-                        model.getRef().getCardLayout().show( model.getRef().getCardPanel() , "REGISTER");
-                    }
+                        }
+                }
+            });
+        }
+    }
+
+    class RegisterListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    ref.changePage("REGISTER_PAGE");
+
+                    model.getUserNameTextField().setText("");
+                    model.getPasswordField().setText("");
                 }
             });
         }

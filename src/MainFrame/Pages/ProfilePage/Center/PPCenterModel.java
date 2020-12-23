@@ -4,6 +4,7 @@ import MainFrame.CustomComponents.CustomField;
 import MainFrame.CustomComponents.CustomJButton;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.MainFrameModel;
+import MainFrame.Navbar.NavbarModel;
 import PojoClasses.User;
 import Static.SizeConstants;
 
@@ -34,10 +35,13 @@ public class PPCenterModel implements IPPCenterModel{
     private JPanel panelT;
     private JPanel panelB;
 
-    public  PPCenterModel()
+    private NavbarModel ref;
+
+    public  PPCenterModel(NavbarModel ref)
     {
         this.sc = new SizeConstants();
         this.currentUser = null;
+        this.ref = ref;
         this.init();
     }
     private void init()
@@ -48,20 +52,18 @@ public class PPCenterModel implements IPPCenterModel{
         this.panelT = new CustomJPanel();
         this.panelB = new CustomJPanel();
 
-        this.field1 = new CustomField("Username: " , "Username");
-        this.field2 = new CustomField("Email: " , "Username");
-        this.field3 = new CustomField("Password: " , "Username");
-        this.field4 = new CustomField("ID: " , "Username");
-        this.field5 = new CustomField("Level: " , "Username");
+        this.field1 = new CustomField("Username: " , "Username", "USERNAME", this, this.ref);
+        this.field2 = new CustomField("Email: " , "Username", "EMAIL", this, this.ref);
+        this.field3 = new CustomField("Password: " , "Username", "PASSWORD", this, this.ref);
+
     }
 
     public void initText()
     {
-        this.field1 = new CustomField("Username: " , this.currentUser.getUsername());
-        this.field2 = new CustomField("Email: " , this.currentUser.getEmail());
-        this.field3 = new CustomField("Password: " , this.currentUser.getPasswordHashed());
-        this.field4 = new CustomField("ID: " , this.currentUser.getUserID());
-        this.field5 = new CustomField("Level: " , String.valueOf(this.currentUser.getUserLevel()));
+        this.field1 = new CustomField("Username: " , this.currentUser.getUsername(), "USERNAME", this, this.ref);
+        this.field2 = new CustomField("Email: " , this.currentUser.getEmail(), "EMAIL", this, this.ref);
+        this.field3 = new CustomField("Password: " , this.currentUser.getPasswordHashed(), "PASSWORD", this, this.ref);
+
     }
 
 
@@ -139,5 +141,10 @@ public class PPCenterModel implements IPPCenterModel{
         this.currentUser = user;
         this.initText();
         this.update();
+    }
+
+    public User getUser()
+    {
+        return this.currentUser;
     }
 }

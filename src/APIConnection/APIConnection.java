@@ -72,7 +72,65 @@ public class APIConnection
         return response.toString();
 
     }
-    public static List<User> getUsers() throws Exception
+
+    /****************************************************************************************************************/
+
+    public static User getUser(String USERNAME, String PASSWORD_HASHED) throws Exception
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(String.format("http://localhost:8080/login/getUser/%s/%s", USERNAME, PASSWORD_HASHED))).build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String bodyAsString = response.body().toString();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        User user = mapper.readValue(bodyAsString, new TypeReference<User>(){});
+
+        System.out.println(user.toString());
+
+        return user;
+    }
+
+    /****************************************************************************************************************/
+
+    public static String addUser(User user) throws Exception
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        String requestBody = mapper.writeValueAsString(user);
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(String.format("http://localhost:8080/user/addUser/"))).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        return response.toString();
+    }
+
+    /****************************************************************************************************************/
+
+    public static String updateUser(User user) throws Exception
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        String requestBody = mapper.writeValueAsString(user);
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(String.format("http://localhost:8080/user/updateUser/"))).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        return response.toString();
+    }
+
+    /****************************************************************************************************************/
+
+    public static ArrayList<User> getUsers() throws Exception
     {
         HttpClient client = HttpClient.newHttpClient();
 
@@ -84,7 +142,7 @@ public class APIConnection
 
         ObjectMapper mapper = new ObjectMapper();
 
-        List<User> userList = mapper.readValue(bodyAsString, new TypeReference<List<User>>(){});
+        ArrayList<User> userList = mapper.readValue(bodyAsString, new TypeReference<ArrayList<User>>(){});
 
         return userList;
     }
@@ -160,8 +218,6 @@ public class APIConnection
         return bodyAsString;
 
     }
-
-
 
     /****************************************************************************************************************/
 

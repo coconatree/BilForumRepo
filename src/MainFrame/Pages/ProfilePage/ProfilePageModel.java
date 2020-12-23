@@ -1,5 +1,6 @@
 package MainFrame.Pages.ProfilePage;
 import MainFrame.MainFrameModel;
+import MainFrame.Navbar.NavbarModel;
 import MainFrame.Pages.ProfilePage.Center.PPCenterModel;
 import MainFrame.Pages.ProfilePage.Center.PPCenterView;
 import MainFrame.Pages.ProfilePage.Center.PPCenterController;
@@ -20,15 +21,15 @@ public class ProfilePageModel implements IProfilePageModel{
     private PPCenterView PPCenterView;
     private PPCenterController PPCenterController;
 
-    public ProfilePageModel()
+    public ProfilePageModel(NavbarModel ref)
     {
         this.sc = new SizeConstants();
-        this.initPPCenter();
+        this.initPPCenter(ref);
     }
-    private void initPPCenter()
+    private void initPPCenter(NavbarModel ref)
     {
         this.PPCenterView = new PPCenterView();
-        this.PPCenterModel = new PPCenterModel();
+        this.PPCenterModel = new PPCenterModel(ref);
         this.PPCenterController = new PPCenterController();
 
         this.PPCenterModel.setView(this.PPCenterView);

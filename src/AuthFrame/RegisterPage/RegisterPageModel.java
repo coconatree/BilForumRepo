@@ -2,9 +2,11 @@ package AuthFrame.RegisterPage;
 
 import MainFrame.CustomComponents.*;
 import Static.AuthSizeConstants;
+import Static.Fonts;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RegisterPageModel implements IRegisterPageModel
@@ -32,6 +34,8 @@ public class RegisterPageModel implements IRegisterPageModel
 
     private CustomJButton registerBTN;
 
+    private JButton loginButton;
+
     public RegisterPageModel()
     {
         this.init();
@@ -43,15 +47,23 @@ public class RegisterPageModel implements IRegisterPageModel
 
         this.username = new CustomJLabel();
         this.username.setText("Username:");
+        this.username.setFont(Fonts.TITLE_FONT);
+        this.username.setFont(Fonts.TITLE_FONT);
 
         this.email = new CustomJLabel();
         this.email.setText("Email:");
+        this.email.setFont(Fonts.TITLE_FONT);
+        this.email.setFont(Fonts.TITLE_FONT);
 
         this.password = new CustomJLabel();
         this.password.setText("Password:");
+        this.password.setFont(Fonts.TITLE_FONT);
+        this.password.setFont(Fonts.TITLE_FONT);
 
         this.passwordR = new CustomJLabel();
         this.passwordR.setText("Password Repeat:");
+        this.passwordR.setFont(Fonts.TITLE_FONT);
+        this.passwordR.setFont(Fonts.TITLE_FONT);
 
         this.usernameF = new CustomJTextField(5);
 
@@ -63,6 +75,13 @@ public class RegisterPageModel implements IRegisterPageModel
 
         this.registerBTN = new CustomJButton();
         this.registerBTN.setText("Register");
+        this.registerBTN.setFont(Fonts.TITLE_FONT);
+        this.registerBTN.setFont(Fonts.TITLE_FONT);
+
+        this.loginButton = new CustomJButton();
+        this.loginButton.setText("To Login");
+        this.loginButton.setFont(Fonts.TITLE_FONT);
+        this.loginButton.setFont(Fonts.TITLE_FONT);
 
         this.initPanels();
     }
@@ -101,8 +120,10 @@ public class RegisterPageModel implements IRegisterPageModel
 
     public void addActionListenerToBtn(ActionListener AL)
     {
-        this.getRegisterBTN().addActionListener(AL);
+        this.registerBTN.addActionListener(AL);
     }
+
+    public void addActionListenerToLBtn(ActionListener AL){ this.loginButton.addActionListener(AL);}
 
     public AuthSizeConstants getSc() {
         return sc;
@@ -173,7 +194,5 @@ public class RegisterPageModel implements IRegisterPageModel
         return passwordRF;
     }
 
-
-
-
+    public JButton getLBtn(){ return this.loginButton; }
 }
