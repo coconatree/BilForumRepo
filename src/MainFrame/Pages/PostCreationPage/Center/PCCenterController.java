@@ -36,12 +36,15 @@ public class PCCenterController
         String contentText;
         String tagsText;
         String currentForum;
+        String date;
+        int index;
 
         boolean valid = true;
 
         @Override
         public void actionPerformed(ActionEvent e)
         {
+
             SwingUtilities.invokeLater(new Runnable()
             {
                 @Override
@@ -56,29 +59,39 @@ public class PCCenterController
                     postCreationCenterModel.getContentInput().setText("");
                     postCreationCenterModel.getTagsTextField().setText("");
 
-                    Post post1 = new Post(
-                            "1016",
-                            "0",
-                            "0",
-                            titleText,
-                            contentText,
-                            "emre",
-                            "----", tagsText
-                    );
 
-                    PostModel modelTemp = new PostModel(post1);
-                    PostView viewTemp = new PostView();
-
-                    modelTemp.setView(viewTemp);
 
                     try
                     {
                         PCCenterModel.getRef().getFPM().getCM().wake();
 
+                        Post post1 = new Post(
+                                APIConnection.getID(currentForum + "Post"),
+                                "0",
+                                "0",
+                                titleText,
+                                contentText,
+                                "emre",
+                                "",
+                                tagsText
+                        );
+
+                        index = post1.getId().indexOf("-");
+                        date = post1.getId().substring(index + 1);
+
+                        post1.setDate(date);
+                        System.out.println(date);
+
+                        PostModel modelTemp = new PostModel(post1);
+                        PostView viewTemp = new PostView();
+
+                        modelTemp.setView(viewTemp);
+
                         String code = APIConnection.httpPOST(post1,currentForum);
 
                         PCCenterModel.getRef().getFPM().getCM().wake();
                         System.out.println(code);
+
                     }
                     catch (Exception exception)
                     {

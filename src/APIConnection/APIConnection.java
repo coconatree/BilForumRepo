@@ -142,6 +142,26 @@ public class APIConnection
 
         return postList;
     }
+    public static String getID(String ID) throws Exception
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(String.format("http://localhost:8080/general/createID/%s", ID))).build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String bodyAsString = response.body().toString();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        String id = mapper.writeValueAsString(bodyAsString);
+
+        return bodyAsString;
+
+    }
+
+
 
     /****************************************************************************************************************/
 
