@@ -1,7 +1,11 @@
 package MainFrame.Pages.MainMenu.TopPosts;
 
 import MainFrame.CustomComponents.CustomJPanel;
+import Static.Colors;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+
 /**
  * __The view class of Top Posts Pane in the main menu (Left Pane) ___
  * @author __Can Yılmaz___
@@ -16,26 +20,18 @@ public class TopPostsView extends CustomJPanel implements ITopPostsView {
 
     private void init( TopPostsModel model){
 
-        MigLayout layout = new MigLayout( "inset 15 15 15 15","[grow]", this.stringGenerator(10 , model) );
+        MigLayout layout = new MigLayout( "inset 0 0 10 0","[grow]", String.format("[%d]10[grow]7[grow]7[grow]7[grow]7[grow]7[grow]7[grow]7[grow]7[grow]7[grow]", model.getSc().getHEIGHT_RATIO() * 5));
         this.setLayout( layout );
 
-        this.add( model.getTopPostsLabel()," wrap");
+        this.add( model.getTopPostsLabel(),"center, wrap");
 
         for ( int i = 0 ; i < 10 ; i++)
         {
-            this.add( model.getPostModels().get( i ).getView(),"grow, wrap");
-        }
-    }
-
-    private String stringGenerator( int number ,TopPostsModel model){
-        String str = "[100]5" ;
-
-        for ( int i = 0 ; i < number ; i++){
-            str += String.format( "[%d]",model.getSc().getHEIGHT_RATIO() * 8 );
-            if ( i < number - 1)
-                str += "5";
+            this.add(model.getCMP().get(i), "grow, wrap");
         }
 
-        return str ;
+        this.setOpaque(false);
+
+        // this.setBorder(BorderFactory.createLineBorder(Colors.SECONDARY_COLOR));
     }
 }

@@ -165,6 +165,25 @@ public class APIConnection
 
     /****************************************************************************************************************/
 
+    public static ArrayList<Post> getTop10Post() throws Exception
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/post/getTop10/")).build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String bodyAsString = response.body().toString();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        ArrayList<Post> postList = mapper.readValue(bodyAsString, new TypeReference<List<Post>>(){});
+
+        return postList;
+    }
+
+    /****************************************************************************************************************/
+
     public static void main(String[] args)
     {
         /**

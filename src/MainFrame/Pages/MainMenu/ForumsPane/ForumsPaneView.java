@@ -13,7 +13,7 @@ public class ForumsPaneView extends CustomJPanel implements IForumsPaneView {
 
     private void init( ForumsPaneModel model)
     {
-        MigLayout layout = new MigLayout( "inset 5 10 5 10", "[grow]", stringGenerator( model.getForumList().size(), model ));
+        MigLayout layout = new MigLayout( "inset 0 0 0 15", "[grow]", stringGenerator( model.getForumList().size(), model ));
 
         this.setLayout( layout );
 

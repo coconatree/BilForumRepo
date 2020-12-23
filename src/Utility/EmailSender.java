@@ -40,7 +40,6 @@ public class EmailSender
 
 
     public static void main(String[] args) {
-        EmailSender emailSender = new EmailSender("1212", "ecanikli20@gmaiffdsfl");
-        System.out.println("SECOND");
+        EmailSender emailSender = new EmailSender("MERHABA KODUN 10101010", "oonurertunc@gmail.com");
     }
 }

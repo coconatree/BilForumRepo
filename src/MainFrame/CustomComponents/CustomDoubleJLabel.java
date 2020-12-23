@@ -26,7 +26,7 @@ public class CustomDoubleJLabel extends JComponent
         this.add(this.topPanel, "grow, wrap");
         this.add(this.botPanel, "grow");
 
-        this.setOpaque(true);
+        this.setOpaque(false);
     }
 
     public void init(String top, String bot)
@@ -45,11 +45,14 @@ public class CustomDoubleJLabel extends JComponent
         this.topPanel.setLayout(layout2);
         this.topPanel.add(this.topLabel, "center");
 
+        this.topPanel.setOpaque(false);
+
         MigLayout layout3 = new MigLayout("", "[grow]", "[grow]");
 
         this.botPanel = new JPanel();
         this.botPanel.setLayout(layout3);
         this.botPanel.add(this.botLabel, "center");
-    }
 
+        this.botPanel.setOpaque(false);
+    }
 }

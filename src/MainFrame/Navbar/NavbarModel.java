@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -42,9 +43,13 @@ public class NavbarModel implements INavbarModel
 
     /*******************************************************************************************/
 
-    private JLabel logoLabel;   // Logo label
-    private JLabel voteLabel;   // Vote Label
-    private JLabel profLabel;   // Profile Label
+    private CustomDoubleJLabel pointsLabel;   // Logo CustomDoubleJLabel
+
+    private CustomImagePanel profPicture;   // Profile picture
+
+    private JLabel profLabel;
+
+    private CustomImagePanel logoLabel;
 
     /*******************************************************************************************/
 
@@ -52,19 +57,13 @@ public class NavbarModel implements INavbarModel
 
     private String rBtnText;
     private String bBtnText;
-    private String nBtnText;
 
     private String logoLabelText;
-    private String voteLabelText;
-    private String profLabelText;
-
-    /*******************************************************************************************/
-
-    private Color background_color;
 
     /*******************************************************************************************/
 
     private JPanel logoPanel;
+    private JPanel profPanel;
 
     /*******************************************************************************************/
 
@@ -80,8 +79,6 @@ public class NavbarModel implements INavbarModel
         this.sc = new SizeConstants();
         this.ref = mainFrameModelRef;
 
-        this.initColors();
-
         this.initText();
         this.initPanels();
         this.initLabels();
@@ -91,21 +88,13 @@ public class NavbarModel implements INavbarModel
 
     /*******************************************************************************************/
 
-    private void initColors()
-    {
-        this.background_color = Colors.NAVBAR_COLOR;
-    }
-
     private void initText()
     {
         this.sBtnText = "Search";
         this.rBtnText = "Refresh";
         this.bBtnText = "Back";
-        this.nBtnText = "Next";
 
         this.logoLabelText = "Bil-Forum";
-        this.voteLabelText = "56";
-        this.profLabelText = "Guest";
     }
 
     private void initPanels()
@@ -139,24 +128,19 @@ public class NavbarModel implements INavbarModel
         MigLayout logoLayout = new MigLayout("", String.format("[%d]", this.sc.getWIDTH_RATIO() * 60), String.format("[%d]", this.sc.getHEIGHT()));
 
         this.logoPanel.setLayout(logoLayout);
-        this.logoLabel = new CustomJLabel();
-
-        this.logoLabel = new JLabel("BİL-FORUM");
-        this.logoLabel.setText(this.logoLabelText);
-        this.logoLabel.setFont(Fonts.LOGO_FONT);
-        this.logoLabel.setForeground(Colors.SECONDARY_COLOR);
+        this.logoLabel = new CustomImagePanel("LOGO", "/AUTH_LOGO.png", new Dimension(sc.getWIDTH_RATIO() * 10, sc.getHEIGHT_RATIO() * 10));
 
         this.logoPanel.add(this.logoLabel, "grow");
 
-        this.voteLabel = new JLabel();
-        this.voteLabel.setText(this.voteLabelText);
-        this.voteLabel.setFont(Fonts.TITLE_FONT);
-        this.voteLabel.setForeground(Colors.SECONDARY_COLOR);
+        this.pointsLabel = new CustomDoubleJLabel("20", "Points");
 
-        this.profLabel = new JLabel();
-        this.profLabel.setText(this.profLabelText);
+        this.profPicture = new CustomImagePanel("PROFİLE", "/PROFILE_LOGO.png", new Dimension(sc.getWIDTH_RATIO() * 5, sc.getHEIGHT_RATIO() * 5));
+        this.profLabel = new CustomJLabel();
+        this.profLabel.setText("Guest");
         this.profLabel.setFont(Fonts.TITLE_FONT);
         this.profLabel.setForeground(Colors.SECONDARY_COLOR);
+
+        this.profPanel = new CustomJPanel();
     }
 
     private void initTextField()
@@ -200,6 +184,11 @@ public class NavbarModel implements INavbarModel
     public void addMouseListenerToLogoLabel(MouseListener Ml)
     {
         this.logoLabel.addMouseListener(Ml);
+    }
+
+    public void addMouseListenerToProfile(MouseListener ML)
+    {
+        this.profPanel.addMouseListener(ML);
     }
 
     /*******************************************************************************************/
@@ -249,26 +238,29 @@ public class NavbarModel implements INavbarModel
         return bBtn;
     }
 
-    public JLabel getLogoLabel()
+    public CustomImagePanel getLogoLabel()
     {
         return logoLabel;
     }
 
-    public JLabel getVoteLabel()
+    public CustomDoubleJLabel getVoteLabel()
     {
-        return voteLabel;
+        return this.pointsLabel;
     }
 
     public JLabel getProfLabel() {
         return profLabel;
     }
 
-    /*******************************************************************************************/
-
-    public Color getBackground_color()
-    {
-        return background_color;
+    public CustomImagePanel getProfPicture() {
+        return profPicture;
     }
+
+    public JPanel getProfPanel() {
+        return profPanel;
+    }
+
+    /*******************************************************************************************/
 
     public JPanel getLogoPanel()
     {

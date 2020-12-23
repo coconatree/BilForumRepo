@@ -2,6 +2,7 @@ package MainFrame;
 
 import MainFrame.CustomComponents.CustomJFrame;
 import Static.Colors;
+import Utility.CenterFrame;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.*;
@@ -20,7 +21,7 @@ public class MainFrameView extends CustomJFrame implements IMainFrameView
 
     private void init(MainFrameModel model)
     {
-        MigLayout layout = new MigLayout("inset 0 15 0 15", "[grow]", String.format("[%d]15[grow]", model.getSc().getHEIGHT_RATIO() * 10));
+        MigLayout layout = new MigLayout("inset 0 15 0 15", "[grow]", String.format("[70]5[grow]", model.getSc().getHEIGHT_RATIO() * 5));
         this.setLayout(layout);
 
         // Setting the background color
@@ -56,5 +57,7 @@ public class MainFrameView extends CustomJFrame implements IMainFrameView
         /******************************************************************/
 
         this.setMinimumSize(new Dimension(model.getSc().getWIDTH(), model.getSc().getHEIGHT()));
+
+        CenterFrame.centreWindow(this);
     }
 }

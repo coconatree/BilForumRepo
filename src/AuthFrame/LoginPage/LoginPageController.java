@@ -37,7 +37,7 @@ public class LoginPageController {
 
         //api yoksa bunu true yapıp direk girebilirsiniz.
 
-        boolean valid = true;
+        boolean valid = false;
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -71,7 +71,12 @@ public class LoginPageController {
 
                         if(valid)
                         {
-                            mainLoop.getMainFrameModel().setUser(new User("", username, "", password, 1));
+                            User user = new User("", username, "", password, 1);
+
+                            mainLoop.getMainFrameModel().setUser(user);
+                            mainLoop.getMainFrameModel().getProfilePageModel().getPPCenterModel().setUser(user);
+
+                            System.out.println(user.toString());
 
                             mainLoop.getMainFrameModel().getNVM().getProfLabel().setText(username);
 

@@ -25,10 +25,6 @@ public class PostView_2 extends CustomJPanel implements IPostView
         MigLayout layout = new MigLayout("inset 5 5 5 5", String.format("[%d]5[%d]", model.getSc().getWIDTH_RATIO() * 10,model.getSc().getWIDTH_RATIO() * 5), String.format("[%d]", model.getSc().getHEIGHT_RATIO() * 5));
 
         this.setLayout( layout );
-
-        // [grow] yazmıstın grow yerine
         this.add( model.getPostComponent_2() , "grow");
-        //add( model.getTitleLabel() , "grow");
-        //add( model.getVoteLabel(), "grow");
     }
 }

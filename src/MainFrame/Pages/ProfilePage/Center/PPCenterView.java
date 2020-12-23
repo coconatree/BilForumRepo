@@ -15,12 +15,23 @@ public class PPCenterView extends CustomJPanel implements IPPCenterView {
 
     private void init(PPCenterModel model)
     {
-        MigLayout layout = new MigLayout("inset 15 15 15 15", "[grow]", String.format("[%d]5[%d]5[grow]5[%d]", model.getSc().getHEIGHT_RATIO() * 10, model.getSc().getHEIGHT_RATIO() * 10, model.getSc().getHEIGHT_RATIO() * 5));
+        MigLayout layout1 = new MigLayout("", "[grow]", "[grow]15[grow]15[grow]15[grow]15[grow]");
+        model.getPanelL().setLayout(layout1);
+
+        model.getPanelL().add(model.getField1(), "grow, wrap");
+        model.getPanelL().add(model.getField2(), "grow, wrap");
+        model.getPanelL().add(model.getField3(), "grow, wrap");
+        model.getPanelL().add(model.getField4(), "grow, wrap");
+        model.getPanelL().add(model.getField5(), "grow, wrap");
+
+        MigLayout layout3 = new MigLayout("debug", "[grow]5[grow]", "[grow]");
+        model.getPanelT().setLayout(layout3);
+        model.getPanelT().add(model.getPanelL(), "grow");
+
+        MigLayout layout = new MigLayout("inset 0 0 0 0", "[grow]", "[grow][grow]");
         this.setLayout(layout);
 
-        this.add(model.getProfilePhoto(), "grow");
-        this.add(model.getReputationPoint(),"grow, wrap");
-        this.add(model.getUserInformation(),"grow, wrap");
-        this.add(model.getEditBtn(), "grow");
+        this.add(model.getPanelT(), "grow, wrap");
+        this.add(model.getPanelB(), "grow");
     }
 }

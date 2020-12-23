@@ -27,6 +27,43 @@ public class NavbarController
         this.NBM.addMouseListenerToLogoLabel(new LogoListener());
         this.NBM.addActionListenerToBackBtn(new BackListener());
         this.NBM.addActionListenerToRefreshBtn(new RefreshListener());
+        this.NBM.addMouseListenerToProfile(new ProfileNavListener());
+    }
+
+    class ProfileNavListener implements MouseListener
+    {
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    NBM.getRef().changePage("PROFILE_PAGE");
+                }
+            });
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
     }
 
     class BackListener implements ActionListener

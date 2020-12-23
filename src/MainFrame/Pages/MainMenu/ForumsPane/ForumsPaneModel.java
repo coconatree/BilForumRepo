@@ -34,18 +34,6 @@ public class ForumsPaneModel implements IForumsPaneModel{
 
         this.foumModelList = new ArrayList<ForumModel>();
 
-        ArrayList<Post> postList = new ArrayList<>(); // Sample ArrayList of Post object
-        Post loopPost;
-
-        for (int i = 0 ; i < 15 ; i++)
-        {
-            loopPost = new Post("Hello ","12","12","", "", "","", "");
-            postList.add( loopPost );
-        }
-
-        ForumModel loopModel;
-        ForumView loopView ;
-
         /******************************************************************/
 
         this.forumList = null;
@@ -67,6 +55,9 @@ public class ForumsPaneModel implements IForumsPaneModel{
         }
 
         /******************************************************************/
+
+        ForumView loopView = null;
+        ForumModel loopModel = null;
 
          for ( int i = 0 ; i < forumList.size() ; i++)
          {

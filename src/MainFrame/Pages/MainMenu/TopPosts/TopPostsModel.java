@@ -1,9 +1,13 @@
 package MainFrame.Pages.MainMenu.TopPosts;
 
+import APIConnection.APIConnection;
+import MainFrame.CustomComponents.CustomJLabel;
 import MainFrame.CustomComponents.CustomJPanel;
+import MainFrame.CustomComponents.PostComponent_2;
 import MainFrame.Pages.ForumPage.Center.Post.PostModel;
 import MainFrame.Pages.MainMenu.TopPosts.Post_2.PostView_2;
 import Static.ConstantText;
+import Static.Fonts;
 import Static.SizeConstants;
 import PojoClasses.Post;
 
@@ -24,7 +28,8 @@ public class TopPostsModel implements ITopPostsModel{
     private JLabel topPostsLabel ;
     /*******************************************************************************************/
 
-    private ArrayList<PostModel> postModels;
+    private ArrayList<Post> topPosts;
+    private ArrayList<PostComponent_2> comp;
 
     /*******************************************************************************************/
 
@@ -36,24 +41,27 @@ public class TopPostsModel implements ITopPostsModel{
     public void init(){
 
         sc = new SizeConstants();
-        postModels = new ArrayList<PostModel>();
-        topPostsLabel = new JLabel(ConstantText.getTopPostsText());
-        topPostsLabel.setFont( new Font(Font.SERIF,Font.BOLD, 25));
-        topPostsLabel.setForeground( new Color(0,150,50));
 
-        PostView_2 loopView;
-        PostModel loopModel;
+        topPosts = new ArrayList<Post>();
 
-        for ( int i = 0 ; i < 10 ; i++)
+        comp = new ArrayList<PostComponent_2>();
+
+        topPostsLabel = new CustomJLabel();
+        topPostsLabel.setText(ConstantText.getTopPostsText());
+        topPostsLabel.setFont(Fonts.TITLE_FONT);
+
+        try
         {
-            int random = (int)(Math.random() * 100);
+            this.topPosts = APIConnection.getTop10Post();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-            loopModel = new PostModel( new Post("Hi my problem is :" + i , "12", "12", "", "", "", "", ""));
-            loopView = new PostView_2();
-
-            loopModel.setView( loopView );
-
-            this.postModels.add(loopModel);
+        for (Post post : this.topPosts)
+        {
+            this.comp.add(new PostComponent_2(post));
         }
     }
 
@@ -81,9 +89,9 @@ public class TopPostsModel implements ITopPostsModel{
         return sc;
     }
 
-    public ArrayList<PostModel> getPostModels()
+    public ArrayList<PostComponent_2> getCMP()
     {
-        return postModels;
+        return this.comp;
     }
 
     public JLabel getTopPostsLabel()
@@ -92,9 +100,4 @@ public class TopPostsModel implements ITopPostsModel{
     }
 
     /*******************************************************************************************/
-
-    public void setPostModels(ArrayList<PostModel> postModels)
-    {
-        this.postModels = postModels;
-    }
 }

@@ -1,8 +1,10 @@
 package MainFrame.Pages.ProfilePage;
+import MainFrame.MainFrameModel;
 import MainFrame.Pages.ProfilePage.Center.PPCenterModel;
 import MainFrame.Pages.ProfilePage.Center.PPCenterView;
 import MainFrame.Pages.ProfilePage.Center.PPCenterController;
 import MainFrame.CustomComponents.CustomJPanel;
+import PojoClasses.User;
 import Static.SizeConstants;
 
 import javax.swing.*;

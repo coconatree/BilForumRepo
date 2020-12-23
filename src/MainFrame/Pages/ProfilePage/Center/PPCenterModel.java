@@ -1,7 +1,10 @@
 package MainFrame.Pages.ProfilePage.Center;
 
+import MainFrame.CustomComponents.CustomField;
 import MainFrame.CustomComponents.CustomJButton;
 import MainFrame.CustomComponents.CustomJPanel;
+import MainFrame.MainFrameModel;
+import PojoClasses.User;
 import Static.SizeConstants;
 
 import javax.swing.*;
@@ -13,48 +16,54 @@ public class PPCenterModel implements IPPCenterModel{
 
     private IPPCenterView profilePageCenterView;
 
-    private JTextField reputationPoint;
-
-    private JTextPane userInformation;
-
-    private JLabel profilePhoto;
-    private JPanel sharedPanel;
-    private JPanel followingPanel;
-    private JButton editBtn;
-
-
     private String userInformationText = "username";
+
     /*******************************************************************************************/
+
+    private User currentUser;
+
+    private CustomField field1;
+    private CustomField field2;
+    private CustomField field3;
+    private CustomField field4;
+    private CustomField field5;
+
+    private JPanel panelL;
+    private JPanel panelR;
+
+    private JPanel panelT;
+    private JPanel panelB;
+
     public  PPCenterModel()
     {
         this.sc = new SizeConstants();
+        this.currentUser = null;
         this.init();
     }
     private void init()
     {
-        this.initFields();
-        this.initButtons();
+        this.panelL = new CustomJPanel();
+        this.panelR = new CustomJPanel();
+
+        this.panelT = new CustomJPanel();
+        this.panelB = new CustomJPanel();
+
+        this.field1 = new CustomField("Username: " , "Username");
+        this.field2 = new CustomField("Email: " , "Username");
+        this.field3 = new CustomField("Password: " , "Username");
+        this.field4 = new CustomField("ID: " , "Username");
+        this.field5 = new CustomField("Level: " , "Username");
     }
 
-    private void initFields()
+    public void initText()
     {
-        this.profilePhoto = new JLabel("Photo");
-        this.reputationPoint = new JTextField();//will get reputation point
-        this.userInformation = new JTextPane();
-        this.getUserInformation().setOpaque(true);
-        this.getUserInformation().setEditable(false);
-        this.getUserInformation().setText(this.getUserInformationText());
-
+        this.field1 = new CustomField("Username: " , this.currentUser.getUsername());
+        this.field2 = new CustomField("Email: " , this.currentUser.getEmail());
+        this.field3 = new CustomField("Password: " , this.currentUser.getPasswordHashed());
+        this.field4 = new CustomField("ID: " , this.currentUser.getUserID());
+        this.field5 = new CustomField("Level: " , String.valueOf(this.currentUser.getUserLevel()));
     }
 
-    private void initButtons()
-    {
-        this.profilePhoto = new JLabel();
-        this.profilePhoto.setText("PROFILE PHOTO");
-
-        this.editBtn = new CustomJButton();
-        this.editBtn.setText("EDIT PROFILE");
-    }
 
     /*********************************************************************************************/
 
@@ -79,11 +88,6 @@ public class PPCenterModel implements IPPCenterModel{
 
     /*******************************************************************************************/
 
-    public void addActionListenerToEditBtn(ActionListener next)
-    {
-        this.getEditBtn().addActionListener(next);
-    }
-
     /*******************************************************************************************/
 
     public SizeConstants getSc() {
@@ -92,23 +96,48 @@ public class PPCenterModel implements IPPCenterModel{
 
     /*******************************************************************************************/
 
-    public JTextField getReputationPoint() {
-        return reputationPoint;
+    public CustomField getField1() {
+        return field1;
     }
 
-    public JTextPane getUserInformation() {
-        return userInformation;
+    public CustomField getField2() {
+        return field2;
     }
 
-    public JButton getEditBtn() {
-        return editBtn;
+    public CustomField getField3() {
+        return field3;
     }
 
-    public String getUserInformationText() {
-        return userInformationText;
+    public CustomField getField4() {
+        return field4;
     }
 
-    public JLabel getProfilePhoto() {
-        return profilePhoto;
+    public CustomField getField5() {
+        return field5;
+    }
+
+    public JPanel getPanelL() {
+        return panelL;
+    }
+
+    public JPanel getPanelR() {
+        return panelR;
+    }
+
+    public JPanel getPanelT() {
+        return panelT;
+    }
+
+    public JPanel getPanelB() {
+        return panelB;
+    }
+
+    /****************************************************/
+
+    public void setUser(User user)
+    {
+        this.currentUser = user;
+        this.initText();
+        this.update();
     }
 }

@@ -1,5 +1,7 @@
 package MainFrame.Pages.MainMenu;
 
+import MainFrame.CustomComponents.CustomForumComponent;
+import MainFrame.CustomComponents.CustomJLabel;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.MainFrameModel;
 import MainFrame.Pages.MainMenu.ForumsPane.ForumsPaneController;
@@ -8,6 +10,8 @@ import MainFrame.Pages.MainMenu.ForumsPane.ForumsPaneView;
 import MainFrame.Pages.MainMenu.TopPosts.TopPostsController;
 import MainFrame.Pages.MainMenu.TopPosts.TopPostsModel;
 import MainFrame.Pages.MainMenu.TopPosts.TopPostsView;
+import Static.Colors;
+import Static.Fonts;
 import Static.SizeConstants;
 
 import javax.swing.*;
@@ -37,6 +41,10 @@ public class MainMenuModel implements IMainMenuModel {
 
     /*******************************************************************************************/
 
+    private JLabel forumLabel;
+
+    private JPanel forumPanel;
+
     public MainMenuModel(MainFrameModel ref)
     {
 
@@ -46,6 +54,14 @@ public class MainMenuModel implements IMainMenuModel {
 
         this.scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
         this.scrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        this.scrollPane.setBorder(BorderFactory.createEmptyBorder());
+
+        this.forumLabel = new CustomJLabel();
+        this.forumLabel.setText("Different Forums");
+        this.forumLabel.setFont(Fonts.TITLE_FONT);
+
+        this.forumPanel = new CustomJPanel();
 
         initPanels(ref);
     }
@@ -65,7 +81,7 @@ public class MainMenuModel implements IMainMenuModel {
         this.forumsPaneModel.setView( forumsPaneView );
 
         this.panelR = new CustomJPanel();
-        this.panelR.setBackground( Color.cyan );
+        this.panelR.setBackground(Colors.SECONDARY_COLOR);
     }
 
     /*******************************************************************************************/
@@ -113,9 +129,11 @@ public class MainMenuModel implements IMainMenuModel {
         return scrollPane;
     }
 
-    @Override
-    public String toString()
-    {
-        return "Hello from the view";
+    public JLabel getForumLabel() {
+        return forumLabel;
+    }
+
+    public JPanel getForumPanel() {
+        return forumPanel;
     }
 }

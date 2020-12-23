@@ -9,8 +9,8 @@ import javax.swing.border.MatteBorder;
 public class LoginPageView extends CustomJPanel implements ILoginPageView {
 
     @Override
-    public void update(LoginPageModel model) {
-
+    public void update(LoginPageModel model)
+    {
         this.init(model);
         this.validate();
         this.repaint();

@@ -1,7 +1,10 @@
 package MainFrame.Pages.MainMenu.ForumsPane.Forum;
 
 import MainFrame.CustomComponents.CustomJPanel;
+import Static.Colors;
 import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 
 /**
  * __ForumView class ___
@@ -22,5 +25,7 @@ public class ForumView extends CustomJPanel implements IForumView
         this.setLayout( layout );
 
         this.add(model.getComp(), "grow, wrap");
+
+        this.setBorder(BorderFactory.createLineBorder(Colors.SECONDARY_COLOR));
     }
 }
