@@ -1,5 +1,8 @@
 package AuthFrame;
 
+import AuthFrame.EmailPage.EmailPageController;
+import AuthFrame.EmailPage.EmailPageModel;
+import AuthFrame.EmailPage.EmailPageView;
 import AuthFrame.RegisterPage.RegisterPageController;
 import AuthFrame.RegisterPage.RegisterPageModel;
 import AuthFrame.RegisterPage.RegisterPageView;
@@ -52,6 +55,11 @@ public class AuthFrameModel implements IAuthFrameModel {
     private LoginPageController loginPageController;
 
     /****************************************************************************/
+    private EmailPageView EPV;
+    private EmailPageModel EPM;
+    private EmailPageController EPC;
+
+    /****************************************************************************/
 
     public AuthFrameModel( Loop mainLoop )
     {
@@ -100,6 +108,7 @@ public class AuthFrameModel implements IAuthFrameModel {
 
         this.createLoginPage();
         this.createRegisterPage();
+        this.createEmailPage();
     }
 
     public void changePage(String pageName)
@@ -125,6 +134,15 @@ public class AuthFrameModel implements IAuthFrameModel {
         this.RPM.setView(this.RPV);
     }
 
+    /****************************************************************************/
+    private void createEmailPage()
+    {
+        this.EPV = new EmailPageView();
+        this.EPM = new EmailPageModel(this);
+        this.EPC = new EmailPageController(this.EPM, this.EPV, this);
+
+        this.EPM.setView(this.EPV);
+    }
     /****************************************************************************/
 
     @Override
@@ -171,6 +189,10 @@ public class AuthFrameModel implements IAuthFrameModel {
 
     public LoginPageModel getLoginPageModel() {
         return loginPageModel;
+    }
+    
+    public EmailPageModel getEmailPageModel() {
+        return EPM;
     }
 
     public Loop getMainLoop() {
