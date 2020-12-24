@@ -33,7 +33,10 @@ public class ForumsPaneController
         {
             CustomForumComponent comp = (CustomForumComponent) e.getSource();
 
+            System.out.println("RAN");
+
             ref.getFPM().getCM().setForum(comp.getForum());
+            ref.getFPM().getCC().updateMouseListener();
             ref.changePage("FORUM_PAGE");
         }
 

@@ -26,9 +26,6 @@ public class CenterModel implements ICenterModel
 
     private List<Post> postList;
 
-    private PostView  loopView;
-    private PostModel loopModel;
-
     private Forum forum;
     private String currentForum;
 
@@ -52,9 +49,9 @@ public class CenterModel implements ICenterModel
     {
         for (PostModel mdl : this.getPostModels())
         {
-            if(mdl.getPostComponent().getMouseListeners().length == 0)
+            if(true)
             {
-                mdl.getPostComponent().addMouseListener(ML);
+                mdl.addMouseListenerToComponent1(ML);
             }
         }
     }
@@ -77,9 +74,11 @@ public class CenterModel implements ICenterModel
             tempModel.setView(tempView);
 
             this.postModels.add(tempModel);
+
+            System.out.println("POST ADDED");
         }
+        this.wakeDate();
         this.update();
-        wakeDate();
     }
 
     public void wakeDate()
@@ -87,6 +86,7 @@ public class CenterModel implements ICenterModel
         this.postList = forum.getPostList();
 
         algorithms = new SortingAlgorithms();
+
         PostModel tempModel = null;
         PostView tempView = null;
 
@@ -103,10 +103,7 @@ public class CenterModel implements ICenterModel
 
             this.postModels.add(tempModel);
         }
-
-        this.update();
     }
-
 
     public void wakeVote()
     {

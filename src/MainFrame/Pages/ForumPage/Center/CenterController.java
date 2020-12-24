@@ -31,7 +31,6 @@ public class CenterController
 
     class PostMouseListener implements MouseListener
     {
-
         @Override
         public void mouseClicked(MouseEvent e)
         {
@@ -41,9 +40,10 @@ public class CenterController
                 public void run()
                 {
                     PostComponent cmp = (PostComponent) e.getSource();
-                    //ref.getLabelTemp().setText(cmp.getView());
 
-                    //ref.getCardLayout().show(ref.getCardPanel(), "PANEL_TEMP");
+                    ref.getPostPageModel().getPOCM().setPost(cmp.getPost());
+                    ref.getPostPageModel().getPOCM().setContent();
+                    ref.getPostPageModel().getPOCM().update();
                     ref.changePage("POST_PAGE");
                 }
             });

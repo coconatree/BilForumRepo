@@ -1,20 +1,23 @@
 package MainFrame.Pages.PostPage.Center;
 
+import MainFrame.CustomComponents.CustomJLabel;
 import MainFrame.CustomComponents.CustomJPanel;
-import MainFrame.Pages.ForumPage.Center.Post.PostModel;
-import MainFrame.Pages.ForumPage.Center.Post.PostView;
+import Script.ViewComponent.SyntaxComponentModel;
+import Script.ViewComponent.SyntaxComponentView;
 import PojoClasses.Post;
 import Static.SizeConstants;
 
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
+import javax.swing.*;
 
 public class POCenterModel implements IPOCenterModel {
 
     private IPOCenterView centerView;
     private SizeConstants sizeConstants;
 
-    private ArrayList<PostModel> postModels;
+    private Post post;
+
+    private SyntaxComponentModel syntaxModel;
+    private SyntaxComponentView  syntaxView;
 
     public POCenterModel() {
         this.init();
@@ -24,41 +27,20 @@ public class POCenterModel implements IPOCenterModel {
     {
         this.sizeConstants = new SizeConstants();
 
-        this.postModels = new ArrayList<>();
-
-        PostView loopView;
-        PostModel loopModel;
-
-        for(int i = 0; i < 10; i++)
-        {
-            loopView =  new PostView();
-            loopModel = new PostModel(new Post("emre", "20","12", "emre", "emre", "emre", "12:12:2020", ""));
-
-            loopModel.setView(loopView);
-
-            this.postModels.add(loopModel);
-        }
+        this.syntaxModel = new SyntaxComponentModel("");
+        this.syntaxView  = new SyntaxComponentView();
+        this.syntaxModel.setView(this.syntaxView);
     }
 
-    public void addMouseListener(MouseListener ML)
+    public void setContent()
     {
-        for (PostModel mdl : this.getPostModels())
-        {
-            if(mdl.getPostComponent().getMouseListeners().length == 0)
-            {
-                mdl.getPostComponent().addMouseListener(ML);
-            }
-        }
+        this.syntaxModel = new SyntaxComponentModel(this.post.getContent());
+        this.syntaxModel.setView(this.syntaxView);
     }
 
-    public ArrayList<PostModel> getPostModels()
+    public void setPost(Post post)
     {
-        return postModels;
-    }
-
-    public void setPostModels(ArrayList<PostModel> postModels)
-    {
-        this.postModels = postModels;
+        this.post = post;
     }
 
     @Override
@@ -80,5 +62,9 @@ public class POCenterModel implements IPOCenterModel {
     public SizeConstants getSc()
     {
         return sizeConstants;
+    }
+
+    public SyntaxComponentModel getSyntaxModel() {
+        return syntaxModel;
     }
 }

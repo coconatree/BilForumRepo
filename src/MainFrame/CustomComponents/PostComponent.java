@@ -16,26 +16,31 @@ public class PostComponent extends JComponent
 
     /*******************************************************************************************/
 
-    CustomDoubleJLabel customDLabel1;
-    CustomDoubleJLabel customDLabel2;
+    private CustomDoubleJLabel customDLabel1;
+    private CustomDoubleJLabel customDLabel2;
 
-    JPanel panel3;
+    private JPanel panel3;
 
     /*******************************************************************************************/
 
-    String titleText;
-    String date;
+    private String titleText;
+    private String date;
 
-    String id;
+    private String id;
 
-    String vote;
-    String view;
+    private String vote;
+    private String view;
 
     private SizeConstants sc;
+
+    private Post post;
 
     public PostComponent(Post post)
     {
         super();
+
+        this.post = post;
+
         this.sc = new SizeConstants();
         this.init(post);
     }
@@ -89,5 +94,10 @@ public class PostComponent extends JComponent
     public String getView()
     {
         return this.view;
+    }
+
+    public Post getPost()
+    {
+        return this.post;
     }
 }

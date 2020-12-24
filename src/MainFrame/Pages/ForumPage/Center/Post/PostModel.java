@@ -6,6 +6,8 @@ import MainFrame.CustomComponents.PostComponent_2;
 import PojoClasses.Post;
 import Static.SizeConstants;
 
+import java.awt.event.MouseListener;
+
 public class PostModel implements IPostModel
 {
     private IPostView postView;
@@ -31,6 +33,12 @@ public class PostModel implements IPostModel
 
         this.postComponent = new PostComponent(post);
         this.postComponent_2 = new PostComponent_2(post);
+    }
+
+    public void addMouseListenerToComponent1(MouseListener ML)
+    {
+        this.postComponent.addMouseListener(ML);
+        System.out.println("ADDED");
     }
 
     /*******************************************************************************************/

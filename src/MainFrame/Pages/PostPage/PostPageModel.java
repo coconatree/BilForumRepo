@@ -108,4 +108,5 @@ public class PostPageModel implements IPostPageModel{
         return this.POCM.getView();
     }
 
+    public POCenterModel getPOCM() { return POCM; }
 }
