@@ -2,8 +2,10 @@ package Script.ViewComponent;
 
 import MainFrame.CustomComponents.CustomJPanel;
 import Script.Engine.Token;
+import Static.Colors;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class SyntaxComponentView extends CustomJPanel
@@ -21,6 +23,7 @@ public class SyntaxComponentView extends CustomJPanel
         this.setLayout(layout);
 
         this.renderer(model);
+        this.setBorder(BorderFactory.createLineBorder(Colors.SECONDARY_COLOR));
     }
 
     private void renderer(SyntaxComponentModel model)

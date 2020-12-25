@@ -21,16 +21,16 @@ public class ProfilePageModel implements IProfilePageModel{
     private PPCenterView PPCenterView;
     private PPCenterController PPCenterController;
 
-    public ProfilePageModel(NavbarModel ref)
+    public ProfilePageModel(NavbarModel ref, MainFrameModel ref2)
     {
         this.sc = new SizeConstants();
-        this.initPPCenter(ref);
+        this.initPPCenter(ref, ref2);
     }
-    private void initPPCenter(NavbarModel ref)
+    private void initPPCenter(NavbarModel ref, MainFrameModel ref2)
     {
         this.PPCenterView = new PPCenterView();
         this.PPCenterModel = new PPCenterModel(ref);
-        this.PPCenterController = new PPCenterController();
+        this.PPCenterController = new PPCenterController(this.PPCenterView, this.PPCenterModel, ref2);
 
         this.PPCenterModel.setView(this.PPCenterView);
     }

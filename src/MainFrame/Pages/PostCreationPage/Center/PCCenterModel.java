@@ -91,6 +91,8 @@ public class PCCenterModel implements IPCCenterModel
         this.syntaxInfo = new JTextPane();
         this.syntaxInfo.setOpaque(false);
         this.syntaxInfo.setEditable(false);
+        this.syntaxInfo.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 13));
+        this.syntaxInfo.setForeground(Colors.SECONDARY_COLOR);
         this.syntaxInfo.setText(this.syntaxInfoText);
 
         this.scrollPanel = new CustomJPanel();
@@ -119,6 +121,9 @@ public class PCCenterModel implements IPCCenterModel
         this.panel2 = new CustomJPanel();
 
         this.tagsTextField = new CustomJTextField(5);
+        this.tagsTextField.setText("#Hello_World");
+        this.tagsTextField.setForeground(Colors.SECONDARY_COLOR);
+
         this.tagsLabel = new CustomJLabel();
         this.tagsLabel.setText("Tags:");
         this.tagsLabel.setFont(Fonts.TITLE_FONT);
@@ -126,6 +131,18 @@ public class PCCenterModel implements IPCCenterModel
         /***************************************************************/
 
         this.guidePanel = new CustomJPanel();
+    }
+
+    /*******************************************************************************************/
+
+    public void changeToEditMode()
+    {
+        this.postBtn.setText("Update");
+    }
+
+    public void changeToPostMode()
+    {
+        this.postBtn.setText("Post");
     }
 
     /*******************************************************************************************/

@@ -26,7 +26,7 @@ public class AuthFrameView extends CustomJFrame implements IAuthFrameView
 
     private void init(AuthFrameModel model)
     {
-        MigLayout layout = new MigLayout("", String.format("[grow]5[%d]", model.getSc().getWIDTH_RATIO() * 55), "[grow]");
+        MigLayout layout = new MigLayout("", String.format("[grow]5[%d]", model.getSc().getWIDTH_RATIO() * 65), "[grow]");
 
         this.setLayout(layout);
 
@@ -34,7 +34,7 @@ public class AuthFrameView extends CustomJFrame implements IAuthFrameView
 
         model.getCardPanel().add(model.getLoginPageModel().getView(), "LOGIN_PAGE");
         model.getCardPanel().add(model.getRegisterPageModel().getView(), "REGISTER_PAGE");
-        model.getCardPanel().add(model.getPanel3(), "EMAIL_PAGE");
+        model.getCardPanel().add(model.getPanel3(), "EmailCodeGenerator");
 
         model.getCardLayout().show(model.getCardPanel(), "LOGIN");
 

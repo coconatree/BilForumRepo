@@ -1,5 +1,7 @@
 package PojoClasses;
 
+import APIConnection.APIConnection;
+
 import java.util.ArrayList;
 
 public class Post
@@ -19,8 +21,8 @@ public class Post
 
     private String tags;
 
-    private ArrayList<String> comments;
-    private ArrayList<String> anwsers;
+    private String comments;
+    private String answers;
 
     /***********************************************************************************/
 
@@ -31,7 +33,7 @@ public class Post
 
     /***********************************************************************************/
 
-    public Post(String id, String views, String votes, String title, String content, String author, String date, String tags)
+    public Post(String id, String views, String votes, String title, String content, String author, String date, String tags, String comments, String answers)
     {
         this.id = id;
         this.views = views;
@@ -41,14 +43,24 @@ public class Post
         this.author = author;
         this.date = date;
         this.tags = tags;
+
+        this.comments = comments;
+        this.answers = answers;
     }
 
     /***********************************************************************************/
 
+    public void incrementViews()
+    {
+        this.views = String.valueOf(Integer.valueOf(this.views) + 1);
+        System.out.println("ARTTI : " + this.views);
+        this.updateDb();
+    }
+
     @Override
     public String toString()
     {
-        return String.format("Id: %s - Views: %s - Votes: %s - Title: %s - Content: %s - Author: %s - Date: %s Tags: %s",
+        return String.format("Id: %s - Views: %s - Votes: %s - Title: %s - Content: %s - Author: %s - Date: %s Tags: %s - Comments: %s - Answers: %s",
 
                 this.id,
                 this.views,
@@ -57,9 +69,24 @@ public class Post
                 this.content,
                 this.author,
                 this.date,
-                this.tags
-
+                this.tags,
+                this.comments,
+                this.answers
                 );
+    }
+
+    /***********************************************************************************/
+
+    private void updateDb()
+    {
+        try
+        {
+            APIConnection.updatePost(this);
+        }
+        catch (Exception exception)
+        {
+            exception.printStackTrace();
+        }
     }
 
     /***********************************************************************************/
@@ -136,4 +163,29 @@ public class Post
         this.date = date;
     }
 
+    /***********************************************************************************/
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(String answers) {
+        this.answers = answers;
+    }
 }

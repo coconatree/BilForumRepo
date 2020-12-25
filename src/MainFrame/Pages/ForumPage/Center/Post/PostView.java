@@ -18,7 +18,7 @@ public class PostView extends CustomJPanel implements IPostView
 
     private void addAll(PostModel model)
     {
-        MigLayout layout = new MigLayout("debug, inset 0 0 0 0", "[grow]", "[grow]");
+        MigLayout layout = new MigLayout("inset 0 0 0 0", "[grow]", "[grow]");
 
         this.setLayout(layout);
 

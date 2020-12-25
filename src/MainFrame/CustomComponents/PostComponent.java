@@ -21,6 +21,8 @@ public class PostComponent extends JComponent
 
     private JPanel panel3;
 
+    private JLabel tags;
+
     /*******************************************************************************************/
 
     private String titleText;
@@ -47,9 +49,13 @@ public class PostComponent extends JComponent
 
     private void init(Post post)
     {
+        this.tags = new CustomJLabel();
+
         this.initText(post);
         this.initLabels();
         this.initPanels();
+
+
 
         MigLayout layout = new MigLayout("", String.format("[%d][%d][grow]", this.sc.getWIDTH_RATIO() * 7, this.sc.getWIDTH_RATIO() * 7), "[grow]");
         this.setLayout(layout);
@@ -77,6 +83,7 @@ public class PostComponent extends JComponent
         this.titleLabel = new CustomJLabel();
         this.titleLabel.setText(this.titleText);
         this.titleLabel.setFont(Fonts.TITLE_FONT);
+        this.tags.setText(this.post.getTags());
     }
 
     private void initPanels()
@@ -86,9 +93,11 @@ public class PostComponent extends JComponent
 
         this.panel3 = new JPanel();
 
-        MigLayout layout3 = new MigLayout("", "[grow]", "[grow]");
+        MigLayout layout3 = new MigLayout("", "[grow]", String.format("[grow]5[%d]", this.sc.getHEIGHT_RATIO() * 3));
         this.panel3.setLayout(layout3);
-        this.panel3.add(this.titleLabel, "center");
+        this.panel3.setOpaque(false);
+        this.panel3.add(this.titleLabel, "center, wrap");
+        this.panel3.add(this.tags, "center");
     }
 
     public String getView()

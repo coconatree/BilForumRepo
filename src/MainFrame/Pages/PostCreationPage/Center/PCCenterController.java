@@ -39,8 +39,6 @@ public class PCCenterController
         String date;
         int index;
 
-        boolean valid = true;
-
         @Override
         public void actionPerformed(ActionEvent e)
         {
@@ -59,8 +57,6 @@ public class PCCenterController
                     postCreationCenterModel.getContentInput().setText("");
                     postCreationCenterModel.getTagsTextField().setText("");
 
-
-
                     try
                     {
                         PCCenterModel.getRef().getFPM().getCM().wake();
@@ -73,7 +69,9 @@ public class PCCenterController
                                 contentText,
                                 "emre",
                                 "",
-                                tagsText
+                                tagsText,
+                                "",
+                                ""
                         );
 
                         index = post1.getId().indexOf("-");
@@ -87,10 +85,17 @@ public class PCCenterController
 
                         modelTemp.setView(viewTemp);
 
-                        String code = APIConnection.httpPOST(post1,currentForum);
+                        if(((JButton) e.getSource()).getText().equals("Update"))
+                        {
+                            APIConnection.updatePost(post1);
+                            postCreationCenterModel.changeToPostMode();
+                        }
+                        else
+                            {
+                                APIConnection.httpPOST(post1, currentForum);
+                            }
 
                         PCCenterModel.getRef().getFPM().getCM().wake();
-                        System.out.println(code);
 
                     }
                     catch (Exception exception)

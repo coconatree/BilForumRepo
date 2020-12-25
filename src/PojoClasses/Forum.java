@@ -39,7 +39,7 @@ public class Forum
         {
             this.postList = new ArrayList<Post>();
 
-            this.postList.add(new Post("ERRORPOST", "12", "12", "ERRORPOST", "ERRORPOST", "ERRORPOST", "ERRORPOST", "ERRORPOST"));
+            this.postList.add(new Post("ERRORPOST", "12", "12", "ERRORPOST", "ERRORPOST", "ERRORPOST", "ERRORPOST", "ERRORPOST", "ERRORPOST", "ERRORPOST"));
 
             exception.printStackTrace();
         }

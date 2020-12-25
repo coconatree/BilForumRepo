@@ -162,7 +162,7 @@ public class MainFrameModel implements IMainFrameModel
     private void createProfilePage()
     {
         this.ProfilePageView = new ProfilePageView();
-        this.ProfilePageModel  = new ProfilePageModel(this.NBM);
+        this.ProfilePageModel  = new ProfilePageModel(this.NBM, this);
         this.ProfilePageController = new ProfilePageController();
 
         this.ProfilePageModel.setView(this.ProfilePageView);

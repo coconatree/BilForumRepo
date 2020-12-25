@@ -1,14 +1,15 @@
 package MainFrame.Pages.ProfilePage.Center;
 
-import MainFrame.CustomComponents.CustomField;
-import MainFrame.CustomComponents.CustomJButton;
-import MainFrame.CustomComponents.CustomJPanel;
+import MainFrame.CustomComponents.*;
 import MainFrame.MainFrameModel;
 import MainFrame.Navbar.NavbarModel;
 import PojoClasses.User;
+import Static.Colors;
+import Static.Fonts;
 import Static.SizeConstants;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class PPCenterModel implements IPPCenterModel{
@@ -25,7 +26,7 @@ public class PPCenterModel implements IPPCenterModel{
 
     private CustomField field1;
     private CustomField field2;
-    private CustomField field3;
+    private CustomFieldP field3;
     private CustomField field4;
     private CustomField field5;
 
@@ -34,6 +35,9 @@ public class PPCenterModel implements IPPCenterModel{
 
     private JPanel panelT;
     private JPanel panelB;
+
+    private JLabel label;
+    private JButton logOut;
 
     private NavbarModel ref;
 
@@ -46,6 +50,14 @@ public class PPCenterModel implements IPPCenterModel{
     }
     private void init()
     {
+        this.logOut = new CustomJButton();
+        this.logOut.setText("Log Out");
+
+        this.label = new CustomJLabel();
+        this.label.setText("Change your account details:");
+        this.label.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 28));
+        this.label.setForeground(Colors.SECONDARY_COLOR);
+
         this.panelL = new CustomJPanel();
         this.panelR = new CustomJPanel();
 
@@ -54,7 +66,7 @@ public class PPCenterModel implements IPPCenterModel{
 
         this.field1 = new CustomField("Username: " , "Username", "USERNAME", this, this.ref);
         this.field2 = new CustomField("Email: " , "Username", "EMAIL", this, this.ref);
-        this.field3 = new CustomField("Password: " , "Username", "PASSWORD", this, this.ref);
+        this.field3 = new CustomFieldP("Password: " , "Username", "PASSWORD", this, this.ref);
 
     }
 
@@ -62,8 +74,7 @@ public class PPCenterModel implements IPPCenterModel{
     {
         this.field1 = new CustomField("Username: " , this.currentUser.getUsername(), "USERNAME", this, this.ref);
         this.field2 = new CustomField("Email: " , this.currentUser.getEmail(), "EMAIL", this, this.ref);
-        this.field3 = new CustomField("Password: " , this.currentUser.getPasswordHashed(), "PASSWORD", this, this.ref);
-
+        this.field3 = new CustomFieldP("Password: " , "**********", "PASSWORD", this, this.ref);
     }
 
 
@@ -90,6 +101,8 @@ public class PPCenterModel implements IPPCenterModel{
 
     /*******************************************************************************************/
 
+    public void addActionListenerToLogOut(ActionListener AL){ this.logOut.addActionListener(AL); }
+
     /*******************************************************************************************/
 
     public SizeConstants getSc() {
@@ -106,7 +119,8 @@ public class PPCenterModel implements IPPCenterModel{
         return field2;
     }
 
-    public CustomField getField3() {
+    public CustomFieldP getField3()
+    {
         return field3;
     }
 
@@ -133,6 +147,10 @@ public class PPCenterModel implements IPPCenterModel{
     public JPanel getPanelB() {
         return panelB;
     }
+
+    public JLabel getLabel(){ return this.label; }
+
+    public JButton getLogOut(){ return this.logOut; }
 
     /****************************************************/
 

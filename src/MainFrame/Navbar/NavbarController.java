@@ -104,6 +104,7 @@ public class NavbarController
                 {
                     NBM.getRef().getFPM().getCM().wake();
                     NBM.getRef().getFPM().getCM().update();
+                    NBM.getRef().update();
                 }
             });
         }

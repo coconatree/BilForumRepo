@@ -3,6 +3,7 @@ package PojoClasses;
 
 import APIConnection.APIConnection;
 import Utility.PasswordHash;
+import Utility.Utility;
 
 public class User
 {
@@ -65,8 +66,12 @@ public class User
         }
         else if(KEY.equals("EMAIL"))
         {
-            this.email = data;
-            this.updateTheDB();
+            if(Utility.checkEmail(data))
+            {
+                this.email = data;
+                this.updateTheDB();
+            }
+            else{ return; }
         }
         else if(KEY.equals("PASSWORD"))
         {

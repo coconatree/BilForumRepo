@@ -101,9 +101,16 @@ public class RegisterPageController {
                             1
                     );
 
-                    APIConnection.addUser(newUser);
+                    EmailCodeGenerator generator = new EmailCodeGenerator();
 
+                    String code = generator.createEmailCode();
 
+                    EmailSender.send(code, registerPageModel.getEmail().getText());
+
+                    ref.getEmailPageModel().setNewUser(newUser);
+                    ref.getEmailPageModel().setCode(code);
+
+                    ref.changePage("EMAIL_PAGE");
                 }
                 catch (Exception exception)
                 {

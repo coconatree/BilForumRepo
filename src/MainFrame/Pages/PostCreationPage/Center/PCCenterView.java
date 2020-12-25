@@ -19,7 +19,7 @@ public class PCCenterView extends CustomJPanel implements IPCCenterView
 
     private void init(PCCenterModel model)
     {
-        MigLayout layout = new MigLayout("inset 15 15 15 15", "[grow]", String.format("[%d]15[%d]15[grow][%d]", model.getSc().getHEIGHT_RATIO() * 5, model.getSc().getHEIGHT_RATIO() * 10, model.getSc().getHEIGHT_RATIO() * 10));
+        MigLayout layout = new MigLayout("inset 5 5 5 5", "[grow]", String.format("[%d]5[%d]5[grow]5[%d]", model.getSc().getHEIGHT_RATIO() * 5, model.getSc().getHEIGHT_RATIO() * 10, model.getSc().getHEIGHT_RATIO() * 10));
         this.setLayout(layout);
 
         this.initTitlePanel(model);

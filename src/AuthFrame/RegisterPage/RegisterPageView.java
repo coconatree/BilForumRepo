@@ -31,7 +31,7 @@ public class RegisterPageView extends CustomJPanel implements IRegisterPageView
 
     private void setPanels(RegisterPageModel model)
     {
-        MigLayout layout1 = new MigLayout("inset 5 5 5 5", "[170][grow]", "[grow]");
+        MigLayout layout1 = new MigLayout("inset 0 0 0 0", "[170]5[grow]", "[grow]");
         model.getPanel1().setLayout(layout1);
         model.getPanel1().add(model.getUsername(), "grow");
         model.getPanel1().add(model.getUsernameF(), "grow");

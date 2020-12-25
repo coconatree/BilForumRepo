@@ -3,13 +3,17 @@ package AuthFrame.EmailPage;
 import AuthFrame.AuthFrameModel;
 import MainFrame.CustomComponents.CustomJButton;
 import MainFrame.CustomComponents.CustomJPanel;
+import PojoClasses.User;
 import Static.AuthSizeConstants;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class EmailPageModel implements IEmailPageModel{
+public class EmailPageModel implements IEmailPageModel
+{
+
+    private User newUser;
 
     private AuthSizeConstants sc ;
     private IEmailPageView emailPageView ;
@@ -26,6 +30,8 @@ public class EmailPageModel implements IEmailPageModel{
     private JTextField codeTextField ;
 
     private JButton codeVerifyButton ;
+
+    private String code;
 
     public EmailPageModel( AuthFrameModel ref) {
         this.init(ref);
@@ -55,6 +61,9 @@ public class EmailPageModel implements IEmailPageModel{
         this.panelBot.setOpaque(false);
     }
 
+    public void setNewUser(User user){ this.newUser = user; }
+
+    public void setCode(String code){ this.code = code; }
 
     @Override
     public void setView(IEmailPageView view) {

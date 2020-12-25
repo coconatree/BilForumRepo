@@ -41,6 +41,8 @@ public class CenterController
                 {
                     PostComponent cmp = (PostComponent) e.getSource();
 
+                    cmp.getPost().incrementViews();
+
                     ref.getPostPageModel().getPOCM().setPost(cmp.getPost());
                     ref.getPostPageModel().getPOCM().setContent();
                     ref.getPostPageModel().getPOCM().update();

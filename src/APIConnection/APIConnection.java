@@ -240,25 +240,20 @@ public class APIConnection
 
     /****************************************************************************************************************/
 
-    public static void main(String[] args)
+    public static String updatePost(Post post) throws Exception
     {
-        /**
-         * try
-         *         {
-         *             for (Post post : getAllPostOfAForum("Forum1"))
-         *             {
-         *                 System.out.println(post.toString());
-         *             }
-         *
-         *         }
-         *         catch (Exception exception)
-         *         {
-         *             exception.printStackTrace();
-         *             System.out.println(exception.getMessage());
-         *         }
-         * */
+        HttpClient client = HttpClient.newHttpClient();
 
-        URL path = APIConnection.class.getResource("/AUTH_LOGO.png");
-        System.out.println(path.toString());
+        ObjectMapper mapper = new ObjectMapper();
+
+        String requestBody = mapper.writeValueAsString(post);
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(String.format("http://localhost:8080/post/updatePost/"))).PUT(HttpRequest.BodyPublishers.ofString(requestBody)).build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        return response.toString();
     }
+
+    /****************************************************************************************************************/
 }

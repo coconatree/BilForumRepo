@@ -25,7 +25,7 @@ public class TopPostsView extends CustomJPanel implements ITopPostsView {
 
         this.add( model.getTopPostsLabel(),"center, wrap");
 
-        for ( int i = 0 ; i < 10 ; i++)
+        for ( int i = 0 ; i < model.getCMP().size() ; i++)
         {
             this.add(model.getCMP().get(i), "grow, wrap");
         }
