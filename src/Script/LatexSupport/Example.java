@@ -1,16 +1,11 @@
 package Script.LatexSupport;
 
-import java.awt.*;
-import java.io.*;
-import java.util.ArrayList;
-import javax.swing.*;
-
 public class Example {
-
+    /**
     private static String MIMETEX_EXE = "c:\\Program Files (x86)\\mimetex\\mimetex.cgi";
 
     final private static int BUFFER_SIZE = 1024;
-
+*/
     /**
      * Convert LaTeX code to GIF
      *

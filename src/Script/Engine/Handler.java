@@ -3,7 +3,6 @@ package Script.Engine;
 import MainFrame.CustomComponents.CustomJLabel;
 import Static.Colors;
 import Static.Fonts;
-import org.apache.fop.fo.FObj;
 
 import java.awt.*;
 import java.util.ArrayList;

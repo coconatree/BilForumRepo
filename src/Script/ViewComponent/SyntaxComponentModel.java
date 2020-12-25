@@ -4,7 +4,6 @@ import MainFrame.CustomComponents.CustomJPanel;
 import Script.Engine.Handler;
 import Script.Engine.Lexer;
 import Script.Engine.Token;
-import Static.Colors;
 
 import javax.swing.*;
 import java.awt.*;
