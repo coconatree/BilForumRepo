@@ -138,7 +138,7 @@ public class AuthFrameModel implements IAuthFrameModel {
     private void createEmailPage()
     {
         this.EPV = new EmailPageView();
-        this.EPM = new EmailPageModel(this);
+        this.EPM = new EmailPageModel();
         this.EPC = new EmailPageController(this.EPM, this.EPV, this);
 
         this.EPM.setView(this.EPV);

@@ -64,7 +64,12 @@ public class RegisterPageController {
 
                     ArrayList<User> userList = APIConnection.getUsers();
 
-                    if(Utility.checkEmail(registerPageModel.getEmailF().getText()))
+                    if(!registerPageModel.getEmailF().getText().contains("@"))
+                    {
+                        PopUp popUp = new PopUp("Enter a proper mail adress");
+                        return;
+                    }
+                    else if(Utility.checkEmail(registerPageModel.getEmailF().getText()))
                     {
                         PopUp popUp = new PopUp("Please use your Bilkent email.");
                         return;
@@ -79,7 +84,12 @@ public class RegisterPageController {
                         PopUp popUp = new PopUp("Passwords must match.");
                         return;
                     }
-                    else {}
+                    else if(!PasswordValidation.isValid(registerPageModel.getPasswordRF().getText()))
+                    {
+                        PopUp popUp = new PopUp("Your password is not valid. It should be between 8-20 length. Should contain atleast 1 Capital letter and 1 number");
+                        return;
+                    }
+                    else{}
 
                     for (User user : userList)
                     {
@@ -102,45 +112,24 @@ public class RegisterPageController {
                     );
 
                     EmailCodeGenerator generator = new EmailCodeGenerator();
-
+                    EmailSender sender;
                     String code = generator.createEmailCode();
 
-                    EmailSender.send(code, registerPageModel.getEmail().getText());
+                    sender = new EmailSender(code, registerPageModel.getEmailF().getText());
 
                     ref.getEmailPageModel().setNewUser(newUser);
                     ref.getEmailPageModel().setCode(code);
 
                     ref.changePage("EMAIL_PAGE");
+                    PopUp popUp = new PopUp("We have sent you an e-mail code.");
                 }
                 catch (Exception exception)
                 {
-                    PopUp popUp = new PopUp("Please check you internet connection.");
+                    PopUp popUp = new PopUp("Please check your internet connection.");
                     exception.printStackTrace();
 
                     ref.changePage("EMAIL_PAGE");
                 }
-
-                /**
-                 *
-                 *
-                 *
-                 *                 String code = new EmailCodeGenerator().createEmailCode();
-                 *                 EmailSender sender = null;
-                 *                 try
-                 *                 {
-                 *                     sender = new EmailSender(code, email);
-                 *                 }
-                 *                 catch (MessagingException messagingException)
-                 *                 {
-                 *                     messagingException.printStackTrace();
-                 *                 }
-                 *
-                 *                 String passCode = sender.getCode();
-                 *
-                 *                 //also check for email
-                 *
-                 *
-                 * */
             });
         }
     }

@@ -33,11 +33,11 @@ public class EmailPageModel implements IEmailPageModel
 
     private String code;
 
-    public EmailPageModel( AuthFrameModel ref) {
-        this.init(ref);
+    public EmailPageModel( ) {
+        this.init();
     }
 
-    private void init( AuthFrameModel ref ) {
+    private void init() {
         sc = new AuthSizeConstants();
 
         this.panel = new CustomJPanel();
@@ -47,9 +47,9 @@ public class EmailPageModel implements IEmailPageModel
         this.ref = ref ;
 
         codeLabel = new JLabel("Please enter the code to verify your email:");
-        codeLabel.setFont( new Font( "Monaco", Font.BOLD, 12));
+        codeLabel.setFont( new Font( "Monaco", Font.BOLD, 10));
 
-        codeTextField = new JTextField(20);
+        codeTextField = new JTextField(5);
 
         codeVerifyButton = new CustomJButton();
         codeVerifyButton.setText("Verify");
@@ -107,4 +107,12 @@ public class EmailPageModel implements IEmailPageModel
     public JPanel getPanelTop() { return panelTop; }
 
     public JPanel getPanelBot() {return panelBot; }
+
+    public User getNewUser() {
+        return newUser;
+    }
+
+    public String getCode() {
+        return code;
+    }
 }

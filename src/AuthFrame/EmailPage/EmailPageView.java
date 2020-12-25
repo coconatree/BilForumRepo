@@ -15,14 +15,14 @@ public class EmailPageView extends CustomJPanel implements IEmailPageView{
     public void init( EmailPageModel model ) {
         //MigLayout layout = new MigLayout("inset 100 70 100 70", "[grow]","[grow]");
         //MigLayout layout = new MigLayout("inset 200 70 200 70", "[grow]20[grow]", "[grow]");
-        MigLayout layout = new MigLayout("inset 100 70 100 70", "[grow]5[grow]", "[grow]");
+        MigLayout layout = new MigLayout("inset 5 5 5 5", "[grow]5[grow]", "[grow]");
         model.getPanel().setLayout(layout);
         model.getPanel().add(model.getCodeLabel(),"grow");
         model.getPanel().add(model.getCodeTextField(),"grow");
 
         /***********************************************************************/
 
-        MigLayout layout2 = new MigLayout("inset 50 50 50 50", "[grow]", "[grow]");
+        MigLayout layout2 = new MigLayout("inset 5 5 5 5", "[grow]", "[grow]");
         model.getPanel2().setLayout(layout2);
         model.getPanel2().add(model.getCodeVerifyButton(), "grow,wrap");
 
