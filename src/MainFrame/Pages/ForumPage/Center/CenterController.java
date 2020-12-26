@@ -41,16 +41,12 @@ public class CenterController
                 {
                     PostComponent cmp = (PostComponent) e.getSource();
 
-                    //System.out.println("11 :"+ cmp.getPost().getTitle());
-                    //System.out.println("11 :"+ cmp.getPost().getViews());
-
                     cmp.getPost().incrementViews();
-
-                    //System.out.println("22 :"+ cmp.getPost().getTitle());
-                    //System.out.println("22 :"+ cmp.getPost().getViews());
 
                     ref.getPostPageModel().getPOCM().setPost(cmp.getPost());
                     ref.getPostPageModel().getPOCM().setPostDetailsContents();
+
+                    System.out.println(cmp.getPost().getContent());
 
                     ref.getPostPageModel().getPOCM().update();
                     ref.changePage("POST_PAGE");

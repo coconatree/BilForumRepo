@@ -3,6 +3,8 @@ package MainFrame.Pages.PostPage;
 import MainFrame.CustomComponents.CustomJPanel;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.*;
+
 public class PostPageView extends CustomJPanel implements IPostPageView {
 
     @Override
@@ -15,7 +17,7 @@ public class PostPageView extends CustomJPanel implements IPostPageView {
 
     private void init(PostPageModel PPM)
     {
-        MigLayout layout = new MigLayout("inset 5 5 5 5", String.format("[%d]15[grow]15[%d]", PPM.getSc().getWIDTH_RATIO() * 15, PPM.getSc().getWIDTH_RATIO() * 15), "[grow]");
+        MigLayout layout = new MigLayout("inset 5 5 5 5","[grow]", "[grow]");
         this.setLayout(layout);
 
         PPM.getScrollPane().setViewportView(PPM.getCenterView());
@@ -25,8 +27,8 @@ public class PostPageView extends CustomJPanel implements IPostPageView {
 
     private void addAll(PostPageModel PPM)
     {
-        this.add(PPM.getLeftBarView(), "grow");
+        PPM.getScrollPane().setBorder(BorderFactory.createEmptyBorder());
+
         this.add(PPM.getScrollPane(), "grow");
-        this.add(PPM.getPanelR(), "grow");
     }
 }

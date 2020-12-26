@@ -3,13 +3,19 @@ package MainFrame.Pages.PostPage.Center;
 import MainFrame.CustomComponents.CustomJButton;
 import MainFrame.CustomComponents.CustomJLabel;
 import MainFrame.CustomComponents.CustomJPanel;
+import MainFrame.CustomComponents.CustomJTextField;
+import MainFrame.MainFrameModel;
 import Script.ViewComponent.SyntaxComponentModel;
 import Script.ViewComponent.SyntaxComponentView;
 import PojoClasses.Post;
+import Static.Fonts;
 import Static.SizeConstants;
+import org.apache.fop.fo.FObj;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class POCenterModel implements IPOCenterModel {
 
@@ -27,88 +33,155 @@ public class POCenterModel implements IPOCenterModel {
     private JPanel panel4;
 
     /**********-ParentPanel1-******************/
+
     private JPanel panel1Top;
     private JPanel panel1Center;
     private JPanel panel1Bottom;
+
     /**************Top*****************/
+
     private JButton voteUpButton ;
     private JButton voteDownButton ;
-    private JLabel pointsLabel ;
-    private JLabel titleLabel ;
+
+    private JLabel pointsLabel1;
+    private JLabel pointsLabel2;
+
+    private JLabel titleLabel1;
+    private JLabel titleLabel2;
+
     private JLabel dateLabel ;
+
     /**************-Center-**********************/
+
     private JLabel contentLabel ;
-    /******************-Bottom-******************/
-    /************************************/
-    /**********-ParentPanel2-******************/
-    /************************************/
-    /**********-ParentPanel3-******************/
-    /************************************/
-    /**********-ParentPanel4-******************/
     private JButton editButton;
     private JButton deleteButton;
     private JButton postButton;
+
     /************************************/
 
-    public POCenterModel() {
+    private ArrayList<String> comments;
+    private ArrayList<String> anwsers;
+
+    private JTextArea content;
+
+    /************************************/
+
+    private JTextField commentTf;
+    private JButton postComment;
+
+    private JPanel p1;
+    private JPanel p2;
+    private JPanel p3;
+    private JPanel p4;
+    private JPanel p5;
+
+    private JLabel filler;
+
+    private MainFrameModel ref;
+
+    private JLabel author;
+    private JLabel date;
+
+    public POCenterModel(MainFrameModel ref)
+    {
+        this.ref = ref;
         this.init();
     }
 
-    public void setPostDetailsContents() {
-        pointsLabel.setText("POINTS: "+String.valueOf(post.getVotes()));
-        titleLabel.setText("TITLE: "+post.getTitle());
-        voteUpButton.setText("+");
-        voteDownButton.setText("-");
-        dateLabel.setText(post.getDate());
-        contentLabel.setText("POST CONTENT : " + post.getContent());
+    public void setPostDetailsContents()
+    {
+        System.out.println("SETTING POST PAGE DETAILS");
+
+        this.pointsLabel1.setText("Points");
+        this.pointsLabel1.setFont(Fonts.TITLE_FONT);
+        this.pointsLabel2.setText(String.valueOf(post.getVotes()));
+
+        this.titleLabel2.setText(post.getTitle());
+        this.titleLabel2.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 35));
+
+        this.voteUpButton.setText("Up Vote");
+        this.voteDownButton.setText("Down Vote");
+
+        this.author.setText("Author: " + post.getAuthor());
+        this.date.setText("Date: " + post.getDate());
+
+        this.content.setText(post.getContent());
+
+        this.initComments();
     }
 
     private void init()
     {
-        System.out.println("POCenterModel init edildi...");
         this.sizeConstants = new SizeConstants();
+
+        /************************************/
+
+        this.date = new CustomJLabel();
+        this.author = new CustomJLabel();
+
+        this.comments = new ArrayList<>();
+
+        this.content = new JTextArea();
+        this.content.setFont(Fonts.NORMAL_FONT);
+        this.content.setEditable(false);
+        this.content.setOpaque(false);
+
+        this.commentTf = new CustomJTextField(5);
+        this.commentTf.setEnabled(true);
+
+        this.postComment = new CustomJButton();
+        this.postComment.setText("Post Comment");
+
+        /************************************/
 
         this.panel1 = new CustomJPanel();
         this.panel1Top = new CustomJPanel();
+
         this.panel1Center = new CustomJPanel();
         this.panel1Bottom = new CustomJPanel();
 
         this.voteUpButton = new CustomJButton();
         this.voteDownButton = new CustomJButton();
-        this.pointsLabel = new JLabel();
-        this.pointsLabel.setFont(new Font("Monaco", Font.BOLD, 12));
-        this.titleLabel = new JLabel();
-        this.dateLabel = new JLabel();
-        this.contentLabel = new JLabel();
 
+        this.pointsLabel1 = new CustomJLabel();
+        this.pointsLabel2 = new CustomJLabel();
+
+        this.titleLabel1 = new CustomJLabel();
+        this.titleLabel2 = new CustomJLabel();
+
+        this.dateLabel = new CustomJLabel();
+
+        this.contentLabel = new CustomJLabel();
 
         this.editButton = new CustomJButton();
-        this.deleteButton = new CustomJButton();
-        this.postButton = new CustomJButton();
-        editButton.setText("edit");
-        deleteButton.setText("delete");
-        postButton.setText("post");
+        this.editButton.setText("Edit");
 
+        this.postButton = new CustomJButton();
+        this.postButton.setText("Post");
+
+        this.deleteButton = new CustomJButton();
+        this.deleteButton.setText("Delete");
 
         this.panel2 = new CustomJPanel();
         this.panel3 = new CustomJPanel();
         this.panel4 = new CustomJPanel();
 
-        this.panel1.setBackground(Color.red);
-        this.panel2.setBackground(Color.green);
-        this.panel3.setBackground(Color.cyan);
-        this.panel4.setBackground(Color.yellow);
+        /********* TEMP *********/
 
-        //this.syntaxModel = new SyntaxComponentModel("");
-        //this.syntaxView  = new SyntaxComponentView();
-        //this.syntaxModel.setView(this.syntaxView);
+        this.syntaxModel = new SyntaxComponentModel(true);
+        this.syntaxView  = null;
+
+        /*************************/
+
+        this.p1 = new CustomJPanel();
+        this.p2 = new CustomJPanel();
+        this.p3 = new CustomJPanel();
+        this.p4 = new CustomJPanel();
+        this.p5 = new CustomJPanel();
+
+        this.filler = new CustomJLabel();
     }
-
-    /*public void setContent()
-    {
-        this.syntaxModel = new SyntaxComponentModel(this.post.getContent());
-        this.syntaxModel.setView(this.syntaxView);
-    }*/
 
     public void setPost(Post post)
     {
@@ -127,7 +200,8 @@ public class POCenterModel implements IPOCenterModel {
     }
 
     @Override
-    public void update() {
+    public void update()
+    {
         this.centerView.update(this);
     }
 
@@ -135,10 +209,6 @@ public class POCenterModel implements IPOCenterModel {
     {
         return sizeConstants;
     }
-
-    /*public SyntaxComponentModel getSyntaxModel() {
-        return syntaxModel;
-    }*/
 
     public JPanel getPanel1() { return panel1; }
 
@@ -158,17 +228,159 @@ public class POCenterModel implements IPOCenterModel {
 
     public JButton getVoteDownButton() { return voteDownButton; }
 
-    public JLabel getPointsLabel() { return pointsLabel; }
-
-    public JLabel getTitleLabel() { return titleLabel; }
-
     public JLabel getDateLabel() { return dateLabel; }
 
     public JLabel getContentLabel() { return contentLabel; }
 
-    public JButton getEditButton() { return editButton; }
+    public JButton getEditButton()
+    {
+        if(this.post != null && this.post.getAuthor().equals(this.ref.getCurrentUser().getUsername()))
+        {
+            this.editButton.setEnabled(true);
+        }
+        else {this.editButton.setEnabled(false); }
 
-    public JButton getDeleteButton() { return deleteButton; }
+        return editButton;
+    }
+
+    public JButton getDeleteButton()
+    {
+        if(this.post != null && this.post.getAuthor().equals(this.ref.getCurrentUser().getUsername()))
+        {
+            this.deleteButton.setEnabled(true);
+        }
+        else {this.deleteButton.setEnabled(false); }
+
+        return deleteButton;
+    }
 
     public JButton getPostButton() { return postButton; }
+
+    /******************************************************************************/
+
+    public void initComments()
+    {
+        for(String string : this.post.getComments().split("-"))
+        {
+            System.out.println("ADDED");
+
+            this.comments.add(string);
+        }
+    }
+
+    /**************************** ACTION LISTENERS ********************************/
+
+    public void addActionListenerToAddComment(ActionListener AL){ this.postComment.addActionListener(AL); }
+    public void addActionListenerToDeletePost(ActionListener AL){ this.deleteButton.addActionListener(AL); }
+    public void addActionListenerToEditPost(ActionListener AL){ this.editButton.addActionListener(AL); }
+    public void addActionListenerToAnswer(ActionListener AL){ this.postComment.addActionListener(AL); }
+    public void addActionListenerToUpVote(ActionListener AL){ this.voteUpButton.addActionListener(AL); }
+    public void addActionListenerToDownVote(ActionListener AL){ this.voteDownButton.addActionListener(AL); }
+
+    /******************************************************************************/
+
+    public JLabel getLabelWithText(String text)
+    {
+        JLabel ret = new CustomJLabel();
+        ret.setText(text);
+        return ret;
+    }
+
+    /******************************************************************************/
+
+    public IPOCenterView getCenterView() {
+        return centerView;
+    }
+
+    public SizeConstants getSizeConstants() {
+        return sizeConstants;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public SyntaxComponentModel getSyntaxModel() {
+        return syntaxModel;
+    }
+
+    public JLabel getPointsLabel1() {
+        return pointsLabel1;
+    }
+
+    public JLabel getPointsLabel2() {
+        return pointsLabel2;
+    }
+
+    public JLabel getTitleLabel1() {
+        return titleLabel1;
+    }
+
+    public JLabel getTitleLabel2() {
+        return titleLabel2;
+    }
+
+    public JPanel getP1() {
+        return p1;
+    }
+
+    public JPanel getP2() {
+        return p2;
+    }
+
+    public JPanel getP3() {
+        return p3;
+    }
+
+    public JPanel getP4() {
+        return p4;
+    }
+
+    public JPanel getP5() {
+        return p5;
+    }
+
+    public JLabel getFiller() {
+        return filler;
+    }
+
+    public SyntaxComponentView getSyntaxView() {
+        return syntaxView;
+    }
+
+    public ArrayList<String> getComments() {
+        return comments;
+    }
+
+    public ArrayList<String> getAwnsers() {
+        return anwsers;
+    }
+
+    public JTextArea getContent() {
+        return content;
+    }
+
+    public MainFrameModel getRef() {
+        return ref;
+    }
+
+    public ArrayList<String> getAnwsers() {
+        return anwsers;
+    }
+
+    public JTextField getCommentTf() {
+        return commentTf;
+    }
+
+    public JButton getPostComment() {
+        return postComment;
+    }
+
+    public JLabel getAuthor() {
+        return author;
+    }
+
+    public JLabel getDate() {
+        return date;
+    }
 }

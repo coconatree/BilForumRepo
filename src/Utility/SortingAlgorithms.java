@@ -50,7 +50,10 @@ public class SortingAlgorithms
         {
             for (int j = 0; j < n-i-1; j++)
             {
-                if (Integer.valueOf(list.get(j).getDate()) > Integer.valueOf(list.get(j + 1).getDate()))
+                if (
+                        Integer.valueOf(list.get(j).getId().substring(list.get(j).getId().indexOf("-"), list.get(j).getId().length() - 1)) >
+                        Integer.valueOf(list.get(j).getId().substring(list.get(j).getId().indexOf("-"), list.get(j).getId().length() - 1))
+                    )
                 {
                     Post temp = list.get(j);
                     list.set(j, list.get(j + 1));

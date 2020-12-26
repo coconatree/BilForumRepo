@@ -5,6 +5,7 @@ import MainFrame.CustomComponents.CustomJLabel;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.CustomComponents.CustomJTextField;
 import MainFrame.MainFrameModel;
+import PojoClasses.Post;
 import Static.Colors;
 import Static.ConstantText;
 import Static.Fonts;
@@ -54,6 +55,7 @@ public class PCCenterModel implements IPCCenterModel
 
     private static MainFrameModel mainFrameModelReference;
 
+    private Post post;
 
     public PCCenterModel(MainFrameModel ref)
     {
@@ -135,13 +137,19 @@ public class PCCenterModel implements IPCCenterModel
 
     /*******************************************************************************************/
 
-    public void changeToEditMode()
+    public void changeToEditMode(Post post)
     {
+        this.titleField.setText(post.getTitle());
+        this.contentInput.setText(post.getContent());
+        this.tagsTextField.setText(post.getTags().replace(',', '#'));
+        this.postBtn.setName("UPDATE");
         this.postBtn.setText("Update");
+        this.post = post;
     }
 
     public void changeToPostMode()
     {
+        this.postBtn.setName("POST");
         this.postBtn.setText("Post");
     }
 
@@ -266,6 +274,11 @@ public class PCCenterModel implements IPCCenterModel
     public static MainFrameModel getRef()
     {
         return mainFrameModelReference;
+    }
+
+    public Post getPost()
+    {
+        return post;
     }
 }
 

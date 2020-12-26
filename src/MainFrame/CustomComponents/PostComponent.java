@@ -83,7 +83,7 @@ public class PostComponent extends JComponent
         this.titleLabel = new CustomJLabel();
         this.titleLabel.setText(this.titleText);
         this.titleLabel.setFont(Fonts.TITLE_FONT);
-        this.tags.setText(this.post.getTags());
+        this.tags.setText(this.post.getTags().replace(',', '#'));
     }
 
     private void initPanels()

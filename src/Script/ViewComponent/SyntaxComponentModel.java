@@ -26,13 +26,29 @@ public class SyntaxComponentModel
 
     public SyntaxComponentModel(String data)
     {
-        this.data = data;
-        this.init();
+        this.init(data);
     }
 
-    private void init()
+    private boolean empty;
+
+    public SyntaxComponentModel(boolean empty)
     {
+        this.empty = empty;
+        this.data = null;
+
+        this.handler = new Handler();
+    }
+
+    public void init(String data)
+    {
+        this.empty = false;
+        this.data = data;
+
+        this.handler = new Handler();
+
         Lexer lexer = new Lexer();
+
+        System.out.println("DATA : " + this.data);
 
         this.panel = new CustomJPanel();
 
@@ -49,18 +65,29 @@ public class SyntaxComponentModel
 
     public void setView(SyntaxComponentView view)
     {
+        System.out.println("VIEW SET");
         this.view = view;
+        this.update();
     }
 
     public SyntaxComponentView getView()
     {
-        this.update(this);
-        return this.view;
+        if(this.view == null)
+        {
+            SyntaxComponentView view1 = new SyntaxComponentView();
+            view1.update(true);
+            return view1;
+        }
+        else
+            {
+                this.update();
+                return this.view;
+            }
     }
 
-    public void update(SyntaxComponentModel model)
+    public void update()
     {
-        this.view.update(model);
+        this.view.update(this);
     }
 
     /*********************************************************************************************************/
@@ -79,8 +106,6 @@ public class SyntaxComponentModel
 
     private void tokenizer()
     {
-        this.handler = new Handler();
-
         for (String iterator : this.dataList)
         {
             if(iterator.equals(this.dataList.get(this.dataList.size() - 1)))
@@ -132,5 +157,10 @@ public class SyntaxComponentModel
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public void setData(String data)
+    {
+         this.data = data;
     }
 }

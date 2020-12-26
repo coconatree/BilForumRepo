@@ -22,11 +22,6 @@ public class PostPageModel implements IPostPageModel{
     private CustomJPanel panelRight;
     private JScrollPane scrollPane;
 
-    //LeftBar
-    private LeftBarModel LBM;
-    private LeftBarView  LBV;
-    private LeftBarController LBC;
-
     /*******************************************************************************************/
 
     private POCenterModel POCM;
@@ -34,8 +29,6 @@ public class PostPageModel implements IPostPageModel{
     private POCenterController POCC;
 
     /*******************************************************************************************/
-
-    //RightBar
 
     //Constructor
     public PostPageModel(MainFrameModel ref) {
@@ -46,18 +39,13 @@ public class PostPageModel implements IPostPageModel{
         this.scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
         this.scrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        initPanels(ref);
+        this.initPanels(ref);
     }
 
     //Methods
     private void initPanels(MainFrameModel ref) {
-        this.LBM = new LeftBarModel(ref);
-        this.LBV = new LeftBarView();
-        this.LBC = new LeftBarController(this.LBV, this.LBM);
 
-        this.LBM.setView(this.LBV);
-
-        this.POCM = new POCenterModel();
+        this.POCM = new POCenterModel(ref);
         this.POCV = new POCenterView();
         this.POCC = new POCenterController(this.POCV, this.POCM, ref);
 
@@ -96,11 +84,6 @@ public class PostPageModel implements IPostPageModel{
     public CustomJPanel getPanelR()
     {
         return this.panelRight;
-    }
-
-    public CustomJPanel getLeftBarView()
-    {
-        return this.LBM.getView();
     }
 
     public CustomJPanel getCenterView()

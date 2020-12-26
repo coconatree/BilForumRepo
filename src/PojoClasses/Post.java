@@ -57,6 +57,18 @@ public class Post
         this.updateDb();
     }
 
+    public void incrementVotes()
+    {
+        this.votes = String.valueOf(Integer.valueOf(this.votes) + 1);
+        this.updateDb();
+    }
+
+    public void decrementVotes()
+    {
+        this.votes = String.valueOf(Integer.valueOf(this.votes) - 1);
+        this.updateDb();
+    }
+
     @Override
     public String toString()
     {
@@ -76,6 +88,16 @@ public class Post
     }
 
     /***********************************************************************************/
+
+    public void addComment(String username, String comment)
+    {
+        this.comments += String.format("%s | %s -", username, comment);
+    }
+
+    public void addAnswer(String author, String answer)
+    {
+        this.answers += String.format("%s | %s -", author, answer);
+    }
 
     private void updateDb()
     {

@@ -256,4 +256,16 @@ public class APIConnection
     }
 
     /****************************************************************************************************************/
+
+    public static String delete(String ID) throws Exception
+    {
+
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(String.format("http://localhost:8080/post/delete/%s", ID))).DELETE().build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        return response.toString();
+    }
 }

@@ -15,6 +15,19 @@ public class SyntaxComponentView extends CustomJPanel
         this.init(model);
         this.revalidate();
         this.repaint();
+        System.out.println("NOT EMPTY");
+    }
+
+    public void update(boolean empty)
+    {
+        this.empty();
+        this.revalidate();
+        this.repaint();
+    }
+
+    private void empty()
+    {
+        this.add(new JLabel("EMPTY"));
     }
 
     private void init(SyntaxComponentModel model)
@@ -28,7 +41,9 @@ public class SyntaxComponentView extends CustomJPanel
 
     private void renderer(SyntaxComponentModel model)
     {
+        System.out.println("----------------------------------------------------------------------");
         System.out.println("RENDERER STARTED");
+        System.out.println("----------------------------------------------------------------------");
 
         for(int i = 0; i < model.getTokenList().size(); i++)
         {
@@ -66,15 +81,8 @@ public class SyntaxComponentView extends CustomJPanel
             else { continue;}
         }
 
-        for (Token token : model.getTokenList())
-        {
-            System.out.println("TOKEN DATA: " + token.getData().getText() + " TOKEN CC: " + token.getCc());
-        }
-
         System.out.println("----------------------------------------------------------------------");
-
-        System.out.println("WRAP COUNT:" + model.getTotalWrap());
-
         System.out.println("RENDERER ENDED");
+        System.out.println("----------------------------------------------------------------------");
     }
 }
