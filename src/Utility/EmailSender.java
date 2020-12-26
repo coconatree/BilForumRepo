@@ -17,6 +17,10 @@ import java.nio.file.Paths;
 
 public class EmailSender {
     String code;
+    public EmailSender()
+    {
+
+    }
     public EmailSender(String code, String mail) throws MessagingException {
         this.code = code;
         String fileFinder;
@@ -67,4 +71,18 @@ public class EmailSender {
         return this.code;
     }
 
+    public void forgetSender(String username, String password, String mail)
+    {
+        try {
+            String message = "Username: " + username + "\n" + "Password: " + password;
+            Email email = new Email("bilforum102@gmail.com", "BilForumGF102*");
+            email.setFrom("bilforum102@gmail.com", "BilForum");
+            email.setSubject("PasswordForget");
+            email.setContent("<h1>" + message + "</h1>", "text/html");
+            email.addRecipient(mail);
+            email.send();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

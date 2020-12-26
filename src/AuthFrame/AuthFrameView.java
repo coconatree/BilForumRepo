@@ -35,6 +35,7 @@ public class AuthFrameView extends CustomJFrame implements IAuthFrameView
         model.getCardPanel().add(model.getLoginPageModel().getView(), "LOGIN_PAGE");
         model.getCardPanel().add(model.getRegisterPageModel().getView(), "REGISTER_PAGE");
         model.getCardPanel().add(model.getEmailPageModel().getView(), "EMAIL_PAGE");
+        model.getCardPanel().add(model.getForgetPasswordPageModel().getView(), "PASSWORD_PAGE");
 
         model.getCardLayout().show(model.getCardPanel(), "LOGIN");
 

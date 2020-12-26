@@ -3,6 +3,9 @@ package AuthFrame;
 import AuthFrame.EmailPage.EmailPageController;
 import AuthFrame.EmailPage.EmailPageModel;
 import AuthFrame.EmailPage.EmailPageView;
+import AuthFrame.ForgetPasswordPage.ForgetPasswordPageController;
+import AuthFrame.ForgetPasswordPage.ForgetPasswordPageModel;
+import AuthFrame.ForgetPasswordPage.ForgetPasswordPageView;
 import AuthFrame.RegisterPage.RegisterPageController;
 import AuthFrame.RegisterPage.RegisterPageModel;
 import AuthFrame.RegisterPage.RegisterPageView;
@@ -61,6 +64,12 @@ public class AuthFrameModel implements IAuthFrameModel {
 
     /****************************************************************************/
 
+    private ForgetPasswordPageView FPV;
+    private ForgetPasswordPageModel FPM;
+    private ForgetPasswordPageController FPC;
+
+    /****************************************************************************/
+
     public AuthFrameModel( Loop mainLoop )
     {
         this.init( mainLoop );
@@ -72,7 +81,7 @@ public class AuthFrameModel implements IAuthFrameModel {
 
         this.panelLeft = new JPanel();
 
-        MigLayout lefLayout = new MigLayout("", String.format("[%d]", this.sc.getWIDTH_RATIO() * 60), String.format("[%d]", this.sc.getHEIGHT()));
+        MigLayout lefLayout = new MigLayout("", String.format("[%d]", this.sc.getWIDTH_RATIO() * 72), String.format("[%d]", this.sc.getHEIGHT()));
         this.panelLeft.setLayout(lefLayout);
 
         BufferedImage imgBuffer = null;
@@ -83,7 +92,7 @@ public class AuthFrameModel implements IAuthFrameModel {
 
             imgBuffer = ImageIO.read(url);
 
-            Image img = imgBuffer.getScaledInstance(this.sc.getWIDTH_RATIO() * 60, sc.getHEIGHT_RATIO() * 80, Image. SCALE_SMOOTH);
+            Image img = imgBuffer.getScaledInstance(this.sc.getWIDTH_RATIO() * 47, sc.getHEIGHT_RATIO() * 80, Image. SCALE_SMOOTH);
 
             this.imageLabel =  new JLabel(new ImageIcon(img));
         }
@@ -109,6 +118,7 @@ public class AuthFrameModel implements IAuthFrameModel {
         this.createLoginPage();
         this.createRegisterPage();
         this.createEmailPage();
+        this.createPasswordPage();
     }
 
     public void changePage(String pageName)
@@ -124,6 +134,7 @@ public class AuthFrameModel implements IAuthFrameModel {
 
         this.loginPageModel.setView( this.loginPageView );
     }
+
 
     private void createRegisterPage()
     {
@@ -143,6 +154,16 @@ public class AuthFrameModel implements IAuthFrameModel {
 
         this.EPM.setView(this.EPV);
     }
+    private void createPasswordPage()
+    {
+        this.FPV = new ForgetPasswordPageView();
+        this.FPM = new ForgetPasswordPageModel();
+        this.FPC = new ForgetPasswordPageController(this.FPV, this.FPM, this);
+
+        this.FPM.setView(this.FPV);
+    }
+
+
     /****************************************************************************/
 
     @Override
@@ -185,6 +206,11 @@ public class AuthFrameModel implements IAuthFrameModel {
     public RegisterPageModel getRegisterPageModel()
     {
         return this.RPM;
+    }
+
+    public ForgetPasswordPageModel getForgetPasswordPageModel()
+    {
+        return this.FPM;
     }
 
     public LoginPageModel getLoginPageModel() {

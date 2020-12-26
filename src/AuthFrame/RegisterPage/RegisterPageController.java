@@ -128,7 +128,6 @@ public class RegisterPageController {
                     PopUp popUp = new PopUp("Please check your internet connection.");
                     exception.printStackTrace();
 
-                    ref.changePage("EMAIL_PAGE");
                 }
             });
         }

@@ -9,6 +9,6 @@ public class PopUp
     public PopUp ( String message )
     {
         this.message = message ;
-        JOptionPane.showMessageDialog( null, message ,"Error!", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog( null, message ,"Message!", JOptionPane.INFORMATION_MESSAGE);
     }
 }

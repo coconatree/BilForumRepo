@@ -34,6 +34,7 @@ public class LoginPageController {
 
         model.addActionListenerToLoginB( new LoginListener() );
         model.addActionListenerToRegisterB( new RegisterListener() );
+        model.addActionListenerToForgotB( new ForgetPasswordListener());
     }
 
     class LoginListener implements ActionListener
@@ -102,6 +103,24 @@ public class LoginPageController {
                 public void run()
                 {
                     ref.changePage("REGISTER_PAGE");
+
+                    model.getUserNameTextField().setText("");
+                    model.getPasswordField().setText("");
+                }
+            });
+        }
+    }
+    class ForgetPasswordListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    ref.changePage("PASSWORD_PAGE");
 
                     model.getUserNameTextField().setText("");
                     model.getPasswordField().setText("");

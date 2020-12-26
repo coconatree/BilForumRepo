@@ -6,7 +6,7 @@ public class EmailCodeGenerator {
         return Double.toString(Math.random() * 10000000).substring(0, 4);
     }
 
-    public String createUserID() {
-        return Double.toString(Math.random() * 10000000).substring(0, 5);
+    public String createPassword() {
+        return "Bil" + Double.toString(Math.random() * 10000000).substring(0, 5);
     }
 }
