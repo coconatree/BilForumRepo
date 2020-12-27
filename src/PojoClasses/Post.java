@@ -96,7 +96,7 @@ public class Post
 
     public void addAnswer(String author, String answer)
     {
-        this.answers += String.format("%s | %s -", author, answer);
+        this.answers += String.format("%s _ %s -", author, answer);
     }
 
     private void updateDb()

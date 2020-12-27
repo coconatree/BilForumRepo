@@ -59,7 +59,7 @@ public class ForumPageModel implements IForumPageModel
     {
         this.LBM = new LeftBarModel(ref);
         this.LBV = new LeftBarView();
-        this.LBC = new LeftBarController(this.LBV, this.LBM);
+        this.LBC = new LeftBarController(this.LBV, this.LBM, ref);
 
         this.LBM.setView(this.LBV);
 
@@ -70,7 +70,6 @@ public class ForumPageModel implements IForumPageModel
         this.CM.setView(this.CV);
 
         this.panelR = new CustomJPanel();
-        this.panelR.setBackground(Color.YELLOW);
     }
 
     /*******************************************************************************************/

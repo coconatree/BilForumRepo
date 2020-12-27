@@ -2,6 +2,7 @@ package AuthFrame.EmailPage;
 
 import AuthFrame.AuthFrameModel;
 import MainFrame.CustomComponents.CustomJButton;
+import MainFrame.CustomComponents.CustomJLabel;
 import MainFrame.CustomComponents.CustomJPanel;
 import PojoClasses.User;
 import Static.AuthSizeConstants;
@@ -46,7 +47,8 @@ public class EmailPageModel implements IEmailPageModel
 
         this.ref = ref ;
 
-        codeLabel = new JLabel("Please enter the code to verify your email:");
+        codeLabel = new CustomJLabel();
+        codeLabel.setText("Please enter the code to verify your email:");
         codeLabel.setFont( new Font( "Monaco", Font.BOLD, 10));
 
         codeTextField = new JTextField(5);

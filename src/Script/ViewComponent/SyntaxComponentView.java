@@ -15,19 +15,6 @@ public class SyntaxComponentView extends CustomJPanel
         this.init(model);
         this.revalidate();
         this.repaint();
-        System.out.println("NOT EMPTY");
-    }
-
-    public void update(boolean empty)
-    {
-        this.empty();
-        this.revalidate();
-        this.repaint();
-    }
-
-    private void empty()
-    {
-        this.add(new JLabel("EMPTY"));
     }
 
     private void init(SyntaxComponentModel model)
@@ -39,14 +26,26 @@ public class SyntaxComponentView extends CustomJPanel
         this.setBorder(BorderFactory.createLineBorder(Colors.SECONDARY_COLOR));
     }
 
+    private void clear()
+    {
+        this.removeAll();
+        this.revalidate();
+        this.repaint();
+    }
+
     private void renderer(SyntaxComponentModel model)
     {
         System.out.println("----------------------------------------------------------------------");
         System.out.println("RENDERER STARTED");
         System.out.println("----------------------------------------------------------------------");
 
+
+        this.clear();
+
         for(int i = 0; i < model.getTokenList().size(); i++)
         {
+            System.out.println(model.getTokenList().get(i).getData().getText());
+
             if(!(model.getTokenList().get(i).getData().getText().equals("")))
             {
                 if(model.getTokenList().get(i).getCc().equals("wrap"))

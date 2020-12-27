@@ -2,6 +2,7 @@ package AuthFrame.LoginPage;
 
 import APIConnection.APIConnection;
 import AuthFrame.AuthFrameModel;
+import MainFrame.CustomComponents.CustomDoubleJLabel;
 import MainFrame.Navbar.NavbarModel;
 import MainLoop.Loop;
 import PojoClasses.Post;
@@ -82,7 +83,6 @@ public class LoginPageController {
                             }
                             catch (Exception e)
                             {
-                                System.out.println(e.getMessage());
                                 e.printStackTrace();
                                 PopUp popUp = new PopUp("Please check your internet connection.");
                             }

@@ -12,12 +12,11 @@ public class EmailPageView extends CustomJPanel implements IEmailPageView{
         this.repaint();
     }
 
-    public void init( EmailPageModel model ) {
-        //MigLayout layout = new MigLayout("inset 100 70 100 70", "[grow]","[grow]");
-        //MigLayout layout = new MigLayout("inset 200 70 200 70", "[grow]20[grow]", "[grow]");
+    public void init( EmailPageModel model )
+    {
         MigLayout layout = new MigLayout("inset 5 5 5 5", "[grow]5[grow]", "[grow]");
         model.getPanel().setLayout(layout);
-        model.getPanel().add(model.getCodeLabel(),"grow");
+        model.getPanel().add(model.getCodeLabel(),"grow, wrap");
         model.getPanel().add(model.getCodeTextField(),"grow");
 
         /***********************************************************************/
@@ -27,6 +26,7 @@ public class EmailPageView extends CustomJPanel implements IEmailPageView{
         model.getPanel2().add(model.getCodeVerifyButton(), "grow,wrap");
 
         /**************************************************************************************/
+
         MigLayout topLayout = new MigLayout("", "[grow]", "[grow][grow]");
         model.getPanelTop().setLayout(topLayout);
         model.getPanelTop().add(model.getPanel(), "grow");
@@ -34,7 +34,6 @@ public class EmailPageView extends CustomJPanel implements IEmailPageView{
         MigLayout botLayout = new MigLayout("", "[grow]", "[grow][grow]");
         model.getPanelBot().setLayout(botLayout);
         model.getPanelBot().add(model.getPanel2(), "grow,wrap");
-
 
         /******************************************************************************************/
 
@@ -44,9 +43,6 @@ public class EmailPageView extends CustomJPanel implements IEmailPageView{
         model.getPanel3().add(model.getPanelTop(), "grow, wrap");
         model.getPanel3().add(model.getPanelBot(), "grow");
 
-
         this.add(model.getPanel3(),"grow");
-        //this.add(model.getPanel2(),"grow");
     }
-
 }

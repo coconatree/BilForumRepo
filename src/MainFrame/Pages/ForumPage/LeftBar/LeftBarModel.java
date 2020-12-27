@@ -4,7 +4,9 @@ import MainFrame.CustomComponents.CustomJButton;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.CustomComponents.CustomJTextPane;
 import MainFrame.MainFrameModel;
+import Static.Colors;
 import Static.ConstantText;
+import Static.Fonts;
 import Static.SizeConstants;
 
 import javax.swing.*;
@@ -78,6 +80,8 @@ public class LeftBarModel implements ILeftBaModel
     {
         this.textPane = new CustomJTextPane();
         this.textPane.setText(this.textPaneText);
+        this.textPane.setFont(Fonts.NORMAL_FONT);
+        this.textPane.setForeground(Colors.SECONDARY_COLOR);
         this.textPane.setOpaque(false);
     }
 

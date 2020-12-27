@@ -43,12 +43,14 @@ public class CenterController
 
                     cmp.getPost().incrementViews();
 
+                    ref.getPostPageModel().getPOCM().resetComments();
+                    ref.getPostPageModel().getPOCM().resetAnswers();
+
                     ref.getPostPageModel().getPOCM().setPost(cmp.getPost());
                     ref.getPostPageModel().getPOCM().setPostDetailsContents();
 
-                    System.out.println(cmp.getPost().getContent());
-
                     ref.getPostPageModel().getPOCM().update();
+
                     ref.changePage("POST_PAGE");
                 }
             });

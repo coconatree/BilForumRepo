@@ -1,5 +1,10 @@
 package MainFrame.Navbar;
 
+import APIConnection.APIConnection;
+import MainFrame.MainFrameModel;
+import PojoClasses.Post;
+import Utility.SearchPopUp;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +21,9 @@ public class NavbarController
     private int currentPosition;
     private Boolean bool;
 
-    public NavbarController(INavbarView NBV, NavbarModel NBM)
+    private MainFrameModel ref;
+
+    public NavbarController(INavbarView NBV, NavbarModel NBM, MainFrameModel ref)
     {
         this.NBV = NBV;
         this.NBM = NBM;
@@ -24,10 +31,39 @@ public class NavbarController
         this.currentPosition = 0;
         this.bool = true;
 
+        this.ref = ref;
+
         this.NBM.addMouseListenerToLogoLabel(new LogoListener());
         this.NBM.addActionListenerToBackBtn(new BackListener());
         this.NBM.addActionListenerToRefreshBtn(new RefreshListener());
         this.NBM.addMouseListenerToProfile(new ProfileNavListener());
+        this.NBM.addActionListenerToSearchBtn(new SearchListener());
+    }
+
+    class SearchListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        ArrayList<Post> postList = APIConnection.search(NBM.getsTF().getText().replace("#", ","));
+
+                        SearchPopUp popUp = new SearchPopUp(postList);
+
+                    }
+                    catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
     }
 
     class ProfileNavListener implements MouseListener

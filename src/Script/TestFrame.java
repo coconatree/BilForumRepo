@@ -1,12 +1,12 @@
 package Script;
 
-
-import Script.ViewComponent.SyntaxComponentModel;
-import Script.ViewComponent.SyntaxComponentView;
+import Script.ViewComponent.PanelComp;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TestFrame
 {
@@ -14,19 +14,34 @@ public class TestFrame
     {
         JFrame frame = new JFrame();
 
-        String data = "Merhaba Arkadaslar. <CodeBlock> AAAAAA AAAAAAAAAAAA AAAAAA </CodeBlock> BBBBB ";
+        PanelComp panel = new PanelComp();
 
-        SyntaxComponentView compView = new SyntaxComponentView();
-        SyntaxComponentModel compModel = new SyntaxComponentModel(data);
-
-        compModel.setView(compView);
+        panel.setData("Merhaba Arkadaslar. <CodeBlock> AAAAAA AAAAAAAAAAAA AAAAAA </CodeBlock> BBBBB ");
 
         MigLayout layout = new MigLayout("inset 0 0 0 0", "[grow]", "[grow][grow]");
 
         frame.setLayout(layout);
 
-        frame.add(new JLabel("TEST FIELD"), "grow, wrap");
-        frame.add(compModel.getView(), "center");
+        JButton changer = new JButton("Change");
+
+        changer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        panel.setData("Merhaba Arkadaslar. <CodeBlock> CCCCCCCC </CodeBlock> DDDDD ");
+                        panel.update();
+                    }
+                });
+            }
+        });
+
+        panel.update();
+
+        frame.add(changer, "grow, wrap");
+        frame.add(panel, "grow");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

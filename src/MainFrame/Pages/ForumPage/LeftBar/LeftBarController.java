@@ -1,5 +1,7 @@
 package MainFrame.Pages.ForumPage.LeftBar;
 
+import MainFrame.MainFrameModel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,10 +11,14 @@ public class LeftBarController
     private LeftBarView LBV;
     private LeftBarModel LBM;
 
-    public LeftBarController(LeftBarView LBV, LeftBarModel LBM)
+    private MainFrameModel ref;
+
+    public LeftBarController(LeftBarView LBV, LeftBarModel LBM, MainFrameModel ref)
     {
         this.LBV = LBV;
         this.LBM = LBM;
+
+        this.ref = ref;
 
         this.LBM.addActionListenerToAddPostBtn(new PostPageNavigationListener());
         this.LBM.addActionListenerToByDateBtn(new PostPageSortByViewListener());
@@ -45,6 +51,7 @@ public class LeftBarController
                 public void run()
                 {
                     LBM.getRef().getFPM().getCM().wakeVote();
+                    ref.getFPM().getCC().updateMouseListener();
                 }
             });
         }
@@ -60,10 +67,9 @@ public class LeftBarController
                 public void run()
                 {
                     LBM.getRef().getFPM().getCM().wakeView();
+                    ref.getFPM().getCC().updateMouseListener();
                 }
             });
         }
     }
-
-
 }

@@ -98,6 +98,11 @@ public class RegisterPageController {
                             PopUp popUp = new PopUp("Username taken please select another one.");
                             return;
                         }
+                        else if(user.getEmail().equals(registerPageModel.getEmailF().getText()))
+                        {
+                            PopUp popUp = new PopUp("Email taken please select another one.");
+                            return;
+                        }
                         else { continue; }
                     }
 

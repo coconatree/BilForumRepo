@@ -17,7 +17,7 @@ public class PostComponent_2 extends JComponent {
     private SizeConstants sc ;
     private JPanel panel ;
 
-    String vote ;
+    String view ;
     String title ;
 
     public PostComponent_2(Post post)
@@ -45,17 +45,17 @@ public class PostComponent_2 extends JComponent {
 
     public void initText( Post post){
 
-        vote = post.getVotes();
-        title = post.getTitle();
+        this.view = post.getViews();
+        this.title = post.getTitle();
     }
 
     public void initLabels(){
 
         titleLabel = new JLabel();
-        titleLabel.setText("Title: " + title);
+        titleLabel.setText("Title: " + this.title);
 
         voteLabel = new JLabel();
-        voteLabel.setText("Votes: " + String.valueOf(vote));
+        voteLabel.setText("Views : " + String.valueOf(this.view));
     }
 
 }

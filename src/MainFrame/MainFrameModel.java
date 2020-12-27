@@ -136,7 +136,7 @@ public class MainFrameModel implements IMainFrameModel
     {
         this.NBV = new NavbarView();
         this.NBM = new NavbarModel(this);
-        this.NBC = new NavbarController(this.NBV, this.NBM);
+        this.NBC = new NavbarController(this.NBV, this.NBM, this);
 
         this.NBM.setView(this.NBV);
     }

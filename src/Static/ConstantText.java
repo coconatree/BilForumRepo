@@ -2,7 +2,7 @@ package Static;
 
 public class ConstantText
 {
-    private static final String FORUM_PAGE_LEFT_TEXT = "Please be kind to other users end do not use any words which may offend others.\nAAAA";
+    private static final String FORUM_PAGE_LEFT_TEXT = "Please be kind to other users end do not use any words which may offend others.\n";
 
     private static final String TOP_POSTS_TEXT = "TOP 10 POSTS";
 

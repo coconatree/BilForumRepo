@@ -133,6 +133,8 @@ public class PCCenterModel implements IPCCenterModel
         /***************************************************************/
 
         this.guidePanel = new CustomJPanel();
+
+        this.postBtn.setName("POST");
     }
 
     /*******************************************************************************************/

@@ -92,15 +92,12 @@ public class PCCenterController
                     }
                     else
                         {
-
-
                             try
                             {
                                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                                 Date date = new Date();
 
                                 String strDate = formatter.format(date);
-
 
                                 PCCenterModel.getRef().getFPM().getCM().wake();
 

@@ -31,7 +31,5 @@ public class TopPostsView extends CustomJPanel implements ITopPostsView {
         }
 
         this.setOpaque(false);
-
-        // this.setBorder(BorderFactory.createLineBorder(Colors.SECONDARY_COLOR));
     }
 }

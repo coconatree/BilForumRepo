@@ -29,6 +29,18 @@ public class User
         this.userLevel = userLevel;
     }
 
+    public void incrementPoints()
+    {
+        this.userLevel += 1;
+        this.updateTheDB();
+    }
+
+    public void decrementPoints()
+    {
+        this.userLevel -= 1;
+        this.updateTheDB();
+    }
+
     /*************************************************************************************/
 
     @Override

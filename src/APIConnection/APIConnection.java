@@ -235,7 +235,14 @@ public class APIConnection
 
         ArrayList<Post> postList = mapper.readValue(bodyAsString, new TypeReference<List<Post>>(){});
 
-        return postList;
+        ArrayList ret = new ArrayList();
+
+        for(int i = postList.size() - 1; 0 <= i; i--)
+        {
+            ret.add(postList.get(i));
+        }
+
+        return ret;
     }
 
     /****************************************************************************************************************/
@@ -267,5 +274,42 @@ public class APIConnection
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         return response.toString();
+    }
+
+    /****************************************************************************************************************/
+
+    public static ArrayList<Post> search(String PARAM) throws Exception
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(String.format("http://localhost:8080/search/%s", PARAM))).build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        String bodyAsString = response.body().toString();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        ArrayList<Post> postList = mapper.readValue(bodyAsString, new TypeReference<List<Post>>(){});
+
+        return postList;
+    }
+
+    public static void main(String[] args)
+    {
+        try
+        {
+            ArrayList<Post> postList = APIConnection.search(",admin1");
+
+            for(Post post : postList)
+            {
+                System.out.println(post.toString());
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

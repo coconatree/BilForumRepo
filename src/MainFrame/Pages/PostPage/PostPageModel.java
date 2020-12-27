@@ -36,7 +36,7 @@ public class PostPageModel implements IPostPageModel{
         this.sizeConstants = new SizeConstants();
         this.scrollPane = new JScrollPane();
 
-        this.scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER );
+        this.scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
         this.scrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         this.initPanels(ref);

@@ -132,7 +132,7 @@ public class NavbarModel implements INavbarModel
 
         this.logoPanel.add(this.logoLabel, "grow");
 
-        this.pointsLabel = new CustomDoubleJLabel("20", "Points");
+        this.pointsLabel = new CustomDoubleJLabel("10", "Points");
 
         this.profPicture = new CustomImagePanel("PROFİLE", "/PROFILE_LOGO.png", new Dimension(sc.getWIDTH_RATIO() * 5, sc.getHEIGHT_RATIO() * 5));
         this.profLabel = new CustomJLabel();
@@ -189,6 +189,11 @@ public class NavbarModel implements INavbarModel
     public void addMouseListenerToProfile(MouseListener ML)
     {
         this.profPanel.addMouseListener(ML);
+    }
+
+    public void addActionListenerToSearchBtn(ActionListener AL)
+    {
+        this.sBtn.addActionListener(AL);
     }
 
     /*******************************************************************************************/
@@ -260,10 +265,15 @@ public class NavbarModel implements INavbarModel
         return profPanel;
     }
 
-    /*******************************************************************************************/
-
     public JPanel getLogoPanel()
     {
         return this.logoPanel;
+    }
+
+    /*******************************************************************************************/
+
+    public void setPointsLabel(CustomDoubleJLabel data)
+    {
+        this.pointsLabel = data;
     }
 }

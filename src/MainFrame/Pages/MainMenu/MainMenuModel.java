@@ -68,7 +68,7 @@ public class MainMenuModel implements IMainMenuModel {
 
     private void initPanels( MainFrameModel ref){
 
-        this.topPostsModel = new TopPostsModel();
+        this.topPostsModel = new TopPostsModel(ref);
         this.topPostsView = new TopPostsView();
         this.topPostsController = new TopPostsController();
 
@@ -81,12 +81,9 @@ public class MainMenuModel implements IMainMenuModel {
         this.forumsPaneModel.setView( forumsPaneView );
 
         this.panelR = new CustomJPanel();
-        this.panelR.setBackground(Colors.SECONDARY_COLOR);
     }
 
     /*******************************************************************************************/
-
-    // Get view forumPaneView donduruyordu
 
     @Override
     public CustomJPanel getView()

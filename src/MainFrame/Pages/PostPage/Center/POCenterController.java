@@ -26,9 +26,35 @@ public class POCenterController
 
         this.POCM.addActionListenerToAddComment(new CommentClickListener());
         this.POCM.addActionListenerToDeletePost(new DeleteClickListener());
-        this.POCM.addActionListenerToEditPost(new EditClickListener());
         this.POCM.addActionListenerToUpVote(new VoteUpListener());
         this.POCM.addActionListenerToDownVote(new VoteDownListener());
+        this.POCM.addActionListenerToAnswer(new AnswerListener());
+    }
+
+    class AnswerListener implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            SwingUtilities.invokeLater(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    POCM.getPost().addAnswer(ref.getCurrentUser().getUsername(), POCM.getAnswerArea().getText());
+                    POCM.getAnswerArea().setText("");
+                    try
+                    {
+                        APIConnection.updatePost(POCM.getPost());
+                    }
+                    catch (Exception exception)
+                    {
+                        exception.printStackTrace();
+                    }
+                    POCM.update();
+                }
+            });
+        }
     }
 
     class CommentClickListener implements ActionListener
@@ -42,7 +68,7 @@ public class POCenterController
                 public void run()
                 {
                     POCM.getPost().addComment(ref.getCurrentUser().getUsername(), POCM.getCommentTf().getText());
-
+                    POCM.getCommentTf().setText("");
                     try
                     {
                         APIConnection.updatePost(POCM.getPost());
@@ -83,26 +109,6 @@ public class POCenterController
         }
     }
 
-    class EditClickListener implements ActionListener
-    {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-            SwingUtilities.invokeLater(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    System.out.println("EDIT");
-
-                    ref.getPostCreationPageModel().getPCCenterModel().changeToEditMode(POCM.getPost());
-                    ref.getPostCreationPageModel().getPCCenterModel().update();
-                    ref.changePage("POST_CREATION_PAGE");
-                }
-            });
-        }
-    }
-
     class VoteUpListener implements ActionListener
     {
         @Override
@@ -113,6 +119,7 @@ public class POCenterController
                 @Override
                 public void run()
                 {
+                    ref.getCurrentUser().incrementPoints();
                     POCM.getPost().incrementVotes();
                 }
             });
@@ -129,6 +136,7 @@ public class POCenterController
                 @Override
                 public void run()
                 {
+                    ref.getCurrentUser().decrementPoints();
                     POCM.getPost().decrementVotes();
                 }
             });

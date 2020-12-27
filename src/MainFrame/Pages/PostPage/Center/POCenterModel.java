@@ -1,13 +1,11 @@
 package MainFrame.Pages.PostPage.Center;
 
-import MainFrame.CustomComponents.CustomJButton;
-import MainFrame.CustomComponents.CustomJLabel;
-import MainFrame.CustomComponents.CustomJPanel;
-import MainFrame.CustomComponents.CustomJTextField;
+import MainFrame.CustomComponents.*;
 import MainFrame.MainFrameModel;
 import Script.ViewComponent.SyntaxComponentModel;
 import Script.ViewComponent.SyntaxComponentView;
 import PojoClasses.Post;
+import Static.Colors;
 import Static.Fonts;
 import Static.SizeConstants;
 import org.apache.fop.fo.FObj;
@@ -34,9 +32,15 @@ public class POCenterModel implements IPOCenterModel {
 
     /**********-ParentPanel1-******************/
 
-    private JPanel panel1Top;
-    private JPanel panel1Center;
-    private JPanel panel1Bottom;
+    private JPanel panel5;
+    private JPanel panel6;
+    private JPanel panel7;
+
+    private JPanel p1;
+    private JPanel p2;
+    private JPanel p3;
+    private JPanel p4;
+    private JPanel p5;
 
     /**************Top*****************/
 
@@ -49,37 +53,31 @@ public class POCenterModel implements IPOCenterModel {
     private JLabel titleLabel1;
     private JLabel titleLabel2;
 
-    private JLabel dateLabel ;
-
     /**************-Center-**********************/
 
     private JLabel contentLabel ;
+    private JLabel dateLabel ;
+
     private JButton editButton;
     private JButton deleteButton;
-    private JButton postButton;
+    private JButton answerButton;
 
     /************************************/
 
     private ArrayList<String> comments;
     private ArrayList<String> anwsers;
 
-    private JTextArea content;
+    private MainFrameModel ref;
 
     /************************************/
 
     private JTextField commentTf;
     private JButton postComment;
 
-    private JPanel p1;
-    private JPanel p2;
-    private JPanel p3;
-    private JPanel p4;
-    private JPanel p5;
+    private JTextArea content;
+    private JTextArea answerArea;
 
     private JLabel filler;
-
-    private MainFrameModel ref;
-
     private JLabel author;
     private JLabel date;
 
@@ -91,8 +89,6 @@ public class POCenterModel implements IPOCenterModel {
 
     public void setPostDetailsContents()
     {
-        System.out.println("SETTING POST PAGE DETAILS");
-
         this.pointsLabel1.setText("Points");
         this.pointsLabel1.setFont(Fonts.TITLE_FONT);
         this.pointsLabel2.setText(String.valueOf(post.getVotes()));
@@ -109,6 +105,7 @@ public class POCenterModel implements IPOCenterModel {
         this.content.setText(post.getContent());
 
         this.initComments();
+        this.initAnswers();
     }
 
     private void init()
@@ -120,7 +117,14 @@ public class POCenterModel implements IPOCenterModel {
         this.date = new CustomJLabel();
         this.author = new CustomJLabel();
 
+        this.answerArea = new JTextArea();
+        this.answerArea.setForeground(Colors.SECONDARY_COLOR);
+        this.answerArea.setFont(Fonts.NORMAL_FONT);
+        this.answerArea.setBorder(BorderFactory.createLineBorder(Colors.SECONDARY_COLOR));
+        this.answerArea.setOpaque(false);
+
         this.comments = new ArrayList<>();
+        this.anwsers  = new ArrayList<>();
 
         this.content = new JTextArea();
         this.content.setFont(Fonts.NORMAL_FONT);
@@ -136,10 +140,10 @@ public class POCenterModel implements IPOCenterModel {
         /************************************/
 
         this.panel1 = new CustomJPanel();
-        this.panel1Top = new CustomJPanel();
+        this.panel5 = new CustomJPanel();
 
-        this.panel1Center = new CustomJPanel();
-        this.panel1Bottom = new CustomJPanel();
+        this.panel6 = new CustomJPanel();
+        this.panel7 = new CustomJPanel();
 
         this.voteUpButton = new CustomJButton();
         this.voteDownButton = new CustomJButton();
@@ -157,8 +161,8 @@ public class POCenterModel implements IPOCenterModel {
         this.editButton = new CustomJButton();
         this.editButton.setText("Edit");
 
-        this.postButton = new CustomJButton();
-        this.postButton.setText("Post");
+        this.answerButton = new CustomJButton();
+        this.answerButton.setText("Answer");
 
         this.deleteButton = new CustomJButton();
         this.deleteButton.setText("Delete");
@@ -169,7 +173,7 @@ public class POCenterModel implements IPOCenterModel {
 
         /********* TEMP *********/
 
-        this.syntaxModel = new SyntaxComponentModel(true);
+        this.syntaxModel = new SyntaxComponentModel("HELLO");
         this.syntaxView  = null;
 
         /*************************/
@@ -183,10 +187,14 @@ public class POCenterModel implements IPOCenterModel {
         this.filler = new CustomJLabel();
     }
 
+    /******************************************************************************/
+
     public void setPost(Post post)
     {
         this.post = post;
     }
+
+    /******************************************************************************/
 
     @Override
     public CustomJPanel getView() {
@@ -205,32 +213,7 @@ public class POCenterModel implements IPOCenterModel {
         this.centerView.update(this);
     }
 
-    public SizeConstants getSc()
-    {
-        return sizeConstants;
-    }
-
-    public JPanel getPanel1() { return panel1; }
-
-    public JPanel getPanel2() {return panel2;  }
-
-    public JPanel getPanel3() { return panel3; }
-
-    public JPanel getPanel4() { return panel4; }
-
-    public JPanel getPanel1Top() {return panel1Top;}
-
-    public JPanel getPanel1Center() {return panel1Center;}
-
-    public JPanel getPanel1Bottom() {return panel1Bottom; }
-
-    public JButton getVoteUpButton() { return voteUpButton; }
-
-    public JButton getVoteDownButton() { return voteDownButton; }
-
-    public JLabel getDateLabel() { return dateLabel; }
-
-    public JLabel getContentLabel() { return contentLabel; }
+    /******************************************************************************/
 
     public JButton getEditButton()
     {
@@ -254,7 +237,19 @@ public class POCenterModel implements IPOCenterModel {
         return deleteButton;
     }
 
-    public JButton getPostButton() { return postButton; }
+    /******************************************************************************/
+
+    public void resetComments()
+    {
+        System.out.println("RESET CCC");
+        this.comments.clear();
+    }
+
+    public void resetAnswers()
+    {
+        System.out.println("RESET AAA");
+        this.anwsers.clear();
+    }
 
     /******************************************************************************/
 
@@ -262,9 +257,15 @@ public class POCenterModel implements IPOCenterModel {
     {
         for(String string : this.post.getComments().split("-"))
         {
-            System.out.println("ADDED");
-
             this.comments.add(string);
+        }
+    }
+
+    public void initAnswers()
+    {
+        for(String string : this.post.getAnswers().split("-"))
+        {
+            this.anwsers.add(string);
         }
     }
 
@@ -272,8 +273,7 @@ public class POCenterModel implements IPOCenterModel {
 
     public void addActionListenerToAddComment(ActionListener AL){ this.postComment.addActionListener(AL); }
     public void addActionListenerToDeletePost(ActionListener AL){ this.deleteButton.addActionListener(AL); }
-    public void addActionListenerToEditPost(ActionListener AL){ this.editButton.addActionListener(AL); }
-    public void addActionListenerToAnswer(ActionListener AL){ this.postComment.addActionListener(AL); }
+    public void addActionListenerToAnswer(ActionListener AL){ this.answerButton.addActionListener(AL); }
     public void addActionListenerToUpVote(ActionListener AL){ this.voteUpButton.addActionListener(AL); }
     public void addActionListenerToDownVote(ActionListener AL){ this.voteDownButton.addActionListener(AL); }
 
@@ -286,11 +286,34 @@ public class POCenterModel implements IPOCenterModel {
         return ret;
     }
 
+    public AnswerComponent getAnswerComponent(String title, String content)
+    {
+        AnswerComponent comp = new AnswerComponent(title, content);
+        return comp;
+    }
+
     /******************************************************************************/
 
-    public IPOCenterView getCenterView() {
-        return centerView;
+    public SizeConstants getSc()
+    {
+        return sizeConstants;
     }
+
+    public JPanel getPanel1() { return panel1; }
+
+    public JPanel getPanel2() {return panel2;  }
+
+    public JPanel getPanel3() { return panel3; }
+
+    public JPanel getPanel4() { return panel4; }
+
+    public JButton getVoteUpButton() { return voteUpButton; }
+
+    public JButton getVoteDownButton() { return voteDownButton; }
+
+    public JLabel getDateLabel() { return dateLabel; }
+
+    public JLabel getContentLabel() { return contentLabel; }
 
     public SizeConstants getSizeConstants() {
         return sizeConstants;
@@ -300,20 +323,12 @@ public class POCenterModel implements IPOCenterModel {
         return post;
     }
 
-    public SyntaxComponentModel getSyntaxModel() {
-        return syntaxModel;
-    }
-
     public JLabel getPointsLabel1() {
         return pointsLabel1;
     }
 
     public JLabel getPointsLabel2() {
         return pointsLabel2;
-    }
-
-    public JLabel getTitleLabel1() {
-        return titleLabel1;
     }
 
     public JLabel getTitleLabel2() {
@@ -336,24 +351,12 @@ public class POCenterModel implements IPOCenterModel {
         return p4;
     }
 
-    public JPanel getP5() {
-        return p5;
-    }
-
     public JLabel getFiller() {
         return filler;
     }
 
-    public SyntaxComponentView getSyntaxView() {
-        return syntaxView;
-    }
-
     public ArrayList<String> getComments() {
         return comments;
-    }
-
-    public ArrayList<String> getAwnsers() {
-        return anwsers;
     }
 
     public JTextArea getContent() {
@@ -382,5 +385,27 @@ public class POCenterModel implements IPOCenterModel {
 
     public JLabel getDate() {
         return date;
+    }
+
+    public JPanel getPanel5()
+    {
+        return panel5;
+    }
+
+    public JPanel getPanel6()
+    {
+        return panel6;
+    }
+
+    public JPanel getPanel7()
+    {
+        return panel7;
+    }
+
+    public JButton getAnswerButton(){ return this.answerButton; }
+
+    public JTextArea getAnswerArea()
+    {
+        return answerArea;
     }
 }

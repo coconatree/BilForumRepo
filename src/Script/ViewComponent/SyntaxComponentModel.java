@@ -29,19 +29,8 @@ public class SyntaxComponentModel
         this.init(data);
     }
 
-    private boolean empty;
-
-    public SyntaxComponentModel(boolean empty)
-    {
-        this.empty = empty;
-        this.data = null;
-
-        this.handler = new Handler();
-    }
-
     public void init(String data)
     {
-        this.empty = false;
         this.data = data;
 
         this.handler = new Handler();
@@ -72,17 +61,8 @@ public class SyntaxComponentModel
 
     public SyntaxComponentView getView()
     {
-        if(this.view == null)
-        {
-            SyntaxComponentView view1 = new SyntaxComponentView();
-            view1.update(true);
-            return view1;
-        }
-        else
-            {
-                this.update();
-                return this.view;
-            }
+        this.update();
+        return this.view;
     }
 
     public void update()

@@ -18,6 +18,18 @@ public class POCenterView extends CustomJPanel implements IPOCenterView {
 
     private void init(POCenterModel model)
     {
+        System.out.println("-------------------------------------------------");
+
+        for(String str : model.getComments())
+        {
+            System.out.println(str);
+        }
+
+        System.out.println("-------------------------------------------------");
+
+        model.getP4().removeAll();
+        model.getPanel5().removeAll();
+
         MigLayout layout1Sub1 = new MigLayout("inset 0 0 0 0", "[grow]", "[grow]5[grow]");
         model.getP1().setLayout(layout1Sub1);
 
@@ -54,8 +66,7 @@ public class POCenterView extends CustomJPanel implements IPOCenterView {
 
         /****************************************************************************/
 
-        MigLayout layout3 = new MigLayout("inset 0 70 0 70", String.format("5[%d]5[%d]5[grow]5[%d]5[%d]5",
-                model.getSc().getWIDTH_RATIO() * 7,
+        MigLayout layout3 = new MigLayout("inset 0 70 0 70", String.format("5[%d]5[%d]5[grow]5[%d]",
                 model.getSc().getWIDTH_RATIO() * 7,
                 model.getSc().getWIDTH_RATIO() * 7,
                 model.getSc().getWIDTH_RATIO() * 7)
@@ -67,7 +78,6 @@ public class POCenterView extends CustomJPanel implements IPOCenterView {
         model.getPanel3().add(model.getVoteUpButton(), "grow");
         model.getPanel3().add(model.getVoteDownButton(), "grow");
         model.getPanel3().add(model.getFiller() , "grow");
-        model.getPanel3().add(model.getEditButton(), "grow");
         model.getPanel3().add(model.getDeleteButton(), "grow");
 
         /****************************************************************************/
@@ -103,13 +113,35 @@ public class POCenterView extends CustomJPanel implements IPOCenterView {
 
         /****************************************************************************/
 
-        MigLayout layout5 = new MigLayout();
-        MigLayout layout6 = new MigLayout();
+        MigLayout layout5 = new MigLayout("inset 0 0 0 0", "[grow]", this.generateString(model.getAnwsers().size()));
+        model.getPanel5().setLayout(layout5);
 
-        MigLayout layoutM = new MigLayout("inset 0 0 0 0", "[grow]", String.format("[%d]5[%d][%d][grow]",
+        for(String answer : model.getAnwsers())
+        {
+            if(answer.length() != 0)
+            {
+                model.getPanel5().add(model.getAnswerComponent(answer.split("_")[0], answer.split("_")[1]), "grow, wrap");
+            }
+        }
+
+        MigLayout subLayout = new MigLayout("", "[grow]5[10]", "[50]");
+        model.getPanel7().setLayout(subLayout);
+
+        model.getPanel7().add(model.getAnswerArea(), "grow");
+        model.getPanel7().add(model.getAnswerButton(), "center");
+
+        MigLayout layout6 = new MigLayout("", "[grow]", "[grow]5[20]");
+        model.getPanel6().setLayout(layout6);
+
+        model.getPanel6().add(model.getPanel5(), "grow, wrap");
+        model.getPanel6().add(model.getPanel7(), "grow");
+
+
+        MigLayout layoutM = new MigLayout("inset 0 0 0 0", "[grow]", String.format("[%d]15[%d]15[%d]15[grow]15[%d]",
                 model.getSc().getHEIGHT_RATIO() * 15,
                 model.getSc().getHEIGHT_RATIO() * 70,
-                model.getSc().getHEIGHT_RATIO() * 5
+                model.getSc().getHEIGHT_RATIO() * 5,
+                model.getSc().getHEIGHT_RATIO() * 15
         ));
 
         this.setLayout(layoutM);
@@ -118,45 +150,7 @@ public class POCenterView extends CustomJPanel implements IPOCenterView {
         this.add(model.getPanel2(), "grow, wrap");
         this.add(model.getPanel3(), "grow, wrap");
         this.add(model.getPanel4(), "grow, wrap");
-
-        /**
-        MigLayout panel1Layout = new MigLayout("debug"," [grow]", String.format("[grow]20[%s]",model.getSc().getHEIGHT_RATIO()*5));
-        model.getPanel1().setLayout(panel1Layout);
-
-        MigLayout panel1Toplayout = new MigLayout("inset 0 0 0 0", "[grow]", "[10]15[10]15[10]15[10]");
-        model.getPanel1Top().setLayout(panel1Toplayout);
-
-        model.getPanel1Top().add(model.getPointsLabel(),"grow");
-        model.getPanel1Top().add(model.getVoteUpButton(), "grow");
-        model.getPanel1Top().add(model.getVoteDownButton(), "grow");
-        model.getPanel1Top().add(model.getTitleLabel(), "grow");
-        model.getPanel1Top().add(model.getDateLabel(), "grow");
-        model.getPanel1().add(model.getPanel1Top(),"wrap");
-
-        MigLayout panel1CenterLayout = new MigLayout("debug"," [grow]", String.format("[grow]20[%s]",model.getSc().getHEIGHT_RATIO()*50));
-        model.getPanel1Center().setLayout(panel1CenterLayout);
-        model.getPanel1Center().add(model.getContentLabel(),"grow");
-        model.getPanel1().add(model.getPanel1Center(),"wrap");
-
-        MigLayout panel1BottomLayout = new MigLayout("debug"," [grow]", String.format("[grow]20[%s]",model.getSc().getHEIGHT_RATIO()*50));
-        model.getPanel1Bottom().setLayout(panel1BottomLayout);
-        model.getPanel1Bottom().add(new JLabel("COMMENTS AREA"),"grow");
-        model.getPanel1().add(model.getPanel1Bottom());
-
-        MigLayout panel4Layout = new MigLayout("inset 0 0 0 0", "[grow]", "[10]15[10]15[10]15[10]");
-        model.getPanel4().setLayout(panel4Layout);
-        model.getPanel4().add(model.getEditButton());
-        model.getPanel4().add(model.getDeleteButton());
-        model.getPanel4().add(model.getPostButton());
-
-
-        MigLayout layout = new MigLayout("debug, inset 0 0 0 0","[grow]","[grow]5[grow]5[grow]5[10]");
-        this.setLayout(layout);
-        this.add(model.getPanel1(),"grow,wrap");
-        this.add(model.getPanel2(),"grow,wrap");
-        this.add(model.getPanel3(), "grow, wrap");
-        this.add(model.getPanel4(),"grow");
-        */
+        this.add(model.getPanel6(), "grow, wrap");
     }
 
     private String generateString(int size)
