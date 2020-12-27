@@ -8,7 +8,6 @@ import PojoClasses.Post;
 import Static.Colors;
 import Static.Fonts;
 import Static.SizeConstants;
-import org.apache.fop.fo.FObj;
 
 import javax.swing.*;
 import java.awt.*;
