@@ -92,11 +92,13 @@ public class Post
     public void addComment(String username, String comment)
     {
         this.comments += String.format("%s | %s -", username, comment);
+        this.updateDb();
     }
 
     public void addAnswer(String author, String answer)
     {
         this.answers += String.format("%s _ %s -", author, answer);
+        this.updateDb();
     }
 
     private void updateDb()
