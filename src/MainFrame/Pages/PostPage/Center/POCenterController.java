@@ -52,6 +52,7 @@ public class POCenterController
                         exception.printStackTrace();
                     }
                     POCM.update();
+                    ref.getCardLayout().show(ref.getCardPanel(), "FORUM_PAGE");
                 }
             });
         }
@@ -78,6 +79,7 @@ public class POCenterController
                         exception.printStackTrace();
                     }
                     POCM.update();
+                    ref.getCardLayout().show(ref.getCardPanel(), "FORUM_PAGE");
                 }
             });
         }

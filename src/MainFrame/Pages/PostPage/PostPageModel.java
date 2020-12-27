@@ -31,7 +31,7 @@ public class PostPageModel implements IPostPageModel{
     /*******************************************************************************************/
 
     //Constructor
-    public PostPageModel(MainFrameModel ref) {
+    public PostPageModel(MainFrameModel ref, String data) {
 
         this.sizeConstants = new SizeConstants();
         this.scrollPane = new JScrollPane();
@@ -39,13 +39,13 @@ public class PostPageModel implements IPostPageModel{
         this.scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
         this.scrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        this.initPanels(ref);
+        this.initPanels(ref, data);
     }
 
     //Methods
-    private void initPanels(MainFrameModel ref) {
+    private void initPanels(MainFrameModel ref, String data) {
 
-        this.POCM = new POCenterModel(ref);
+        this.POCM = new POCenterModel(ref, data);
         this.POCV = new POCenterView();
         this.POCC = new POCenterController(this.POCV, this.POCM, ref);
 

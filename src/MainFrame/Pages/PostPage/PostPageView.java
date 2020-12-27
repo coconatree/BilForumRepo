@@ -17,7 +17,7 @@ public class PostPageView extends CustomJPanel implements IPostPageView {
 
     private void init(PostPageModel PPM)
     {
-        MigLayout layout = new MigLayout("inset 5 5 5 25","[grow]", "[grow]");
+        MigLayout layout = new MigLayout("inset 5 5 5 5","[grow]", "[grow]");
         this.setLayout(layout);
 
         PPM.getScrollPane().setViewportView(PPM.getCenterView());

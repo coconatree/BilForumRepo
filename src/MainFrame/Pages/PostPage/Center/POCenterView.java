@@ -1,5 +1,6 @@
 package MainFrame.Pages.PostPage.Center;
 
+import MainFrame.CustomComponents.AnswerComponent;
 import MainFrame.CustomComponents.CustomJPanel;
 import MainFrame.Pages.ForumPage.Center.Post.PostModel;
 import Static.Colors;
@@ -60,7 +61,7 @@ public class POCenterView extends CustomJPanel implements IPOCenterView {
         MigLayout layout2 = new MigLayout("inset 50 70 20 10", "[grow]", "[grow]");
         model.getPanel2().setLayout(layout2);
 
-        model.getPanel2().add(model.getContent(), "grow");
+        model.getPanel2().add(model.getSyntaxModel().getView(), "grow");
 
         model.getPanel2().setBorder(BorderFactory.createLineBorder(Colors.SECONDARY_COLOR));
 
@@ -116,12 +117,9 @@ public class POCenterView extends CustomJPanel implements IPOCenterView {
         MigLayout layout5 = new MigLayout("inset 0 0 0 0", "[grow]", this.generateString(model.getAnwsers().size()));
         model.getPanel5().setLayout(layout5);
 
-        for(String answer : model.getAnwsers())
+        for(AnswerComponent answer : model.getAnwsers())
         {
-            if(answer.length() != 0)
-            {
-                model.getPanel5().add(model.getAnswerComponent(answer.split("_")[0], answer.split("_")[1]), "grow, wrap");
-            }
+            model.getPanel5().add(answer, "grow, wrap");
         }
 
         MigLayout subLayout = new MigLayout("", "[grow]5[10]", "[50]");
@@ -137,7 +135,7 @@ public class POCenterView extends CustomJPanel implements IPOCenterView {
         model.getPanel6().add(model.getPanel7(), "grow");
 
 
-        MigLayout layoutM = new MigLayout("inset 0 0 0 0", "[grow]", String.format("[%d]15[%d]15[%d]15[grow]15[%d]",
+        MigLayout layoutM = new MigLayout("inset 30 30 30 30", "[grow]", String.format("[%d]15[%d]15[%d]15[grow]15[%d]",
                 model.getSc().getHEIGHT_RATIO() * 15,
                 model.getSc().getHEIGHT_RATIO() * 70,
                 model.getSc().getHEIGHT_RATIO() * 5,

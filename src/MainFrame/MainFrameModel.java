@@ -22,6 +22,7 @@ import MainFrame.Pages.ProfilePage.ProfilePageView;
 import MainFrame.Pages.PostPage.PostPageController;
 import MainFrame.Pages.PostPage.PostPageModel;
 import MainFrame.Pages.PostPage.PostPageView;
+import PojoClasses.Post;
 import PojoClasses.User;
 import Static.SizeConstants;
 
@@ -111,7 +112,6 @@ public class MainFrameModel implements IMainFrameModel
         this.createPostCreationPage();
         this.createProfilePage();
         this.createMainMenu();
-        this.createPostPage();
 
         this.cardPanel = new CustomJPanel();
 
@@ -170,10 +170,10 @@ public class MainFrameModel implements IMainFrameModel
 
     /*******************************************************************************************/
     
-    private void createPostPage()
+    private void createPostPage(String data)
     {
         this.PPV = new PostPageView();
-        this.PPM = new PostPageModel(this);
+        this.PPM = new PostPageModel(this, data);
         this.PPC = new PostPageController(this.PPV, this.PPM);
 
         this.PPM.setView(this.PPV);
@@ -188,6 +188,24 @@ public class MainFrameModel implements IMainFrameModel
 
     public void changePage(String pageName)
     {
+        this.cardLayout.show(this.cardPanel, pageName);
+        this.pagesList.add(pageName);
+    }
+
+    public void changePage(String pageName, String data, Post post)
+    {
+        this.createPostPage(data);
+
+        this.getPostPageModel().getPOCM().resetComments();
+        this.getPostPageModel().getPOCM().resetAnswers();
+
+        this.getPostPageModel().getPOCM().setPost(post);
+        this.getPostPageModel().getPOCM().setPostDetailsContents();
+
+        this.getPostPageModel().getPOCM().update();
+
+        this.getCardPanel().add(this.getPostPageModel().getView(), "POST_PAGE");
+
         this.cardLayout.show(this.cardPanel, pageName);
         this.pagesList.add(pageName);
     }

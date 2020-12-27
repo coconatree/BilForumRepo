@@ -65,7 +65,7 @@ public class POCenterModel implements IPOCenterModel {
     /************************************/
 
     private ArrayList<String> comments;
-    private ArrayList<String> anwsers;
+    private ArrayList<AnswerComponent> anwsers;
 
     private MainFrameModel ref;
 
@@ -81,8 +81,13 @@ public class POCenterModel implements IPOCenterModel {
     private JLabel author;
     private JLabel date;
 
-    public POCenterModel(MainFrameModel ref)
+    /**************************/
+
+    private String data;
+
+    public POCenterModel(MainFrameModel ref, String data)
     {
+        this.data = data;
         this.ref = ref;
         this.init();
     }
@@ -173,8 +178,10 @@ public class POCenterModel implements IPOCenterModel {
 
         /********* TEMP *********/
 
-        this.syntaxModel = new SyntaxComponentModel("HELLO");
-        this.syntaxView  = null;
+        this.syntaxModel = new SyntaxComponentModel(this.data);
+        this.syntaxView  = new SyntaxComponentView();
+
+        this.syntaxModel.setView(this.syntaxView);
 
         /*************************/
 
@@ -241,13 +248,11 @@ public class POCenterModel implements IPOCenterModel {
 
     public void resetComments()
     {
-        System.out.println("RESET CCC");
         this.comments.clear();
     }
 
     public void resetAnswers()
     {
-        System.out.println("RESET AAA");
         this.anwsers.clear();
     }
 
@@ -263,9 +268,15 @@ public class POCenterModel implements IPOCenterModel {
 
     public void initAnswers()
     {
+        SyntaxComponentModel modelTemp;
+        SyntaxComponentView  viewTemp;
+
         for(String string : this.post.getAnswers().split("-"))
         {
-            this.anwsers.add(string);
+            if(!(string.split("_").length < 2))
+            {
+                this.anwsers.add(new AnswerComponent(string.split("_")[0], string.split("_")[1]));
+            }
         }
     }
 
@@ -367,7 +378,7 @@ public class POCenterModel implements IPOCenterModel {
         return ref;
     }
 
-    public ArrayList<String> getAnwsers() {
+    public ArrayList<AnswerComponent> getAnwsers() {
         return anwsers;
     }
 
@@ -407,5 +418,10 @@ public class POCenterModel implements IPOCenterModel {
     public JTextArea getAnswerArea()
     {
         return answerArea;
+    }
+
+    public SyntaxComponentModel getSyntaxModel()
+    {
+        return syntaxModel;
     }
 }

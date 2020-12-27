@@ -85,11 +85,7 @@ public class TopPostsModel implements ITopPostsModel{
                         @Override
                         public void run()
                         {
-                            ref.getPostPageModel().getPOCM().setPost(post);
-                            ref.getPostPageModel().getPOCM().setPostDetailsContents();
-
-                            ref.getPostPageModel().getPOCM().update();
-                            ref.changePage("POST_PAGE");
+                            ref.changePage("POST_PAGE", post.getContent(), post);
                         }
                     });
                 }
