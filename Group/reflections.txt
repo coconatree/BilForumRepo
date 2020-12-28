@@ -14,3 +14,5 @@ What has been learned during the project;
     a system for resetting the model.
     a system for initializing the model on demand rather than initializing at the beginning.
     a system for updating the design from a single file.
+
+ We wish that we would have used more design patterns such as the Abstract Factoy pattern or Singleton pattern.
