@@ -106,4 +106,4 @@ Libraries:  (All of the following jars can be found inside one of our two git hu
     Open it in your preferred ide or text editor.
     If it gives errors about the libraries please make sure that you have added the jars and your java version is at least java 11
     Run the main method inside the Main class.
-    If you dont have bilkent student mail you should update LoginPageListener boolean true to login directly.
+    If you dont have bilkent student mail you should update LoginPageListener if statement true to login directly.
